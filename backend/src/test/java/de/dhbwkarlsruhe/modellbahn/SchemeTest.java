@@ -2,7 +2,7 @@ package de.dhbwkarlsruhe.modellbahn;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.CommandScheme;
+import de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.Schemes.CommandScheme;
 
 
 public class SchemeTest {

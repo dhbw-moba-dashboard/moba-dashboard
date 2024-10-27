@@ -1,5 +1,10 @@
-package de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer;
+package de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.Schemes;
 
+/**
+ *These are the commands that can be sent to the CAN-Bus
+ * They are 8 bits long
+ * and the third field of the CAN-Frame
+  */
 public enum CommandScheme {
     SystemCommand("SystemCommand",0x00),
     LocomotiveDiscovery("LocomotiveDiscovery",0x01),
