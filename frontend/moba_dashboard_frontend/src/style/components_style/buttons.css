@@ -1,0 +1,22 @@
+/*import css variables*/
+@import url('../variables.css');
+
+/*define default button style*/
+button {
+    height: auto;
+    width: auto;
+    color: var(--white);
+    background-color: var(--transparent);
+    border: var(--no_border);
+}
+
+/*define button hover style properties*/
+button:hover {
+    border: var(--light_glass_morph);
+}
+
+/*define button active style properties*/
+button:active {
+    border: var(--default_border);
+    background-color: var(--default_glass_morph);
+}
