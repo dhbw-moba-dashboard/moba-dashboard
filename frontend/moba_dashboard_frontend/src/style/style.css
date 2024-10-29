@@ -1,0 +1,12 @@
+/*import css variables*/
+@import url('variables.css');
+
+/*define main style properties*/
+body {
+    color: var(--white);
+    font-size: var(--default_font_size);
+    background-color: var(--background_color);
+    padding: var(--default_padding);
+    caret-color: var(--primary_color);
+}
+
