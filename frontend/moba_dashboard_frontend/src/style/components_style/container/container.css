@@ -1,0 +1,18 @@
+/*import css variables*/
+@import url('../../variables.css');
+
+/*define flexbox style properties*/
+.flexbox-style-properties {
+    display: flex;
+    padding: var(--default_padding);
+    align-items: center;
+}
+
+/*define content container style properties*/
+.content-container-style-properties {
+    height: auto;
+    width: auto;
+    padding: var(--default_padding);
+    border-radius: var(--default_border_radius);
+    background: var(--default_glass_morph);
+}

@@ -1,9 +1,0 @@
-/*import css variables*/
-@import url('../variables.css');
-
-/*define flexbox style properties*/
-.flexbox-style-properties {
-    display: flex;
-    padding: var(--default_padding);
-    align-items: center;
-}
