@@ -2,7 +2,10 @@
 import React from "react";
 
 //import css file
-import '../../style/components_style/buttons.css';
+import '../../style/components_style/atoms/buttons.css';
+
+//import custom component
+import Image from "./images";
 
 //define interface for button properties
 interface ButtonProperties {
@@ -26,3 +29,12 @@ const TextButton: React.FC<ButtonProperties> = (props: ButtonProperties) => {
 }
 //export text button
 export default TextButton;
+
+//create and export image button component
+export const ImageButton: React.FC<ButtonProperties> = (props: ButtonProperties) => {
+    return (
+        <button id={props.buttonID} onClick={props.buttonAction} className={props.className}>
+            <Image style={{height: '18px', width: 'auto', ...props.style}} imageValue={props.buttonImage}/>
+        </button>
+    );
+}

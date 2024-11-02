@@ -1,5 +1,5 @@
 /*import css variables*/
-@import url('../variables.css');
+@import url('../../variables.css');
 
 /*define default image style*/
 image {
@@ -7,4 +7,5 @@ image {
     width: auto;
     border: var(--no_border);
     border-radius: var(--default_border_radius);
+    padding: var(--default_padding);
 }

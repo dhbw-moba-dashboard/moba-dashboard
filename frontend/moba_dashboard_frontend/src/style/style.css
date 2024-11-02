@@ -4,8 +4,9 @@
 /*define main style properties*/
 body {
     color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
     font-size: var(--default_font_size);
-    background-color: var(--background_color);
+    background: var(--gradient_color);
     padding: var(--default_padding);
     caret-color: var(--primary_color);
 }
