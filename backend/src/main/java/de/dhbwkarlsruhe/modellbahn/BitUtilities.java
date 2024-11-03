@@ -50,4 +50,34 @@ public class BitUtilities {
         byte []result = getBitSequence(data,startByte,startBit,lastByte,lastBit);
         return byteArrayToInt(result);
     }
+    /**
+     * This method converts an integer to a byte array
+     * @param value the integer to convert
+     * @return the byte array representation of the integer
+     */
+    public static byte[] intToByteArray(int value) {
+        int length = getByteArrayLength(value);
+        byte[] result = new byte[length];
+        for (int i = 0; i < result.length; i++) {
+            //retrieves the least significant byte
+            // and writes it to the result array starting from the end
+            result[(result.length-1) - i] = (byte) (value & 0xFF);
+            //shifts the value 8 bits to the right
+            value = value >> 8;
+        }
+        return result;
+    }
+    /**
+     * This method returns the number of bytes needed to represent the integer
+     * @param value the integer to check
+     * @return the number of bytes needed to represent the integer
+     */
+    private static int getByteArrayLength(int value){
+        int length = 0;
+        while (value > 0){
+            value = value >> 8;
+            length++;
+        }
+        return length;
+    }
 }
