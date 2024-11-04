@@ -1,15 +1,16 @@
 package de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.PayloadTypes.Commands;
 
+import com.google.gson.GsonBuilder;
 import de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.PayloadTypes.Payload;
 
-public class LocomotiveDiscovery implements Payload {
-    @Override
-    public byte[] toByteArray() {
-        return new byte[0];
+public class LocomotiveDiscovery extends Payload {
+
+    public LocomotiveDiscovery(byte[] data, int DLC,GsonBuilder builder) {
+        super(builder, DLC);
     }
 
     @Override
-    public Payload fromByteArray(byte[] data) {
-        return null;
+    public byte[] toByteArray() {
+        return new byte[0];
     }
 }

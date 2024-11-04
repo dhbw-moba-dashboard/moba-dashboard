@@ -37,6 +37,7 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("com.google.code.gson:gson:2.11.0")
 }
 
 tasks.withType<Test> {

@@ -1,19 +1,22 @@
 package de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.PayloadTypes.Commands;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import de.dhbwkarlsruhe.modellbahn.BitUtilities;
 import de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.PayloadTypes.Payload;
 import jakarta.annotation.Nullable;
+import lombok.Getter;
 
-public class S88Event implements Payload {
-    public int deviceID;
-    public int contactID;
-    public int parameter = -1;
-    public int oldState;
-    public int newState;
-    public int timestamp;
-    public int DLC;
-    public S88Event(byte[] data,int DLC) {
-        this.DLC = DLC;
+@Getter
+public class S88Event extends Payload {
+    private final int deviceID;
+    private final int contactID;
+    private int parameter = -1;
+    private int oldState;
+    private int newState;
+    private int timestamp;
+    public S88Event(byte[] data, int DLC, GsonBuilder builder) {
+        super(builder,DLC);
         this.deviceID = BitUtilities.transformBitSequenceToInt(data, 0, 0,1,7);
         this.contactID = BitUtilities.transformBitSequenceToInt(data, 0, 2,3,7);
         if (DLC == 5) {
@@ -25,7 +28,8 @@ public class S88Event implements Payload {
         }
 
     }
-    public S88Event(int deviceID, int contactID, int parameter, int oldState, int newState, int timestamp) {
+    public S88Event(int deviceID, int contactID, int parameter, int oldState, int newState, int timestamp, GsonBuilder builder,int DLC) {
+        super(builder,DLC);
         this.deviceID = deviceID;
         this.contactID = contactID;
         this.parameter = parameter;
@@ -53,8 +57,5 @@ public class S88Event implements Payload {
         return data;
     }
 
-    @Override
-    public Payload fromByteArray(byte[] data) {
-        return null;
-    }
+
 }

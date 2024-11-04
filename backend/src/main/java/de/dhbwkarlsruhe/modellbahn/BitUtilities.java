@@ -1,5 +1,8 @@
 package de.dhbwkarlsruhe.modellbahn;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BitUtilities {
     /**
      * This method returns a byte array containing the bits from startByte:startBit to lastByte:lastBit
@@ -79,5 +82,14 @@ public class BitUtilities {
             length++;
         }
         return length;
+    }
+    public static byte [] mergeByteArrays(List<byte []> list, int length) {
+        byte[] result = new byte[length];
+        int destinationPosition = 0;
+        for(byte [] element: list){
+            System.arraycopy(element,0,result,destinationPosition,element.length);
+            destinationPosition+=element.length;
+        }
+        return result;
     }
 }
