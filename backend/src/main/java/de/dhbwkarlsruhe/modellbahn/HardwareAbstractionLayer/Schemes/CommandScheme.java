@@ -1,10 +1,13 @@
 package de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.Schemes;
 
+import lombok.Getter;
+
 /**
  *These are the commands that can be sent to the CAN-Bus
  * They are 8 bits long
  * and the third field of the CAN-Frame
   */
+@Getter
 public enum CommandScheme {
     SystemCommand("SystemCommand",0x00),
     LocomotiveDiscovery("LocomotiveDiscovery",0x01),
@@ -40,13 +43,6 @@ public enum CommandScheme {
 
     }
 
-    public String getCommand() {
-        return command;
-    }
-
-    public int getCommandValue() {
-        return CommandValue;
-    }
     public static CommandScheme fromCommand(String command) {
         for (CommandScheme scheme : CommandScheme.values()) {
             if (scheme.getCommand().equals(command)) return scheme;

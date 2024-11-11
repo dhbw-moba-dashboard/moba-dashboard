@@ -5,6 +5,9 @@ import de.dhbwkarlsruhe.modellbahn.BitUtilities;
 import de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.PayloadTypes.Payload;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 public class LocomotiveDirection extends Payload {
     public enum Direction {
@@ -26,14 +29,12 @@ public class LocomotiveDirection extends Payload {
             default -> direction = Direction.SAME;
         }
     }
-    public LocomotiveDirection(int locID, Direction direction, GsonBuilder builder,int DLC) {
-        super(builder,DLC);
-        this.locID = locID;
-        this.direction = direction;
-    }
-    @Override
     public byte[] toByteArray() {
-        return new byte[0];
+        List<byte []> data = List.of(
+                BitUtilities.intToByteArray(locID),
+                BitUtilities.intToByteArray(direction.ordinal())
+        );
+        return BitUtilities.mergeByteArrays(data,DLC);
     }
 
 }

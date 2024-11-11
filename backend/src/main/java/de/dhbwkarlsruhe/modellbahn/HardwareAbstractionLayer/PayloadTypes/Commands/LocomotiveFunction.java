@@ -29,6 +29,6 @@ public class LocomotiveFunction extends Payload {
             BitUtilities.intToByteArray(value),
             BitUtilities.intToByteArray(extraFunction)
         );
-        return BitUtilities.mergeByteArrays(src, 8);
+        return BitUtilities.mergeByteArrays(src, DLC);
     }
 }

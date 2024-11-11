@@ -33,12 +33,13 @@ public class CANMessage {
             and the first 7 bits of the second byte
          */
         int commandValue = BitUtilities.transformBitSequenceToInt(data, 0, 4, 1, 3);
+        
         CommandScheme command = CommandScheme.fromCommandValue(commandValue);
         boolean response = BitUtilities.transformBitSequenceToInt(data, 1, 5, 1, 6) == 1;
         int hash_value = BitUtilities.transformBitSequenceToInt(data, 1, 7, 3, 6);
         int DLC = BitUtilities.transformBitSequenceToInt(data, 3, 7, 4, 2);
         byte [] payloadData = BitUtilities.getBitSequence(data, 5, 3, data.length-1, 7);
-        Payload payload = PayloadFactory.getPayload(payloadData,command,DLC);
+        Payload payload = PayloadFactory.createPayloadFromBytes(payloadData,command,DLC);
         return new CANMessage(priority, command, response, hash_value, payload);
     }
 

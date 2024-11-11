@@ -22,6 +22,6 @@ public class LocomotiveSpeed extends Payload {
         List<byte[]> src = new ArrayList<>();
         src.add(BitUtilities.intToByteArray(LocID));
         src.add(BitUtilities.intToByteArray(speed));
-        return BitUtilities.mergeByteArrays(src,6);
+        return BitUtilities.mergeByteArrays(src,8);
     }
 }

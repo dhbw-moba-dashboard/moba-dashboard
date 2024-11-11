@@ -83,6 +83,13 @@ public class BitUtilities {
         }
         return length;
     }
+
+    /**
+     * this concatenates multiple byte arrays
+     * @param list of byte arrays
+     * @param length of the resulting array
+     * @return array that contains the other arrays
+     */
     public static byte [] mergeByteArrays(List<byte []> list, int length) {
         byte[] result = new byte[length];
         int destinationPosition = 0;
