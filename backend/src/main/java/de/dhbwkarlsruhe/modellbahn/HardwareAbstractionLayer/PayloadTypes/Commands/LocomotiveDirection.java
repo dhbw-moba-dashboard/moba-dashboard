@@ -5,7 +5,6 @@ import de.dhbwkarlsruhe.modellbahn.BitUtilities;
 import de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.PayloadTypes.Payload;
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
