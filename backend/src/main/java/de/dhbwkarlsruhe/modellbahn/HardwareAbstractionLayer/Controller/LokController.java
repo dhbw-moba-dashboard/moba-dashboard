@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LokController {
     @PutMapping("/lok/{loc_id}/speed")
-    public void setLocSpeed(@PathVariable int loc_id,  @RequestBody LokModel.LokSpeed lokModel) throws PayloadFactory.IllegalPayloadException {
+    public void setLocSpeed(@PathVariable int loc_id,  @RequestBody LokModel.LokSpeed lokModel) {
         String json = lokModel.buildJson(loc_id);
         Payload p = PayloadFactory.createPayloadFromJson(json, CommandScheme.LocomotiveSpeed);
         System.out.println(p.toString());

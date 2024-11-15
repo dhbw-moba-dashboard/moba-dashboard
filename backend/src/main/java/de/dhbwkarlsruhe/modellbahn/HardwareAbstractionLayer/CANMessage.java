@@ -27,7 +27,7 @@ public class CANMessage {
         this.rawValue = rawValue;
     }
 
-    public static CANMessage getMessageFromBytes(byte[] data) throws PayloadFactory.IllegalPayloadException {
+    public static CANMessage getMessageFromBytes(byte[] data) {
         //gets the first 4 most significant bit
         int priority = BitUtilities.transformBitSequenceToInt(data, 0, 0, 0, 3);
         /* gets the least significant bit of the first byte
@@ -41,7 +41,7 @@ public class CANMessage {
         int hash_value = BitUtilities.transformBitSequenceToInt(data, 1, 7, 3, 6);
         int DLC = BitUtilities.transformBitSequenceToInt(data, 3, 7, 4, 2);
         byte[] payloadData = BitUtilities.getBitSequence(data, 5, 3, data.length - 1, 7);
-        Payload payload = PayloadFactory.createPayloadFromBytes(payloadData, command, DLC);
+        Payload payload = PayloadFactory.createPayloadFromBytes(payloadData, command);
         return new CANMessage(priority, command, response, hash_value, payload);
     }
 

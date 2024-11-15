@@ -6,14 +6,14 @@ import com.google.gson.*;
 
 //Todo: Implement PayloadFactory
 public class PayloadFactory {
-    public static Payload createPayloadFromBytes(byte[] data, CommandScheme scheme, int DLC) throws IllegalPayloadException {
+    public static Payload createPayloadFromBytes(byte[] data, CommandScheme scheme) {
         return switch (scheme) {
             case LocomotiveSpeed -> new LocomotiveSpeed(data);
 
             default -> throw new IllegalArgumentException("Unknown CommandScheme");
         };
     }
-    public static Payload createPayloadFromJson(String json, CommandScheme scheme) throws IllegalPayloadException {
+    public static Payload createPayloadFromJson(String json, CommandScheme scheme) {
         Gson gson = new Gson();
 
         return switch (scheme) {
@@ -23,10 +23,4 @@ public class PayloadFactory {
         };
     }
 
-
-    public class IllegalPayloadException extends Exception {
-        public IllegalPayloadException(String message) {
-            super(message);
-        }
-    }
 }

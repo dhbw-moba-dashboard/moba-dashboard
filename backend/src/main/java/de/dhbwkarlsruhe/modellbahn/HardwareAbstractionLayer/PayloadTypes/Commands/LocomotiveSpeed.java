@@ -1,7 +1,6 @@
 package de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.PayloadTypes.Commands;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import de.dhbwkarlsruhe.modellbahn.BitUtilities;
 import de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.PayloadTypes.Payload;
 import lombok.Getter;
