@@ -15,15 +15,17 @@ public enum ProtocolScheme {
     unknown(-1),
     MFX_main(64);
     private final int protocolValue;
+
     ProtocolScheme(int protocolValue) {
         this.protocolValue = protocolValue;
     }
+
     public static ProtocolScheme fromProtocolValue(int protocolValue) {
         if (protocolValue > 0 && protocolValue < 33)
             return MFX;
         if (protocolValue >= 64 && protocolValue <= 96)
             return MFX_main;
-        for (ProtocolScheme scheme: ProtocolScheme.values()) {
+        for(ProtocolScheme scheme : ProtocolScheme.values()) {
             if (scheme.getProtocolValue() == protocolValue) {
                 return scheme;
             }

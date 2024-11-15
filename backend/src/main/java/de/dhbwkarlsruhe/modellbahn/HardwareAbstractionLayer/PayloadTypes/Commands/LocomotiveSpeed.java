@@ -17,6 +17,7 @@ public class LocomotiveSpeed implements Payload{
         LocID = BitUtilities.transformBitSequenceToInt(data,0,0,4,7);
         Speed = BitUtilities.transformBitSequenceToInt(data,4,0,5,7);
     }
+    @Override
     public byte[] toByteArray() {
         List<byte[]> src = new ArrayList<>();
         src.add(BitUtilities.intToByteArray(LocID));
