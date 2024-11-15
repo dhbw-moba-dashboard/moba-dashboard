@@ -15,11 +15,11 @@ public class BitUtilities {
      */
     public static byte[] getBitSequence(byte[] data, int startByte, int startBit, int lastByte, int lastBit) {
         byte[] result = new byte[lastByte - startByte + 1];
-        for(int i = startByte; i <= lastByte; i++) {
+        for (int i = startByte; i <= lastByte; i++) {
             if (i == startByte) {
                 result[i - startByte] = (byte) (data[i] & (0xFF >> startBit));
             } else if (i == lastByte) {
-                result[i - startByte] = (byte) (data[i] & (0xFF << (8 - lastBit)));
+                result[i - startByte] = (byte) (data[i] & (0xFF << (7 - lastBit)));
             } else {
                 result[i - startByte] = data[i];
 
@@ -36,7 +36,7 @@ public class BitUtilities {
      */
     public static int byteArrayToInt(byte[] data) {
         int result = 0;
-        for(byte datum : data) {
+        for (byte datum : data) {
             result = result << 8;
             result = result | (datum & 0xFF);
         }
@@ -64,10 +64,11 @@ public class BitUtilities {
      * @param value the integer to convert
      * @return the byte array representation of the integer
      */
-    public static byte[] intToByteArray(int value) {
-        int length = getByteArrayLength(value);
-        byte[] result = new byte[length];
-        for(int i = 0; i < result.length; i++) {
+    public static byte[] intToByteArray(int value, int supposedLength) throws IllegalArgumentException {
+        if (getByteArrayLength(value) > supposedLength)
+            throw new IllegalArgumentException("Value too large for bit sequence");
+        byte[] result = new byte[supposedLength];
+        for (int i = 0; i < result.length; i++) {
             //retrieves the least significant byte
             // and writes it to the result array starting from the end
             result[(result.length - 1) - i] = (byte) (value & 0xFF);
@@ -85,7 +86,7 @@ public class BitUtilities {
      */
     private static int getByteArrayLength(int value) {
         int length = 0;
-        while(value > 0) {
+        while (value > 0) {
             value = value >> 8;
             length++;
         }
@@ -95,17 +96,25 @@ public class BitUtilities {
     /**
      * this concatenates multiple byte arrays
      *
-     * @param list   of byte arrays
-     * @param length of the resulting array
+     * @param list of byte arrays
      * @return array that contains the other arrays
      */
-    public static byte[] mergeByteArrays(List<byte[]> list, int length) {
-        byte[] result = new byte[length];
+    public static byte[] mergeByteArrays(List<byte[]> list) {
+        int DLC = calculateDLC(list);
+        byte[] result = new byte[DLC];
         int destinationPosition = 0;
-        for(byte[] element : list) {
+        for (byte[] element : list) {
             System.arraycopy(element, 0, result, destinationPosition, element.length);
             destinationPosition += element.length;
         }
         return result;
     }
+
+    private static int calculateDLC(List<byte[]> list) {
+		int sum = 0;
+		for (byte[] element : list) {
+			sum += element.length;
+		}
+		return sum;
+	}
 }
