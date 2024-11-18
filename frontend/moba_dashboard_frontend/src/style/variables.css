@@ -1,17 +1,18 @@
 /*global variables to set public style properties*/
 :root {
-    --main_font: Arial, Helvetica, sans-serif;
-    --white: white;
-    --primary_color: #3FBBD7;
-    --background_color: #121212;
-    --lighter_background_color: #181818;
-    --transparent: transparent;
-    --gradient_color: linear-gradient(45deg, #253DA1, #D2122E);
-    --light_glass_morph: rgba(255, 255, 255, 0.05);
-    --default_glass_morph: rgba(255, 255, 255, 0.1);
-    --default_font_size: 16px;
-    --no_border: none;
-    --default_border: 1px;
-    --default_border_radius: 10px;
-    --default_padding: 1%
+	--main_font: Arial, Helvetica, sans-serif;
+	--white: white;
+	--gray: gray;
+	--primary_color: #3fbbd7;
+	--background_color: #121212;
+	--lighter_background_color: #181818;
+	--transparent: transparent;
+	--gradient_color: linear-gradient(45deg, #253da1, #d2122e);
+	--light_glass_morph: rgba(255, 255, 255, 0.05);
+	--default_glass_morph: rgba(255, 255, 255, 0.1);
+	--default_font_size: 16px;
+	--no_border: none;
+	--default_border: 1px;
+	--default_border_radius: 10px;
+	--default_padding: 1%;
 }

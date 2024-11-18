@@ -1,18 +1,29 @@
 /*import css variables*/
-@import url('../../variables.css');
+@import url("../../variables.css");
 
 /*define flexbox style properties*/
 .flexbox-style-properties {
-    display: flex;
-    padding: var(--default_padding);
-    align-items: center;
+	display: flex;
+	padding: var(--default_padding);
+	align-items: center;
+}
+
+/*define grid component style project*/
+.grid-component-style-properties {
+	display: grid;
+	height: auto;
+	width: auto;
+	max-height: 150px;
+	overflow-y: auto;
+	grid-template-rows: auto auto auto;
+	gap: var(--default_padding);
 }
 
 /*define content container style properties*/
 .content-container-style-properties {
-    height: auto;
-    width: auto;
-    padding: var(--default_padding);
-    border-radius: var(--default_border_radius);
-    background: var(--default_glass_morph);
+	height: auto;
+	width: auto;
+	padding: var(--default_padding);
+	border-radius: var(--default_border_radius);
+	background: var(--default_glass_morph);
 }

@@ -1,25 +1,36 @@
 /*import css variables*/
-@import url('../../variables.css');
+@import url("../../variables.css");
 
 /*define default button style*/
 button {
-    cursor: pointer;
-    height: auto;
-    width: auto;
-    color: var(--white);
-    background-color: var(--transparent);
-    border: var(--no_border);
-    border-radius: var(--default_border_radius);
-    align-items: center;
+	cursor: pointer;
+	height: auto;
+	width: auto;
+	color: var(--white);
+	background-color: var(--transparent);
+	border: var(--no_border);
+	border-radius: var(--default_border_radius);
+	align-items: center;
 }
 
 /*define button hover style properties*/
 button:hover {
-    border: var(--light_glass_morph);
+	border: var(--light_glass_morph);
 }
 
 /*define button active style properties*/
 button:active {
-    border: var(--default_border);
-    background-color: var(--default_glass_morph);
+	border: var(--default_border);
+	background-color: var(--default_glass_morph);
+}
+
+/*define glass morph button style properties*/
+.glass-morph-button-style-properties {
+	padding: var(--default_padding);
+	background: var(--lighter_background_color);
+}
+
+/*define glass morph button hover style properties*/
+.glass-morph-button-style-properties:hover {
+	border: .5px solid var(--gray);
 }

@@ -1,9 +1,20 @@
 [
-  {
-    "trainID": "",
-    "trainType": "",
-    "trainName": "",
-    "trainImage": ""
-  }
-
+	{
+		"trainID": "",
+		"trainType": "ELECTRIC",
+		"trainName": "E Lok 1",
+		"trainImage": "images/trains/Lok_1.png"
+	},
+	{
+		"trainID": "",
+		"trainType": "STEAM",
+		"trainName": "Lok 2",
+		"trainImage": "images/trains/Lok_2.png"
+	},
+	{
+		"trainID": "",
+		"trainType": "STEAM",
+		"trainName": "Lok 3",
+		"trainImage": "images/trains/Lok_3.png"
+	}
 ]

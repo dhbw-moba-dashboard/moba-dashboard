@@ -1,27 +1,27 @@
 /*import css variables*/
-@import url('../../variables.css');
+@import url("../../variables.css");
 
 /*define default text properties*/
 span {
-    color: var(--white);
-    padding: var(--default_padding);
+	color: var(--white);
+	padding: var(--default_padding);
 }
 
 /*define style properties for link component*/
 a {
-    color: var(--primary_color);
-    font-weight: bold;
-    text-decoration: none;
-    padding: var(--default_padding);
+	color: var(--primary_color);
+	font-weight: bold;
+	text-decoration: none;
+	padding: var(--default_padding);
 }
 
 /*define style properties for hover link component*/
 a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 /*define style properties for header text component*/
 .header-text-component-style-properties {
-    font-weight: bold;
-    font-size: 32px;
+	font-weight: bold;
+	font-size: 32px;
 }
