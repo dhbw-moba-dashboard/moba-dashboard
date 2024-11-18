@@ -1,13 +1,13 @@
 /*import css variables*/
-@import url('variables.css');
+@import url("variables.css");
 
 /*define main style properties*/
 body {
-    color: var(--white);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: var(--default_font_size);
-    background: var(--gradient_color);
-    padding: var(--default_padding);
-    caret-color: var(--primary_color);
+	height: 95.25vh;
+	color: var(--white);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: var(--default_font_size);
+	background: var(--gradient_color);
+	padding: var(--default_padding);
+	caret-color: var(--primary_color);
 }
-
