@@ -3,7 +3,7 @@ package de.dhbwkarlsruhe.modellbahn;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class BitTest {
+class BitTest {
 	@Test
 	void sequencing() {
 		byte[] data = {0x55, 0x6F, 0x1C, 0x3E, 0x04};

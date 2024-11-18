@@ -1,6 +1,6 @@
-package de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.Controller.models.request;
+package de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.controller.models.request;
 
-import de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.PayloadTypes.Commands.LocomotiveDirection;
+import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.commands.LocomotiveDirection;
 
 public class LocModel {
 	public record LocSpeed(int speed) {

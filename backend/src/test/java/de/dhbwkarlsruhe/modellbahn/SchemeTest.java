@@ -1,17 +1,17 @@
 package de.dhbwkarlsruhe.modellbahn;
 
-import de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.Schemes.CommandScheme;
+import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.schemes.CommandScheme;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class SchemeTest {
+class SchemeTest {
 	@Test
 	void commandScheme() {
 		CommandScheme c = CommandScheme.fromCommandValue(1);
-		Assertions.assertEquals(c.getCommand(), "LocomotiveDiscovery");
+		Assertions.assertEquals("LocomotiveDiscovery", c.getCommand());
 		c = CommandScheme.fromCommandValue(69);
-		Assertions.assertEquals(c.getCommand(), "UnknownCommand");
+		Assertions.assertEquals("UnknownCommand", c.getCommand());
 		c = CommandScheme.fromCommand("AccessoriesConfig");
-		Assertions.assertEquals(c.getCommandValue(), 12);
+		Assertions.assertEquals(12, c.getCommandValue());
 	}
 }

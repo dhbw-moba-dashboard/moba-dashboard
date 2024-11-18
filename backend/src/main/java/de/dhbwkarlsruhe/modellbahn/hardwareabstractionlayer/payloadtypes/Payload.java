@@ -1,4 +1,4 @@
-package de.dhbwkarlsruhe.modellbahn.HardwareAbstractionLayer.PayloadTypes;
+package de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes;
 
 /**
  * This refers to the last 8 Bytes of a CANMessage, which contain the Databytes
