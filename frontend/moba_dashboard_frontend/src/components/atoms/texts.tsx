@@ -4,24 +4,24 @@ import type React from "react";
 //import css file
 import "../../style/components_style/atoms/texts.css";
 
+//import custom react files
+import {DefaultComponentProps} from "../../logic/tools/interfaces/interface";
+
 //import custom react components
 import FlexBox from "../container/FlexBox";
 import Image from "./images";
 
 //define interface for text properties
-interface TextProperties {
-	textID?: string | undefined;
+interface TextProperties extends DefaultComponentProps {
 	textValue: string;
 	textLinkUrl?: string | undefined;
 	textImage?: string | undefined;
-	style?: React.CSSProperties;
-	className?: string | undefined;
 }
 
 //create text component
 const Text: React.FC<TextProperties> = (props: TextProperties) => {
 	return (
-		<span id={props.textID} style={props.style} className={props.className}>
+		<span id={props.id} style={props.style} className={props.className}>
 			{props.textValue}
 		</span>
 	);
@@ -33,7 +33,7 @@ export default Text;
 export const HeaderText: React.FC<TextProperties> = (props: TextProperties) => {
 	return (
 		<Text
-			textID={props.textID}
+			id={props.id}
 			style={props.style}
 			className="header-text-component-style-properties"
 			textValue={props.textValue}
@@ -44,7 +44,7 @@ export const HeaderText: React.FC<TextProperties> = (props: TextProperties) => {
 //create and export text link component
 export const TextLink: React.FC<TextProperties> = (props: TextProperties) => {
 	return (
-		<a id={props.textID} style={props.style} className={props.className}>
+		<a id={props.id} style={props.style} className={props.className}>
 			{props.className}
 		</a>
 	);
@@ -67,7 +67,7 @@ export const ImageLink: React.FC<TextProperties> = (props: TextProperties) => {
 
 	//return created component
 	return (
-		<FlexBox id={props.textID} clickAction={executeOnClickEvent}>
+		<FlexBox id={props.id} clickAction={executeOnClickEvent}>
 			<Image
 				style={{ height: "18px", width: "auto", marginRight: "2%" }}
 				imageValue={props.textImage}
