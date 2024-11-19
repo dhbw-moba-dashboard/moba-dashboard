@@ -39,7 +39,6 @@ export const Select: React.FC<SelectComponentProps> = (props: SelectComponentPro
     );
 };
 
-
 //define interface select option item props
 interface SelectOptionItemProps extends DefaultComponentProps {
     selectOptionItemValue?: string | undefined,
