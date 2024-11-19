@@ -4,12 +4,11 @@ import type React from "react";
 //import css file
 import "../../style/components_style/container/container.css";
 
+//import custom react files
+import {DefaultComponentProps} from "../../logic/tools/interfaces/interface";
+
 //define interface for FlexBox
-interface FlexBoxProps {
-	id?: string | undefined;
-	style?: React.CSSProperties;
-	className?: string | undefined;
-	children?: React.ReactNode;
+interface FlexBoxProps extends DefaultComponentProps {
 	clickAction?: (value?: any) => void;
 }
 

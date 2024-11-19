@@ -4,16 +4,11 @@ import type React from "react";
 //import css file
 import "../../style/components_style/container/container.css";
 
-//define interface for grid box props
-interface GridBoxProps {
-	id?: string | undefined;
-	className?: string | undefined;
-	style?: React.CSSProperties;
-	children?: React.ReactNode;
-}
+//import custom react files
+import {DefaultComponentProps} from "../../logic/tools/interfaces/interface";
 
 //define grid box component
-const GridBox: React.FC<GridBoxProps> = (props: GridBoxProps) => {
+const GridBox: React.FC<DefaultComponentProps> = (props: DefaultComponentProps) => {
 	return (
 		<div
 			id={props.id}

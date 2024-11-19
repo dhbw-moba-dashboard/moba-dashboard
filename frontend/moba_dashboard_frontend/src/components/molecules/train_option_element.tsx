@@ -7,9 +7,11 @@ import {GlassMorphButton} from "../atoms/buttons";
 import Image from "../atoms/images";
 import Text from "../atoms/texts";
 
+//import custom react files
+import {DefaultComponentProps} from "../../logic/tools/interfaces/interface";
+
 //define interface for train option element props
-interface TrainOptionElementProps {
-    trainOptionElementId?: string | undefined,
+interface TrainOptionElementProps extends DefaultComponentProps {
     trainOptionElementText: string,
     trainOptionElementImage?: string | undefined,
     action?: (value?: any) => void
@@ -24,7 +26,7 @@ export const TrainOptionElement: React.FC<TrainOptionElementProps> = (props: Tra
 
     //return created train option element
     return (
-        <GlassMorphButton buttonID={props.trainOptionElementId} buttonAction={props.action}>
+        <GlassMorphButton id={props.id} buttonAction={props.action}>
             <Image style={{height: '40px', width: 'auto'}} imageValue={props.trainOptionElementImage}/>
             <Text style={{fontSize: '20px', fontWeight: 'bold'}} textValue={props.trainOptionElementText}/>
         </GlassMorphButton>
