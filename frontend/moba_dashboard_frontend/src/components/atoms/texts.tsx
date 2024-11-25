@@ -5,7 +5,7 @@ import type React from "react";
 import "../../style/components_style/atoms/texts.css";
 
 //import custom react files
-import {DefaultComponentProps} from "../../logic/tools/interfaces/interface";
+import type { DefaultComponentProps } from "../../logic/tools/interfaces/interface";
 
 //import custom react components
 import FlexBox from "../container/FlexBox";

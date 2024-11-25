@@ -3,21 +3,21 @@
 
 /*define default select component style properties*/
 select {
-    height: auto;
-    width: 100%;
-    background-color: var(--transparent);
-    border: .5px solid var(--whitesmoke);
-    padding: var(--default_padding);
+	height: auto;
+	width: 100%;
+	background-color: var(--transparent);
+	border: .5px solid var(--whitesmoke);
+	padding: var(--default_padding);
 }
 
 /*define default option style properties*/
 option {
-    font-size: 16px;
-    color: var(--primary_color);
+	font-size: 16px;
+	color: var(--primary_color);
 }
 
 /*define check box style properties*/
-input[type=checkbox] {
-    height: auto;
-    width: auto;
+input[type="checkbox"] {
+	height: auto;
+	width: auto;
 }

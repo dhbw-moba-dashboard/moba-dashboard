@@ -6,7 +6,7 @@ import "../../style/components_style/container/container.css";
 import { HeaderText } from "../atoms/texts";
 
 //import custom react files
-import {DefaultComponentProps} from "../../logic/tools/interfaces/interface";
+import type { DefaultComponentProps } from "../../logic/tools/interfaces/interface";
 
 //define interface for content container properties
 interface ContentContainerProperties extends DefaultComponentProps {
