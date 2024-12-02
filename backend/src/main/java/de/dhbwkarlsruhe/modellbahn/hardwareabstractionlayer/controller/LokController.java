@@ -1,6 +1,7 @@
 package de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.controller;
 
 import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.CANMessage;
+import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.TCPSocket;
 import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.controller.models.request.LocModel;
 import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.Payload;
 import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.PayloadFactory;
@@ -20,8 +21,8 @@ public class LokController {
 	@PutMapping("/loc/{locID}/speed")
 	public void setLocSpeed(@PathVariable int locID, @RequestBody LocModel.LocSpeed lokModel) {
 		String json = lokModel.buildJson(locID);
-		Payload p = PayloadFactory.createPayloadFromJson(json, CommandScheme.LOCOMOTIVE_SPEED);
-        System.out.println(p.toString());
+		CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_DIRECTION, json, false);
+		TCPSocket.send(message);
 	}
 
 	/**
@@ -32,8 +33,8 @@ public class LokController {
 	@PutMapping("/loc/{locID}/direction")
 	public void setLocDirection(@PathVariable int locID, @RequestBody LocModel.LocDirection lokModel) {
 		String json = lokModel.buildJson(locID);
-		Payload p = PayloadFactory.createPayloadFromJson(json, CommandScheme.LOCOMOTIVE_DIRECTION);
-		System.out.println(p.toString());
+		CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_DIRECTION, json, false);
+		TCPSocket.send(message);
     }
 
 	/**
@@ -42,7 +43,9 @@ public class LokController {
 	 */
 	@GetMapping("/loc/list")
 	public List<Integer> getLocList() {
-		CANMessage message = new CANMessage(Priority.MELDUNG, CommandScheme.LOCOMOTIVE_DIRECTION, true);
+		CANMessage message = new CANMessage(Priority.MELDUNG, CommandScheme.LOCOMOTIVE_DIRECTION,"{filename:loks}", true);
+		TCPSocket.send(message);
+		CANMessage response = TCPSocket.receive();
 		return List.of(1, 2, 3, 4, 5);
 	}
 }

@@ -3,6 +3,7 @@ package de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes;
 import com.google.gson.Gson;
 import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.commands.LocomotiveDirection;
 import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.commands.LocomotiveSpeed;
+import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.commands.RequestConfigData;
 import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.schemes.CommandScheme;
 
 public class PayloadFactory {
@@ -24,6 +25,7 @@ public class PayloadFactory {
         return switch (scheme) {
 			case LOCOMOTIVE_DIRECTION -> gson.fromJson(json, LocomotiveDirection.class);
 			case LOCOMOTIVE_SPEED -> gson.fromJson(json, LocomotiveSpeed.class);
+            case REQUEST_CONFIG_DATA -> gson.fromJson(json, RequestConfigData.class);
 
             default -> throw new IllegalArgumentException("Unknown CommandScheme");
         };
