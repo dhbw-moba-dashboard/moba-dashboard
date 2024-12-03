@@ -5,7 +5,7 @@ import java.net.Socket;
 public class TCPSocket {
     private static final int SEND_PORT = 15731;
     private static final int RECEIVE_PORT = 15730;
-    private static final String IP_ADDRESS_MOBA = "";
+    private static final String IP_ADDRESS_MOBA = "10.104.0.5";
     public static void send(CANMessage message) {
         try {
             Socket socket = new Socket(IP_ADDRESS_MOBA, SEND_PORT);

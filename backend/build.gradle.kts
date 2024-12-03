@@ -1,13 +1,18 @@
+
 plugins {
     java
     id("org.springframework.boot") version "3.3.4"
     id("io.spring.dependency-management") version "1.1.6"
     id("org.sonarqube") version "5.1.0.4882"
     id("jacoco")
+    application
 }
 
 group = "de.dhbw-karlsruhe.modellbahn"
 version = "0.0.1"
+application{
+    mainClass = "de.dhbwkarlsruhe.modellbahn.ModellbahnApplication"
+}
 
 java {
     toolchain {
@@ -46,7 +51,6 @@ tasks.withType<Test> {
     useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
 }
-
 sonar {
   properties {
     property("sonar.projectKey", "dhbw-moba-dashboard_moba-dashboard")
