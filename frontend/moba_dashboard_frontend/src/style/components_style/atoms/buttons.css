@@ -26,11 +26,13 @@ button:active {
 
 /*define glass morph button style properties*/
 .glass-morph-button-style-properties {
+	height: auto;
+	width: auto;
 	padding: var(--default_padding);
-	background: var(--lighter_background_color);
+	background: var(--light_glass_morph);
 }
 
 /*define glass morph button hover style properties*/
 .glass-morph-button-style-properties:hover {
-	border: .5px solid var(--gray);
+	border: .5px solid white;
 }

@@ -1,0 +1,12 @@
+/*import css variables*/
+@import url("../../variables.css");
+
+/*set video view style properties*/
+.video-view-style-properties {
+    height: 250px;
+    width: 94%;
+    border: 1px solid white;
+    border-radius: var(--default_border_radius);
+    padding: var(--default_padding);
+    margin: 2%;
+}

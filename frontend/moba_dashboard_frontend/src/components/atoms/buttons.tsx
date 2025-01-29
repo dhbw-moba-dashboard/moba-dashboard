@@ -16,7 +16,7 @@ interface ButtonProperties extends DefaultComponentProps {
 	buttonImage?: string | undefined;
 	buttonChecked?: boolean | undefined;
 	imageStyle?: React.CSSProperties;
-	buttonAction?: () => void;
+	buttonAction?: (value?: any) => void;
 }
 
 //create image text button
