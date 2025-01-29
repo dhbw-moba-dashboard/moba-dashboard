@@ -3,6 +3,7 @@ plugins {
     id("org.springframework.boot") version "3.3.4"
     id("io.spring.dependency-management") version "1.1.6"
     id("org.sonarqube") version "5.1.0.4882"
+    id("jacoco")
 }
 
 group = "de.dhbw-karlsruhe.modellbahn"
@@ -43,6 +44,7 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
 
 sonar {
@@ -51,4 +53,10 @@ sonar {
     property("sonar.organization", "dhbw-moba-dashboard")
     property("sonar.host.url", "https://sonarcloud.io")
   }
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
