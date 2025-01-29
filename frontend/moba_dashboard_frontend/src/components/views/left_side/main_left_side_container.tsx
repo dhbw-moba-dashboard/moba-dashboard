@@ -7,11 +7,11 @@ import TrainDataContainer from "./view_options/train_data_view";
 
 //create and export default main left side container
 export default function MainLeftSideContainer() {
-    //return created ui component
-    return (
-        <>
-            <CameraViewContainer/>
-            <TrainDataContainer/>
-        </>
-    );
+	//return created ui component
+	return (
+		<>
+			<CameraViewContainer />
+			<TrainDataContainer />
+		</>
+	);
 }

@@ -48,11 +48,17 @@ export const HeaderText: React.FC<TextProperties> = (props: TextProperties) => {
 export const ImageText: React.FC<TextProperties> = (props: TextProperties) => {
 	return (
 		<FlexBox style={props.style}>
-			<Image style={{height: '18px', width: 'auto', ...props.imageStyle}} imageValue={props.textImage}/>
-			<Text style={{marginLeft: '1%', ...props.textStyle}} textValue={props.textValue}/>
+			<Image
+				style={{ height: "18px", width: "auto", ...props.imageStyle }}
+				imageValue={props.textImage}
+			/>
+			<Text
+				style={{ marginLeft: "1%", ...props.textStyle }}
+				textValue={props.textValue}
+			/>
 		</FlexBox>
 	);
-}
+};
 
 //create and export text link component
 export const TextLink: React.FC<TextProperties> = (props: TextProperties) => {
@@ -74,7 +80,12 @@ export const TextLink: React.FC<TextProperties> = (props: TextProperties) => {
 
 	//return created component
 	return (
-		<a id={props.id} style={props.style} className={props.className} onClick={executeOnClickEvent}>
+		<a
+			id={props.id}
+			style={props.style}
+			className={props.className}
+			onClick={executeOnClickEvent}
+		>
 			{props.textValue}
 		</a>
 	);
@@ -84,7 +95,7 @@ export const TextLink: React.FC<TextProperties> = (props: TextProperties) => {
 export const ImageLink: React.FC<TextProperties> = (props: TextProperties) => {
 	//return created component
 	return (
-		<FlexBox id={props.id} >
+		<FlexBox id={props.id}>
 			<Image
 				style={{ height: "18px", width: "auto", marginRight: "1%" }}
 				imageValue={props.textImage}

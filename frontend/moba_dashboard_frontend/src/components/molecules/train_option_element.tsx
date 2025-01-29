@@ -21,10 +21,13 @@ interface TrainOptionElementProps extends DefaultComponentProps {
 export const TrainOptionElement: React.FC<TrainOptionElementProps> = (
 	props: TrainOptionElementProps,
 ) => {
-
 	//return created train option element
 	return (
-		<GlassMorphButton id={props.id} buttonAction={props.action} style={{width: '33%'}}>
+		<GlassMorphButton
+			id={props.id}
+			buttonAction={props.action}
+			style={{ width: "33%" }}
+		>
 			<Image
 				style={{ height: "40px", width: "auto" }}
 				imageValue={props.trainOptionElementImage}

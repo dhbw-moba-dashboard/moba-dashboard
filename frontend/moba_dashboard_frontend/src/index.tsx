@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 //import i18n file
-import './i18n';
+import "./i18n";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement,
