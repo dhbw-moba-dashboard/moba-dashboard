@@ -3,6 +3,9 @@ package de.dhbwkarlsruhe.modellbahn;
 import java.util.List;
 
 public class BitUtilities {
+	//this prevents the class from being instantiated
+	private BitUtilities() {
+	}
     /**
      * This method returns a byte array containing the bits from startByte:startBit to lastByte:lastBit
      *
@@ -17,9 +20,12 @@ public class BitUtilities {
         byte[] result = new byte[lastByte - startByte + 1];
         for (int i = startByte; i <= lastByte; i++) {
             if (i == startByte) {
-                result[i - startByte] = (byte) (data[i] & (0xFF >> startBit));
+				//&0xFF is done to fix sonar issue.
+				//right shift to get rid of the bits less signicikant than the starting bit
+				result[i - startByte] = (byte) ((data[i] & 0xFF) >> startBit);
             } else if (i == lastByte) {
-                result[i - startByte] = (byte) (data[i] & (0xFF << (7 - lastBit)));
+				//left shift to get rid of the less significant bits
+				result[i - startByte] = (byte) ((data[i] & 0xFF) & (0xFF << (7 - lastBit)));
             } else {
                 result[i - startByte] = data[i];
 
@@ -72,7 +78,6 @@ public class BitUtilities {
             //retrieves the least significant byte
             // and writes it to the result array starting from the end
             result[(result.length - 1) - i] = (byte) (value & 0xFF);
-            //shifts the value 8 bits to the right
             value = value >> 8;
         }
         return result;
@@ -100,8 +105,8 @@ public class BitUtilities {
      * @return array that contains the other arrays
      */
     public static byte[] mergeByteArrays(List<byte[]> list) {
-        int DLC = calculateDLC(list);
-        byte[] result = new byte[DLC];
+		int dlc = calculateDLC(list);
+		byte[] result = new byte[dlc];
         int destinationPosition = 0;
         for (byte[] element : list) {
             System.arraycopy(element, 0, result, destinationPosition, element.length);
