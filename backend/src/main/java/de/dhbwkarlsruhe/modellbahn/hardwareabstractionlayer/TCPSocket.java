@@ -1,21 +1,32 @@
 package de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer;
 
-import java.net.Socket;
+import de.dhbwkarlsruhe.modellbahn.CommandlineArguments;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.net.Socket;
+@Component
 public class TCPSocket {
     private static final int SEND_PORT = 15731;
     private static final int RECEIVE_PORT = 15730;
-    private static final String IP_ADDRESS_MOBA = "10.104.0.5";
-    public static void send(CANMessage message) {
+    private final String IP_ADDRESS_MOBA;
+
+
+    public TCPSocket(CommandlineArguments commandlineArguments) {
+        this.IP_ADDRESS_MOBA = commandlineArguments.getIpAddress();
+    }
+    public void send(CANMessage message) {
+        System.out.println("IP-Adresse: " + IP_ADDRESS_MOBA);
         try {
             Socket socket = new Socket(IP_ADDRESS_MOBA, SEND_PORT);
+            System.out.println("IP-Adresse: " + IP_ADDRESS_MOBA);
             socket.getOutputStream().write(message.toByteArray());
             socket.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public static CANMessage receive() {
+    public CANMessage receive() {
         try {
             Socket socket = new Socket(IP_ADDRESS_MOBA, RECEIVE_PORT);
             byte[] buffer = new byte[1024];

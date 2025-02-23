@@ -13,6 +13,11 @@ import java.util.List;
 
 @RestController
 public class LokController {
+
+	private final TCPSocket TCPSocket;
+	public LokController(TCPSocket TCPSocket) {
+		this.TCPSocket = TCPSocket;
+	}
 	/**
 	 *
 	 * @param locID to identify the loc
@@ -34,6 +39,7 @@ public class LokController {
 	public void setLocDirection(@PathVariable int locID, @RequestBody LocModel.LocDirection lokModel) {
 		String json = lokModel.buildJson(locID);
 		CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_DIRECTION, json, false);
+
 		TCPSocket.send(message);
     }
 
@@ -44,8 +50,6 @@ public class LokController {
 	@GetMapping("/loc/list")
 	public List<Integer> getLocList() {
 		CANMessage message = new CANMessage(Priority.MELDUNG, CommandScheme.LOCOMOTIVE_DIRECTION,"{filename:loks}", true);
-		TCPSocket.send(message);
-		CANMessage response = TCPSocket.receive();
-		return List.of(1, 2, 3, 4, 5);
+		return List.of(1, 2, 3);
 	}
 }
