@@ -2,7 +2,6 @@ package de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer;
 
 import de.dhbwkarlsruhe.modellbahn.BitUtilities;
 import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.Payload;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.PayloadFactory;
 import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.schemes.Priority;
 
@@ -12,20 +11,21 @@ import java.util.Random;
 
 
 public class CANMessage {
-    public Priority priority;
-    public CommandScheme command;
-    public boolean response;
+    private Priority priority;
+    private CommandScheme command;
+    private boolean response;
     public int hashValue;
-    public byte[] rawValue;
+    private byte[] rawValue;
     //Data Length Code : number of data bytes (0-8)
-    public byte DLC;
-    public Payload payload;
-    public CANMessage(Priority prio, CommandScheme command,String json, boolean response  ){
+    private byte DLC;
+    private Payload payload;
+
+    public CANMessage(Priority prio, CommandScheme command, Payload p, boolean response) {
         this.priority = prio;
         this.command = command;
         this.response = response;
         this.hashValue = generateHashValue();
-        this.payload = PayloadFactory.createPayloadFromJson(json, command);
+        this.payload = p;
     }
 
     public CANMessage(byte[] message) {
