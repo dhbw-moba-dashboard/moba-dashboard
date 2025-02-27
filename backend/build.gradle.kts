@@ -33,6 +33,7 @@ repositories {
 dependencies {
     //implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
+    implementation("commons-codec:commons-codec:1.18.0")
 
     compileOnly("org.projectlombok:lombok")
 

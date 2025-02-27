@@ -18,7 +18,7 @@ public class CANMessage {
     private byte[] rawValue;
     //Data Length Code : number of data bytes (0-8)
     private byte DLC;
-    private Payload payload;
+    public Payload payload;
 
     public CANMessage(Priority prio, CommandScheme command, Payload p, boolean response) {
         this.priority = prio;

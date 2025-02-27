@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,11 @@ public class LokController {
 	public ResponseEntity<String> setLocSpeed(@RequestBody LocModel.LocSpeed lokModel) {
 
 		CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_DIRECTION, lokModel, false);
+		try{
 		tcpSocket.send(message);
+		}catch (IOException e){
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		return new ResponseEntity<>(PayloadFactory.getJsonSerialString(lokModel), HttpStatus.OK);
 	}
 
@@ -43,8 +48,11 @@ public class LokController {
 	public ResponseEntity<String> setLocDirection(@RequestBody LocModel.LocDirection lokModel) {
 
 		CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_DIRECTION, lokModel, false);
-
-		tcpSocket.send(message);
+		try{
+			tcpSocket.send(message);
+		}catch (IOException e){
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		return new ResponseEntity<>(PayloadFactory.getJsonSerialString(lokModel), HttpStatus.OK);
     }
 
