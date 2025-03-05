@@ -28,6 +28,6 @@ class LocTest {
 		LocModel.LocSpeed locSpeed = new LocModel.LocSpeed(id, speed);
 		Assertions.assertEquals("{\"locID\":4,\"speed\":16}", PayloadFactory.getJsonSerialString(locSpeed));
 		LocModel.LocDirection locDirection = new LocModel.LocDirection(id, Direction.FORWARD);
-		Assertions.assertEquals("{\"locID\":4,\"direction\":FORWARD}", PayloadFactory.getJsonSerialString(locDirection));
+		Assertions.assertEquals("{\"locID\":4,\"direction\":\"FORWARD\"}", PayloadFactory.getJsonSerialString(locDirection));
 	}
 }
