@@ -14,6 +14,7 @@ import type { DefaultComponentProps } from "../../logic/tools/interfaces/interfa
 interface TrainOptionElementProps extends DefaultComponentProps {
 	trainOptionElementText: string;
 	trainOptionElementImage?: string | undefined;
+	style?: React.CSSProperties;
 	action?: (value?: any) => void;
 }
 
@@ -23,19 +24,11 @@ export const TrainOptionElement: React.FC<TrainOptionElementProps> = (
 ) => {
 	//return created train option element
 	return (
-		<GlassMorphButton
-			id={props.id}
-			buttonAction={props.action}
-			style={{ width: "33%" }}
-		>
-			<Image
-				style={{ height: "40px", width: "auto" }}
-				imageValue={props.trainOptionElementImage}
-			/>
-			<Text
-				style={{ fontSize: "20px", fontWeight: "bold" }}
-				textValue={props.trainOptionElementText}
-			/>
+		<GlassMorphButton buttonAction={props.action} style={props.style}>
+			<Image style={{height: '45px', width: 'auto'}} imageValue={props.trainOptionElementImage}/>
+			<div style={{marginTop: '4%'}}>
+				<Text style={{fontWeight: 'bold', fontSize: '18px'}} textValue={props.trainOptionElementText}/>
+			</div>
 		</GlassMorphButton>
 	);
 };

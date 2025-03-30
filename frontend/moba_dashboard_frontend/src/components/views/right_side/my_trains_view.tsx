@@ -1,5 +1,5 @@
 //import react library
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import Text, { ImageText } from "../../atoms/texts";
 import GridBox from "../../container/GridBox";
@@ -11,10 +11,15 @@ import { TrainOptionElement } from "../../molecules/train_option_element";
 import { setConsoleMessage } from "../../../logic/tools/messages";
 import FlexBox from "../../container/FlexBox";
 
+//import context
+import {DataTransferContext} from "../../../App";
+
 //create and export default my trains container
 export default function MyTrainsContainer() {
 	//define state hook to load train options
 	const [trainOptions, setTrainOptions] = useState<any[]>([]);
+	//get data transfer context values
+	const transferedData = useContext(DataTransferContext);
 
 	//use effect to load train options from .json file
 	useEffect(() => {
@@ -25,13 +30,20 @@ export default function MyTrainsContainer() {
 			.catch((readJsonFileError) => setConsoleMessage(readJsonFileError, true));
 	}, []);
 
+	//function to set current selected train
+	function currentSelectedTrainAction(currentTrainId: string): void {
+		if (currentTrainId !== transferedData.selectedTrain) {
+			transferedData.setSelectedTrain(currentTrainId);
+		}
+	}
+
 	//define map for different train information options
 	const trainInformationOptions = new Map<string, [string, string]>([
 		[
 			"currentSpeed",
 			[`Aktuelle Geschwindigkeit: km/h`, "Icon_Speedometer_IOS_White"],
 		],
-		["coalValue", [`Aktueller Kohle stand::  kg`, "Icon_Coal_IOS_White"]],
+		["coalValue", [`Aktueller Kohle stand:  kg`, "Icon_Coal_IOS_White"]],
 		["waterValue", [`Aktueller Wasser Stand: l`, "Icon_Water_IOS_White"]],
 		["sandValue", [`Aktueller Sand stand: kg`, "Icon_Sand_IOS_White"]],
 	]);
@@ -49,6 +61,8 @@ export default function MyTrainsContainer() {
 									key={currentTrain.trainID}
 									trainOptionElementText={currentTrain.trainName}
 									trainOptionElementImage={currentTrain.trainImage}
+									style={{border: ((transferedData.selectedTrain === currentTrain.trainID) ? '1px solid white' : 'none')}}
+									action={() => currentSelectedTrainAction(currentTrain.trainID)}
 								/>
 							))
 						) : (
