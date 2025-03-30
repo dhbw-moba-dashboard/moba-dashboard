@@ -1,5 +1,5 @@
 //import react library
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Text, { ImageText } from "../../atoms/texts";
 import GridBox from "../../container/GridBox";
@@ -12,7 +12,7 @@ import { setConsoleMessage } from "../../../logic/tools/messages";
 import FlexBox from "../../container/FlexBox";
 
 //import context
-import {DataTransferContext} from "../../../App";
+import { DataTransferContext } from "../../../App";
 
 //create and export default my trains container
 export default function MyTrainsContainer() {
@@ -61,8 +61,15 @@ export default function MyTrainsContainer() {
 									key={currentTrain.trainID}
 									trainOptionElementText={currentTrain.trainName}
 									trainOptionElementImage={currentTrain.trainImage}
-									style={{border: ((transferedData.selectedTrain === currentTrain.trainID) ? '1px solid white' : 'none')}}
-									action={() => currentSelectedTrainAction(currentTrain.trainID)}
+									style={{
+										border:
+											transferedData.selectedTrain === currentTrain.trainID
+												? "1px solid white"
+												: "none",
+									}}
+									action={() =>
+										currentSelectedTrainAction(currentTrain.trainID)
+									}
 								/>
 							))
 						) : (

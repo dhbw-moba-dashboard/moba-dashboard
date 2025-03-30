@@ -1,5 +1,6 @@
 //import react library
-import React, { useRef, useState, useCallback, useEffect } from "react";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type Webcam from "react-webcam";
 
 //import css styling file
@@ -36,7 +37,9 @@ export const VideoViewComponent: React.FC<DefaultComponentProps> = (
 		if (newState) {
 			//start webcam
 			try {
-				const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+				const stream = await navigator.mediaDevices.getUserMedia({
+					video: true,
+				});
 				streamRef.current = stream;
 				if (webcamRef.current) {
 					webcamRef.current.srcObject = stream;
@@ -58,9 +61,10 @@ export const VideoViewComponent: React.FC<DefaultComponentProps> = (
 		}
 
 		// Update button text and icon
-		setVideoViewActionButtonProps(newState ?
-			["Streaming Stoppen", "Icon_Pause_IOS_Primary_Color"]
-			: ["Streaming Starten", "Icon_Play_IOS_Primary_Color"]
+		setVideoViewActionButtonProps(
+			newState
+				? ["Streaming Stoppen", "Icon_Pause_IOS_Primary_Color"]
+				: ["Streaming Starten", "Icon_Play_IOS_Primary_Color"],
 		);
 	};
 
@@ -70,16 +74,26 @@ export const VideoViewComponent: React.FC<DefaultComponentProps> = (
 			<div>
 				{
 					//check if to show video stream or placeholder information
-					actionButtonState ?
-						<video ref={webcamRef} autoPlay playsInline className='video-view-style-properties'/>
-						: <div style={{height: '250px'}}>
-							<Text textValue="Überwachung nicht gestartet!"/>
+					actionButtonState ? (
+						<video
+							ref={webcamRef}
+							autoPlay
+							playsInline
+							className="video-view-style-properties"
+						/>
+					) : (
+						<div style={{ height: "250px" }}>
+							<Text textValue="Überwachung nicht gestartet!" />
 						</div>
+					)
 				}
 			</div>
-			<div style={{marginTop: "-1.5%"}}>
+			<div style={{ marginTop: "-1.5%" }}>
 				<div onClick={videoStreamAction}>
-				<ImageLink textValue={videoViewActionButtonProps[0]} textImage={`images/general/${videoViewActionButtonProps[1]}.png`}/>
+					<ImageLink
+						textValue={videoViewActionButtonProps[0]}
+						textImage={`images/general/${videoViewActionButtonProps[1]}.png`}
+					/>
 				</div>
 			</div>
 		</>

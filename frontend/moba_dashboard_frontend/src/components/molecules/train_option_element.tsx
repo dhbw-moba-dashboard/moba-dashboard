@@ -25,9 +25,15 @@ export const TrainOptionElement: React.FC<TrainOptionElementProps> = (
 	//return created train option element
 	return (
 		<GlassMorphButton buttonAction={props.action} style={props.style}>
-			<Image style={{height: '45px', width: 'auto'}} imageValue={props.trainOptionElementImage}/>
-			<div style={{marginTop: '4%'}}>
-				<Text style={{fontWeight: 'bold', fontSize: '18px'}} textValue={props.trainOptionElementText}/>
+			<Image
+				style={{ height: "45px", width: "auto" }}
+				imageValue={props.trainOptionElementImage}
+			/>
+			<div style={{ marginTop: "4%" }}>
+				<Text
+					style={{ fontWeight: "bold", fontSize: "18px" }}
+					textValue={props.trainOptionElementText}
+				/>
 			</div>
 		</GlassMorphButton>
 	);

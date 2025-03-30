@@ -1,7 +1,7 @@
 //import app styling
 import "./App.css";
 
-import {createContext, useState} from "react";
+import { createContext, useState } from "react";
 
 //import custom react components
 import { ImageButton } from "./components/atoms/buttons";
@@ -23,7 +23,7 @@ function App() {
 	//data transfer object
 	const dataTransferObject: object = {
 		selectedTrain: selectedTrain,
-		setSelectedTrain: setSelectedTrain
+		setSelectedTrain: setSelectedTrain,
 	};
 
 	//return created ui components
@@ -31,16 +31,18 @@ function App() {
 		<DataTransferContext.Provider value={dataTransferObject}>
 			<div className="App">
 				<FlexBox
-					style={{justifyContent: "space-between", alignItems: "center"}}
+					style={{ justifyContent: "space-between", alignItems: "center" }}
 				>
-					<HeaderText textValue="we.love.trains"/>
+					<HeaderText textValue="we.love.trains" />
 				</FlexBox>
-				<FlexBox style={{justifyContent: "space-between", alignItems: 'flex-start'}}>
-					<div style={{width: "40%"}}>
-						<MainLeftSideContainer/>
+				<FlexBox
+					style={{ justifyContent: "space-between", alignItems: "flex-start" }}
+				>
+					<div style={{ width: "40%" }}>
+						<MainLeftSideContainer />
 					</div>
-					<div style={{width: "59%"}}>
-						<MyTrainsContainer/>
+					<div style={{ width: "59%" }}>
+						<MyTrainsContainer />
 					</div>
 				</FlexBox>
 			</div>
