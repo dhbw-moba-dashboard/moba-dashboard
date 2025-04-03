@@ -1,11 +1,12 @@
-package de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.controller;
+package de.dhbwkarlsruhe.modellbahn.controller;
 
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.CANMessage;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.TCPSocket;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.controller.models.request.LocModel;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.PayloadFactory;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.schemes.CommandScheme;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.schemes.Priority;
+import de.dhbwkarlsruhe.modellbahn.Models.CANMessage;
+import de.dhbwkarlsruhe.modellbahn.Socket;
+import de.dhbwkarlsruhe.modellbahn.Models.LocDirection;
+import de.dhbwkarlsruhe.modellbahn.Models.LocSpeed;
+import de.dhbwkarlsruhe.modellbahn.Models.ModelFactory;
+import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
+import de.dhbwkarlsruhe.modellbahn.schemes.Priority;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +20,9 @@ import java.util.List;
 @RestController
 public class LokController {
 
-	private final TCPSocket tcpSocket;
+	private final Socket tcpSocket;
 
-	public LokController(TCPSocket tcpSocket) {
+	public LokController(Socket tcpSocket) {
 		this.tcpSocket = tcpSocket;
 	}
 	/**
@@ -29,7 +30,7 @@ public class LokController {
 	 * @param lokModel contains the new speed value range : 0-1023
 	 */
 	@PutMapping("/loc/speed")
-	public ResponseEntity<String> setLocSpeed(@RequestBody LocModel.LocSpeed lokModel) {
+	public ResponseEntity<String> setLocSpeed(@RequestBody LocSpeed lokModel) {
 
 		CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_DIRECTION, lokModel, false);
 		try{
@@ -37,7 +38,7 @@ public class LokController {
 		}catch (IOException e){
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<>(PayloadFactory.getJsonSerialString(lokModel), HttpStatus.OK);
+		return new ResponseEntity<>(ModelFactory.getJsonSerialString(lokModel), HttpStatus.OK);
 	}
 
 	/**
@@ -45,7 +46,7 @@ public class LokController {
 	 * @param lokModel contains the new direction : value range : 0-3
 	 */
 	@PutMapping("/loc/direction")
-	public ResponseEntity<String> setLocDirection(@RequestBody LocModel.LocDirection lokModel) {
+	public ResponseEntity<String> setLocDirection(@RequestBody LocDirection lokModel) {
 
 		CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_DIRECTION, lokModel, false);
 		try{
@@ -53,7 +54,7 @@ public class LokController {
 		}catch (IOException e){
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<>(PayloadFactory.getJsonSerialString(lokModel), HttpStatus.OK);
+		return new ResponseEntity<>(ModelFactory.getJsonSerialString(lokModel), HttpStatus.OK);
     }
 
 	/**

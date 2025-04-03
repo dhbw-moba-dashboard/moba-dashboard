@@ -1,4 +1,4 @@
-package de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.schemes;
+package de.dhbwkarlsruhe.modellbahn.schemes;
 
 public enum Priority {
     STOP,

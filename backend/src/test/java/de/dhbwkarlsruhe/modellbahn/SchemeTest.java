@@ -1,6 +1,6 @@
 package de.dhbwkarlsruhe.modellbahn;
 
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.schemes.CommandScheme;
+import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
