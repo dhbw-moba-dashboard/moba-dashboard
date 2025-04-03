@@ -6,4 +6,5 @@ package de.dhbwkarlsruhe.modellbahn.Models;
 public interface Model
 {
     byte[] toByteArray();
+    int getDLC();
 }

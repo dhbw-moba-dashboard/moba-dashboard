@@ -21,11 +21,23 @@ public record LocSpeed(int locID, int speed) implements Model
 
         List<byte[]> src = new ArrayList<>();
         src.add(BitUtilities.intToByteArray(locID, 4));
-        src.add(BitUtilities.intToByteArray(speed, 2));
-        //return BitUtilities.mergeByteArrays(src);
+        int writtenSpeed = Math.max(speed, 0);
+        src.add(BitUtilities.intToByteArray(writtenSpeed, 2));
+        src.add(BitUtilities.intToByteArray(0,2));//2 padding bytes
+        return BitUtilities.mergeByteArrays(src);
         //speed to zero return new byte[]{0x00,0x08,0x57,0x38,0x06,0x00,0x00,0x40,0x0d,0x00,0x00,0x00,0x00};
         //return new byte[]{0x00,0x08,0x57,0x38,0x06,0x00,0x00,0x40,0x0d,0x01,(byte) 0xf4,0x00,0x00};
 
-        return new byte[]{0x00,0x08,0x57,0x38,0x06,0x00,0x00,0x40,0x0d,0x01,(byte)0xf4,0x00,0x00};
+    }
+
+    @Override
+    public int getDLC()
+    {
+        if (speed <0){
+            return 4;
+        }
+        else {
+            return 6;
+        }
     }
 }

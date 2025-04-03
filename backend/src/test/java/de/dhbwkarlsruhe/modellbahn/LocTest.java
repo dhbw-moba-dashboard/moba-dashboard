@@ -1,33 +1,25 @@
 package de.dhbwkarlsruhe.modellbahn;
 
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.controller.models.request.LocModel;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.Payload;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.PayloadFactory;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.schemes.Direction;
+import de.dhbwkarlsruhe.modellbahn.Models.LocSpeed;
+import de.dhbwkarlsruhe.modellbahn.Models.Model;
+import de.dhbwkarlsruhe.modellbahn.Models.ModelFactory;
+import de.dhbwkarlsruhe.modellbahn.schemes.Direction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class LocTest {
 	@Test
 	void speed() {
-		byte[] bytes = new byte[]{0x00, 0x00, 0x00, 0x03, 0x00, 0x10};
+		byte[] bytes = new byte[]{0x00,0x00,//Id bytes empty
+				0x40, 0x0d, //loc id : 16397
+				0x01, (byte) 0xf4, //speed 500 max 1024 min 0
+				0x00,0x00};;
 
-		Payload jsonPayload = new LocModel.LocSpeed(3, 16);
-		Payload bytePayload = LocModel.LocSpeed.createLocSpeed(bytes);
-		byte[] convertedBytes = bytePayload.toByteArray();
-		Assertions.assertEquals(jsonPayload, bytePayload);
+		Model jsonPayload = new LocSpeed(16397, 500);
+
+		byte[] convertedBytes = jsonPayload.toByteArray();
 		Assertions.assertArrayEquals(bytes, convertedBytes);
 
 	}
 
-	@Test
-	void model() {
-		//Todo: test edge cases like -1 and serialize/deserialize json properly
-		int speed = 16;
-		int id = 4;
-		LocModel.LocSpeed locSpeed = new LocModel.LocSpeed(id, speed);
-		Assertions.assertEquals("{\"locID\":4,\"speed\":16}", PayloadFactory.getJsonSerialString(locSpeed));
-		LocModel.LocDirection locDirection = new LocModel.LocDirection(id, Direction.FORWARD);
-		Assertions.assertEquals("{\"locID\":4,\"direction\":\"FORWARD\"}", PayloadFactory.getJsonSerialString(locDirection));
-	}
 }

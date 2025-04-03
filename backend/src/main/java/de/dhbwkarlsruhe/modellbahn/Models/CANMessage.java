@@ -14,9 +14,8 @@ public class CANMessage {
     private CommandScheme command;
     private boolean response;
     public int hashValue;
-    private byte[] rawValue;
     //Data Length Code : number of data bytes (0-8)
-    private byte DLC;
+    private int DLC;
     public Model payload;
 
     public CANMessage(Priority prio, CommandScheme command, Model p, boolean response) {
@@ -24,6 +23,7 @@ public class CANMessage {
         this.command = command;
         this.response = response;
         this.hashValue = generateHashValue();
+        this.DLC = p.getDLC();
         this.payload = p;
     }
 
@@ -32,6 +32,9 @@ public class CANMessage {
     }
 
     private int generateHashValue(){
+        return 0x5738;
+    }
+    /*private int generateHashValue(){
         Random r = new Random();
         long longRand= r.nextLong(0xFFFFFFFFL);
         //uidHash is calculated by XORing the lower 2bytes with the higher 2 bytes of the UID
@@ -41,12 +44,12 @@ public class CANMessage {
         //the second byte has always a 1 in the 2 LSB
         uidHash = uidHash| 0x0300;
         return uidHash;
-    }
+    }*/
     public byte[] toByteArray(){
         byte[] firstByte = {getFirstByte()};
         byte [] secondByte = {getSecondByte()};
         byte[] hash = BitUtilities.intToByteArray(hashValue,2);
-        byte[] dlc = {(byte) (DLC << 4)};
+        byte[] dlc = BitUtilities.intToByteArray(DLC,1);
         byte [] data = payload.toByteArray();
         return BitUtilities.mergeByteArrays(List.of(firstByte,secondByte,hash,dlc,data));
     }
@@ -75,9 +78,10 @@ public class CANMessage {
      */
     private byte getSecondByte(){
         byte secondByte = 0x00;
-        secondByte = (byte) (secondByte | (command.getCommandValue() & 0xFE));
+        secondByte = (byte) (secondByte | (command.getCommandValue() << 1));
         secondByte = (byte) (secondByte | (response? 0x01 : 0x00));
         return secondByte;
     }
+
 
 }

@@ -4,5 +4,6 @@ public enum Direction {
 	SAME,
 	FORWARD,
 	BACKWARD,
-	SWITCH
+	SWITCH,
+	REQUEST //
 }

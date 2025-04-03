@@ -122,4 +122,10 @@ public class BitUtilities {
 		}
 		return sum;
 	}
+    public static void printBytes(byte[] bytes) {
+        for (byte b : bytes) {
+            System.out.print("0x" + String.format("%02X", b) + " ");
+        }
+        System.out.println();
+    }
 }

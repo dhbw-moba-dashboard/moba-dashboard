@@ -32,7 +32,7 @@ public class LokController {
 	@PutMapping("/loc/speed")
 	public ResponseEntity<String> setLocSpeed(@RequestBody LocSpeed lokModel) {
 
-		CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_DIRECTION, lokModel, false);
+		CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_SPEED, lokModel, false);
 		try{
 		tcpSocket.send(message);
 		}catch (IOException e){

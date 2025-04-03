@@ -32,6 +32,16 @@ public record LocDirection(int locID, Direction direction) implements Model
         return BitUtilities.mergeByteArrays(data);
     }
 
+    @Override
+    public int getDLC()
+    {
+     if (direction == Direction.REQUEST)
+     {
+         return 4;
+     }
+        return 6;
+    }
+
 }
 
 
