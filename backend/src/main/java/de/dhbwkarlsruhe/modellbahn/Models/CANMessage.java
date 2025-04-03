@@ -6,17 +6,17 @@ import de.dhbwkarlsruhe.modellbahn.schemes.Priority;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
+import java.util.Objects;
 
 
 public class CANMessage {
-    private Priority priority;
-    private CommandScheme command;
-    private boolean response;
-    public int hashValue;
+    private final Priority priority;
+    private final CommandScheme command;
+    private final boolean response;
+    private final int hashValue;
     //Data Length Code : number of data bytes (0-8)
-    private int DLC;
-    public Model payload;
+    private final int DLC;
+    private final Model payload;
 
     public CANMessage(Priority prio, CommandScheme command, Model p, boolean response) {
         this.priority = prio;
@@ -28,7 +28,57 @@ public class CANMessage {
     }
 
     public CANMessage(byte[] message) {
-        System.out.println("Received message : "+ Arrays.toString(message));
+        priority = setPriority(message);
+        command = setCommand(message);
+        response = setResponse(message);
+        hashValue = setHashValue(message);
+        DLC = setDLC(message);
+        payload = setPayload(message);
+    }
+
+    private Priority setPriority(byte[] message)
+    {
+        byte firstByte = message[0];
+        int prio = firstByte >> 4;
+        return Priority.values()[prio];
+
+    }
+
+    private CommandScheme setCommand(byte[] message)
+    {
+        byte firstByte = message[0];
+        byte secondByte = message[1];
+        int commandFirst = firstByte & 0x01; //0000 0001
+        int commandSecond = secondByte >> 1; //0111 1111
+        int merged = (commandFirst << 7) | commandSecond;
+        return CommandScheme.values()[merged];
+    }
+
+    private boolean setResponse(byte[] message)
+    {
+        byte secondByte = message[1];
+        return (secondByte & 0x01) == 1;
+
+
+    }
+
+    private int setHashValue(byte[] message)
+    {
+        byte firstByte = message[2];
+        byte secondByte = message[3];
+        return firstByte << 8 | (secondByte & 0xFF);
+    }
+
+    private int setDLC(byte[] message)
+    {
+        byte dlcByte = message[4];
+        return dlcByte & 0x0F;
+    }
+
+    private Model setPayload(byte[] message)
+    {
+        byte[] payloadArray = Arrays.copyOfRange(message, 5, 5 + DLC);
+        return ModelFactory.createPayloadFromBytes(payloadArray, command);
     }
 
     private int generateHashValue(){
@@ -82,6 +132,24 @@ public class CANMessage {
         secondByte = (byte) (secondByte | (response? 0x01 : 0x00));
         return secondByte;
     }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+        CANMessage that = (CANMessage) o;
+        return response == that.response && hashValue == that.hashValue && DLC == that.DLC && priority == that.priority && command == that.command && Objects.equals(payload, that.payload);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(priority, command, response, hashValue, DLC, payload);
+    }
+
 
 
 }
