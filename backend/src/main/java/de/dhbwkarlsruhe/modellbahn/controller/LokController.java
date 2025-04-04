@@ -1,7 +1,7 @@
 package de.dhbwkarlsruhe.modellbahn.controller;
 
 import de.dhbwkarlsruhe.modellbahn.Models.CANMessage;
-import de.dhbwkarlsruhe.modellbahn.Socket;
+import de.dhbwkarlsruhe.modellbahn.MobaSocket;
 import de.dhbwkarlsruhe.modellbahn.Models.LocDirection;
 import de.dhbwkarlsruhe.modellbahn.Models.LocSpeed;
 import de.dhbwkarlsruhe.modellbahn.Models.ModelFactory;
@@ -9,10 +9,7 @@ import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.Priority;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,9 +17,9 @@ import java.util.List;
 @RestController
 public class LokController {
 
-	private final Socket tcpSocket;
+	private final MobaSocket tcpSocket;
 
-	public LokController(Socket tcpSocket) {
+	public LokController(MobaSocket tcpSocket) {
 		this.tcpSocket = tcpSocket;
 	}
 	/**
@@ -40,6 +37,22 @@ public class LokController {
 		}
 		return new ResponseEntity<>(ModelFactory.getJsonSerialString(lokModel), HttpStatus.OK);
 	}
+	@GetMapping("/loc/speed/{locId}")
+	public ResponseEntity<String> getLocSpeed(@PathVariable int locId) {
+		LocSpeed lokModel = new LocSpeed(locId, -1);
+		CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_SPEED, lokModel, false);
+        try
+        {
+            tcpSocket.send(message);
+			CANMessage response = tcpSocket.receive(CommandScheme.LOCOMOTIVE_SPEED);
+			return new ResponseEntity<>(ModelFactory.getJsonSerialString(response.getPayload()), HttpStatus.OK);
+
+		} catch (IOException e)
+        {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 
 	/**
 	 *

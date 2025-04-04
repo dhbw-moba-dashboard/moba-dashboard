@@ -9,8 +9,14 @@ public record LocSpeed(int locID, int speed) implements Model
 {
     public static LocSpeed createLocSpeed(byte[] data)
     {
+
         int id = BitUtilities.transformBitSequenceToInt(data, 0, 0, 3, 7);
-        int speed = BitUtilities.transformBitSequenceToInt(data, 4, 0, 5, 7);
+        int speed = -1;
+        if (data.length > 4) {
+             speed = BitUtilities.transformBitSequenceToInt(data, 4, 0, 5, 7);
+
+        }
+
         return new LocSpeed(id, speed);
 
     }

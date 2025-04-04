@@ -14,7 +14,7 @@ public class ModelFactory
 			case LOCOMOTIVE_SPEED -> LocSpeed.createLocSpeed(data);
 			case LOCOMOTIVE_DIRECTION -> LocDirection.createLocDirection(data);
 
-            default -> throw new IllegalArgumentException("Unknown CommandScheme");
+            default -> ErrorModel.createErrorModel(data);
         };
     }
 

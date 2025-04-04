@@ -3,6 +3,7 @@ package de.dhbwkarlsruhe.modellbahn.Models;
 import de.dhbwkarlsruhe.modellbahn.BitUtilities;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.Priority;
+import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,11 +12,14 @@ import java.util.Objects;
 
 public class CANMessage {
     private final Priority priority;
+    @Getter
     private final CommandScheme command;
+    @Getter
     private final boolean response;
     private final int hashValue;
     //Data Length Code : number of data bytes (0-8)
     private final int DLC;
+    @Getter
     private final Model payload;
 
     public CANMessage(Priority prio, CommandScheme command, Model p, boolean response) {
@@ -149,7 +153,5 @@ public class CANMessage {
     {
         return Objects.hash(priority, command, response, hashValue, DLC, payload);
     }
-
-
 
 }
