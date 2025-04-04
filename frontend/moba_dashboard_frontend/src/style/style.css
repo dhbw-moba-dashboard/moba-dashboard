@@ -13,7 +13,7 @@ body {
 }
 
 /*add responsive design in case of large display*/
-@media only screen and (max-width: 1000px) {
+@media only screen and (min-width: 1800px) {
 	body {
 		padding-left: 15%;
 		padding-right: 15%;
