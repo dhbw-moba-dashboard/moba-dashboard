@@ -18,7 +18,7 @@ export const ChartComponent: React.FC<ChartComponentProps> = (props: ChartCompon
 	//return created data chart component
 	return (
 		<div style={{marginTop: '4%'}}>
-			<ResponsiveContainer width="100%" height={350}>
+			<ResponsiveContainer width="100%" height={290}>
 				{
 					//check if data is passed or not
 					props.data ? <LineChart data={props.data} margin={{ top: 20, right: 30, left: 20, bottom: 40 }}>

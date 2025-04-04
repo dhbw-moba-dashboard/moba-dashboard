@@ -12,6 +12,7 @@ import type { DefaultComponentProps } from "../../logic/tools/interfaces/interfa
 //import custom rs function
 import { setConsoleMessage } from "../../logic/tools/messages";
 import Text, { ImageLink } from "../atoms/texts";
+import Image from "../atoms/images";
 
 //create and export video view component
 export const VideoViewComponent: React.FC<DefaultComponentProps> = (
@@ -83,13 +84,16 @@ export const VideoViewComponent: React.FC<DefaultComponentProps> = (
 							controls
 						/>
 					) : (
-						<div style={{ height: "250px" }}>
-							<Text textValue="Überwachung nicht gestartet!" />
+						<div style={{ height: "250px", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+							<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+								<Image style={{height: '80px', width: '80px'}} imageValue="images/color/Icon_No_Video_Color.png"/>
+								<Text style={{fontSize: '20px', fontWeight: 'bold', marginTop: '.25%', textWrap: 'nowrap'}} textValue="Überwachung nicht gestartet!" />
+							</div>
 						</div>
 					)
 				}
 			</div>
-			<div style={{ marginTop: "0" }}>
+			<div style={{ marginTop: "-1%" }}>
 				<div onClick={videoStreamAction}>
 					<ImageLink
 						textValue={videoViewActionButtonProps[0]}

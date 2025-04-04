@@ -36,7 +36,7 @@ function App() {
 					<HeaderText textValue="we.love.trains" />
 				</FlexBox>
 				<FlexBox
-					style={{ justifyContent: "space-between", alignItems: "flex-start" }}
+					style={{ justifyContent: "space-between", alignItems: "flex-start", marginTop: '-1%' }}
 				>
 					<div style={{ width: "40%" }}>
 						<MainLeftSideContainer />
