@@ -3,7 +3,7 @@
 
 /*set video view style properties*/
 .video-view-style-properties {
-	height: 250px;
+	height: 260px;
 	border-radius: var(--default_border_radius);
 	margin: 2%;
 }

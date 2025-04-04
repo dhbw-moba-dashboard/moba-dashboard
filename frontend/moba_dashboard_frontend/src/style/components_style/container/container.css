@@ -15,7 +15,7 @@
 	grid-auto-rows: 1fr;
 	width: auto;
 	height: auto;
-	max-height: 600px;
+	max-height: 1000px;
 	overflow-y: auto;
 	gap: var(--default_padding);
 }

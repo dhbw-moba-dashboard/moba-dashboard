@@ -26,7 +26,7 @@ export const VideoViewComponent: React.FC<DefaultComponentProps> = (
 	const [actionButtonState, setActionButtonState] = useState<boolean>(false);
 	const [videoViewActionButtonProps, setVideoViewActionButtonProps] = useState<
 		string[]
-	>(["Streaming Starten", "Icon_Play_IOS_Primary_Color"]);
+	>(["Streaming starten", "Icon_Play_IOS_Primary_Color"]);
 
 	//function for click action
 	const videoStreamAction = async (): Promise<void> => {
@@ -63,8 +63,8 @@ export const VideoViewComponent: React.FC<DefaultComponentProps> = (
 		// Update button text and icon
 		setVideoViewActionButtonProps(
 			newState
-				? ["Streaming Stoppen", "Icon_Pause_IOS_Primary_Color"]
-				: ["Streaming Starten", "Icon_Play_IOS_Primary_Color"],
+				? ["Streaming stoppen", "Icon_Pause_IOS_Primary_Color"]
+				: ["Streaming starten", "Icon_Play_IOS_Primary_Color"],
 		);
 	};
 

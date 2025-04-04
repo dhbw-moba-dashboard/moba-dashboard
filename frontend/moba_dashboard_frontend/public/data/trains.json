@@ -14,25 +14,25 @@
 	{
 		"trainID": "16397",
 		"trainType": "ELCTRIC",
-		"trainName": "Lok - Alte Optik",
+		"trainName": "BR151 gealtert",
 		"trainImage": "images/trains/DB_BR_150_144-4_alt.png"
 	},
 	{
 		"trainID": "2",
 		"trainType": "STEAM",
-		"trainName": "SBB Krokodil",
+		"trainName": "SBB Köfferli",
 		"trainImage": "images/trains/SBB_Fc_12_201.png"
 	},
 	{
 		"trainID": "16392",
 		"trainType": "STEAM",
-		"trainName": "Dampflok - Rauch Funktion",
+		"trainName": "Dampflok - BR96",
 		"trainImage": "images/trains/DRG_BR_96_024.png"
 	},
 	{
 		"trainID": "4",
 		"trainType": "STEAM",
-		"trainName": "Dampflok - Ohne Rauch",
+		"trainName": "Dampflok - BR95",
 		"trainImage": "images/trains/DR_DDR_BR_95_0041-4.png"
 	}
 ]

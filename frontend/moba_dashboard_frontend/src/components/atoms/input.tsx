@@ -14,6 +14,7 @@ import Text from "./texts";
 //interface for select component props
 interface SelectComponentProps extends DefaultComponentProps {
 	selectComponentData?: any[] | undefined;
+	selectAction?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 //define and export select component
@@ -21,7 +22,7 @@ export const Select: React.FC<SelectComponentProps> = (
 	props: SelectComponentProps,
 ) => {
 	return (
-		<select id={props.id} style={props.style} className={props.className}>
+		<select id={props.id} style={props.style} className={props.className} onChange={props.selectAction}>
 			{
 				// Iterate and return SelectOptionItem for each data value
 				props.selectComponentData &&
