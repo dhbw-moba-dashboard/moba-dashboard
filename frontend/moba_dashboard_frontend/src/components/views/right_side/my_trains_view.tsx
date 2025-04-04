@@ -1,5 +1,6 @@
 //import react library
 import React, { useContext, useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 import Text, { ImageText } from "../../atoms/texts";
 import GridBox from "../../container/GridBox";
@@ -23,6 +24,9 @@ export default function MyTrainsContainer() {
 	//get data transfer context values
 	const transferedData = useContext(DataTransferContext);
 
+	//define state hook to fetch train data
+	const [fetchedTrainData, setFetchedTrainData] = useState<[]>();
+
 	//use effect to load train options from .json file
 	useEffect(() => {
 		//fetch data from .json file
@@ -39,11 +43,16 @@ export default function MyTrainsContainer() {
 		}
 	}
 
+	//use effect to fetch train speed
+	useEffect(() => {
+
+	}, []);
+
 	//define map for different train information options
 	const trainInformationOptions = new Map<string, [string, string]>([
 		[
 			"currentSpeed",
-			[`Aktuelle Geschwindigkeit: km/h`, "Icon_Speedometer_IOS_White"],
+			[`Aktuelle Geschwindigkeit: ${fetchedTrainData?.toString()} km/h`, "Icon_Speedometer_IOS_White"],
 		],
 		["coalValue", [`Aktueller Kohle stand:  kg`, "Icon_Coal_IOS_White"]],
 		["waterValue", [`Aktueller Wasser Stand: l`, "Icon_Water_IOS_White"]],
@@ -95,6 +104,10 @@ export default function MyTrainsContainer() {
 							),
 						)
 					}
+					{
+						//check if not data to load and set skeletons
+						<Skeleton count={4} style={{width: '100%', marginTop: '1%', marginBottom: '1%'}} baseColor="rgba(255, 255, 255, 0.1)"/>
+					}
 				</div>
 				<hr />
 				<div style={{marginTop: '2%'}}>
@@ -107,7 +120,7 @@ export default function MyTrainsContainer() {
 							{
 								//load all train select options
 								trainOptions.map((currentTrainAiOption) => (
-									<option value={currentTrainAiOption.trainID}>{currentTrainAiOption.trainName}</option>
+									<option value={currentTrainAiOption.trainID}>{`${currentTrainAiOption.trainName} - AI Ansage`}</option>
 								))
 							}
 						</Select>
