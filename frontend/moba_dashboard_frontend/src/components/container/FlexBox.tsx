@@ -5,7 +5,7 @@ import type React from "react";
 import "../../style/components_style/container/container.css";
 
 //import custom react files
-import {DefaultComponentProps} from "../../logic/tools/interfaces/interface";
+import type { DefaultComponentProps } from "../../logic/tools/interfaces/interface";
 
 //define interface for FlexBox
 interface FlexBoxProps extends DefaultComponentProps {

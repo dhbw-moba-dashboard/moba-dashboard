@@ -2,7 +2,7 @@
 import type React from "react";
 
 //import custom react files
-import {DefaultComponentProps} from "../../logic/tools/interfaces/interface";
+import type { DefaultComponentProps } from "../../logic/tools/interfaces/interface";
 
 //import css file
 import "../../style/components_style/atoms/images.css";

@@ -5,10 +5,12 @@ import type React from "react";
 import "../../style/components_style/container/container.css";
 
 //import custom react files
-import {DefaultComponentProps} from "../../logic/tools/interfaces/interface";
+import type { DefaultComponentProps } from "../../logic/tools/interfaces/interface";
 
 //define grid box component
-const GridBox: React.FC<DefaultComponentProps> = (props: DefaultComponentProps) => {
+const GridBox: React.FC<DefaultComponentProps> = (
+	props: DefaultComponentProps,
+) => {
 	return (
 		<div
 			id={props.id}

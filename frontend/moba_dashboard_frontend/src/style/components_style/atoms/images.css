@@ -2,7 +2,7 @@
 @import url("../../variables.css");
 
 /*define default image style*/
-image {
+img {
 	height: auto;
 	width: auto;
 	border: var(--no_border);
