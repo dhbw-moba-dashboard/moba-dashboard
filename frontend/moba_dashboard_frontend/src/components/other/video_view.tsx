@@ -80,6 +80,7 @@ export const VideoViewComponent: React.FC<DefaultComponentProps> = (
 							autoPlay
 							playsInline
 							className="video-view-style-properties"
+							controls
 						/>
 					) : (
 						<div style={{ height: "250px" }}>

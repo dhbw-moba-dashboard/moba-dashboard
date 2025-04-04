@@ -3,11 +3,18 @@
 
 /*define main style properties*/
 body {
-	height: 95.25vh;
+	user-select: none;
 	color: var(--white);
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: var(--default_font_size);
-	background: var(--gradient_color);
+	background: #121212;
 	padding: var(--default_padding);
 	caret-color: var(--primary_color);
+}
+
+/*add responsive design in case of large display*/
+@media only screen and (max-width: 600px) {
+	body {
+	  color: lightblue;
+	}
 }
