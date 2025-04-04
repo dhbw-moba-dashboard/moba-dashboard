@@ -12,6 +12,7 @@ import MainLeftSideContainer from "./components/views/left_side/main_left_side_c
 
 //import container view component
 import MyTrainsContainer from "./components/views/right_side/my_trains_view";
+import Image from "./components/atoms/images";
 
 //create and export data transfer context
 export const DataTransferContext = createContext<any | null>(null);
@@ -31,12 +32,13 @@ function App() {
 		<DataTransferContext.Provider value={dataTransferObject}>
 			<div className="App">
 				<FlexBox
-					style={{ justifyContent: "space-between", alignItems: "center" }}
+					style={{alignItems: "center"}}
 				>
-					<HeaderText textValue="we.love.trains" />
+					<Image style={{height: '60px', width: 'auto', borderRadius: '25px'}} imageValue="images/logo/Train_Logo.jpg"/>
+					<HeaderText style={{fontSize: '48px', color: '#3fbbd7'}} textValue="we.love.trains" />
 				</FlexBox>
 				<FlexBox
-					style={{ justifyContent: "space-between", alignItems: "flex-start", marginTop: '-1%' }}
+					style={{ justifyContent: "space-between", alignItems: "flex-start" }}
 				>
 					<div style={{ width: "40%" }}>
 						<MainLeftSideContainer />

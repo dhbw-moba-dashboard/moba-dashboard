@@ -102,18 +102,17 @@ export default function MyTrainsContainer() {
 						style={{ fontWeight: "bold", fontSize: "20px" }}
 						textValue="trAIn - Das Modellbahn AI System"
 					/>
-					<FlexBox>
-						<Select>
+					<FlexBox style={{marginTop: '2%', alignItems: 'center'}}>
+						<Select style={{width: '90%', fontWeight: 'bold', fontSize: "18px"}}>
 							{
 								//load all train select options
-								Array.from(trainInformationOptions).map(
-									([key, currentTrainInformation]) => (
-										<option key={key}>{currentTrainInformation[0]}</option>
-									),
-								)
+								trainOptions.map((currentTrainAiOption) => (
+									<option value={currentTrainAiOption.trainID}>{currentTrainAiOption.trainName}</option>
+								))
 							}
 						</Select>
-						<ImageButton />
+						<ImageButton style={{marginLeft: '6%', backgroundColor: '#3fbbd7', padding: '4%', borderRadius: '10px'}}
+									 imageStyle={{height: '32px', width: 'auto'}} buttonImage="images/general/Icon_Speak_IOS_White.png"/>
 					</FlexBox>
 				</div>
 				<FlexBox />
