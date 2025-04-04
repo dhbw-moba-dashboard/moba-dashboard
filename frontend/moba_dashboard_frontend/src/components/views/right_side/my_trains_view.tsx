@@ -13,6 +13,8 @@ import FlexBox from "../../container/FlexBox";
 
 //import context
 import { DataTransferContext } from "../../../App";
+import { Select } from "../../atoms/input";
+import { ImageButton } from "../../atoms/buttons";
 
 //create and export default my trains container
 export default function MyTrainsContainer() {
@@ -95,10 +97,25 @@ export default function MyTrainsContainer() {
 					}
 				</div>
 				<hr />
-				<Text
-					style={{ fontWeight: "bold", fontSize: "20px" }}
-					textValue="trAIn - Das Modellbahn AI System"
-				/>
+				<div style={{marginTop: '2%'}}>
+					<Text
+						style={{ fontWeight: "bold", fontSize: "20px" }}
+						textValue="trAIn - Das Modellbahn AI System"
+					/>
+					<FlexBox>
+						<Select>
+							{
+								//load all train select options
+								Array.from(trainInformationOptions).map(
+									([key, currentTrainInformation]) => (
+										<option key={key}>{currentTrainInformation[0]}</option>
+									),
+								)
+							}
+						</Select>
+						<ImageButton />
+					</FlexBox>
+				</div>
 				<FlexBox />
 			</ContentContainer>
 		</>
