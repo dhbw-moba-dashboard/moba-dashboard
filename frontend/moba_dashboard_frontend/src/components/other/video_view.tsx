@@ -71,7 +71,7 @@ export const VideoViewComponent: React.FC<DefaultComponentProps> = (
 	//return created react component
 	return (
 		<>
-			<div style={{paddingLeft: '2%', paddingRight: '2%', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+			<div>
 				{
 					//check if to show video stream or placeholder information
 					actionButtonState ? (
