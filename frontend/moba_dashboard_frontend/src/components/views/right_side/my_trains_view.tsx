@@ -1,6 +1,9 @@
 //import react library
 import React, { useContext, useEffect, useState } from "react";
+
+//import skeleton properties
 import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import Text, { ImageText } from "../../atoms/texts";
 import GridBox from "../../container/GridBox";
@@ -94,19 +97,19 @@ export default function MyTrainsContainer() {
 						//load train information data
 						Array.from(trainInformationOptions).map(
 							([key, currentTrainInformation]) => (
-								<ImageText
-									key={key}
-									textStyle={{ fontSize: "18px" }}
-									textValue={currentTrainInformation[0]}
-									imageStyle={{ height: "auto", width: "24px" }}
-									textImage={`images/general/${currentTrainInformation[1]}.png`}
-								/>
-							),
+								fetchedTrainData ? (
+									<ImageText
+										key={key}
+										textStyle={{ fontSize: "18px" }}
+										textValue={currentTrainInformation[0]}
+										imageStyle={{ height: "auto", width: "24px" }}
+										textImage={`images/general/${currentTrainInformation[1]}.png`}
+									/>
+								) : (
+									<Skeleton key={key} style={{width: '90%', marginTop: '1.5%', marginBottom: '1.5%'}} baseColor="rgba(255, 255, 255, 0.1)"/>
+								)
+							)
 						)
-					}
-					{
-						//check if not data to load and set skeletons
-						<Skeleton count={4} style={{width: '100%', marginTop: '1%', marginBottom: '1%'}} baseColor="rgba(255, 255, 255, 0.1)"/>
 					}
 				</div>
 				<hr />

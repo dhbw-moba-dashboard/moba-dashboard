@@ -14,18 +14,7 @@ export default function CameraViewContainer() {
 	return (
 		<>
 			<ContentContainer contentContainerHeaderText="Kameraüberwachung">
-				<FlexBox style={{justifyContent: 'space-between', alignItems: 'center'}}>
-					<div>
-						<VideoViewComponent style={{ marginTop: "4%" }} />
-					</div>
-					{
-						//check if to show live image/ text information
-						true && 					<div style={{marginLeft: '15%'}}>
-						<Image style={{height: '60px', width: 'auto'}} imageValue="images/color/Icon_Live_Color.png"/>
-						<Text style={{fontWeight: 'bold', fontSize: '32px'}} textValue="Live"/>
-					</div>
-					}
-				</FlexBox>
+				<VideoViewComponent style={{ marginTop: "4%" }} />
 			</ContentContainer>
 		</>
 	);
