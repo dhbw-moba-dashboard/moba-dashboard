@@ -127,8 +127,8 @@ export default function MyTrainsContainer() {
 						style={{ fontWeight: "bold", fontSize: "20px" }}
 						textValue="trAIn - Das Modellbahn AI System"
 					/>
-					<FlexBox style={{marginTop: '2%', alignItems: 'center'}}>
-						<Select style={{width: '90%', fontWeight: 'bold', fontSize: "18px"}} selectAction={(event) => setSelectedAiTrainName(event.target.value)}>
+					<FlexBox style={{marginTop: '2%', justifyContent: 'space-between', alignItems: 'center'}}>
+						<Select style={{width: '92%', fontWeight: 'bold', fontSize: "18px"}} selectAction={(event) => setSelectedAiTrainName(event.target.value)}>
 							{
 								//load all train select options
 								trainOptions.map((currentTrainAiOption) => (
@@ -136,8 +136,8 @@ export default function MyTrainsContainer() {
 								))
 							}
 						</Select>
-						<ImageButton style={{marginLeft: '6%', backgroundColor: '#3fbbd7', padding: '4%', borderRadius: '10px'}}
-									 imageStyle={{height: '32px', width: 'auto'}} buttonImage="images/general/Icon_Speak_IOS_White.png"
+						<ImageButton style={{padding: '4%', borderRadius: '10px'}}
+									 imageStyle={{height: '30px', width: 'auto'}} buttonImage="images/general/Icon_Speak_IOS_White.png"
 									 buttonAction={playAiSound}/>
 					</FlexBox>
 				</div>

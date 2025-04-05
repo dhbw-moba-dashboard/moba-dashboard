@@ -12,12 +12,9 @@
 .grid-component-style-properties {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	grid-auto-rows: 1fr;
-	width: auto;
-	height: auto;
-	max-height: 600px;
-	overflow-y: auto;
 	gap: var(--default_padding);
+	width: 100%;
+	height: auto;
 }
 
 /*define content container style properties*/
