@@ -19,6 +19,7 @@ import FlexBox from "../../container/FlexBox";
 import { DataTransferContext } from "../../../App";
 import { Select } from "../../atoms/input";
 import { ImageButton } from "../../atoms/buttons";
+import {playSound} from "../../../logic/other/sounds";
 
 //create and export default my trains container
 export default function MyTrainsContainer() {
@@ -29,6 +30,8 @@ export default function MyTrainsContainer() {
 
 	//define state hook to fetch train data
 	const [fetchedTrainData, setFetchedTrainData] = useState<[]>();
+	//define state for selected train name
+	const [selectedAiTrainName, setSelectedAiTrainName] = useState<string>('Crossrail');
 
 	//use effect to load train options from .json file
 	useEffect(() => {
@@ -50,6 +53,12 @@ export default function MyTrainsContainer() {
 	useEffect(() => {
 
 	}, []);
+
+	//define async function to play AI sound for selecte train
+	async function playAiSound(): Promise<void> {
+		//call function to play sound
+		playSound(selectedAiTrainName);
+	}
 
 	//define map for different train information options
 	const trainInformationOptions = new Map<string, [string, string]>([
@@ -119,16 +128,17 @@ export default function MyTrainsContainer() {
 						textValue="trAIn - Das Modellbahn AI System"
 					/>
 					<FlexBox style={{marginTop: '2%', alignItems: 'center'}}>
-						<Select style={{width: '90%', fontWeight: 'bold', fontSize: "18px"}}>
+						<Select style={{width: '90%', fontWeight: 'bold', fontSize: "18px"}} selectAction={(event) => setSelectedAiTrainName(event.target.value)}>
 							{
 								//load all train select options
 								trainOptions.map((currentTrainAiOption) => (
-									<option value={currentTrainAiOption.trainID}>{`${currentTrainAiOption.trainName} - AI Ansage`}</option>
+									<option value={currentTrainAiOption.trainName}>{`${currentTrainAiOption.trainName} - AI Ansage`}</option>
 								))
 							}
 						</Select>
 						<ImageButton style={{marginLeft: '6%', backgroundColor: '#3fbbd7', padding: '4%', borderRadius: '10px'}}
-									 imageStyle={{height: '32px', width: 'auto'}} buttonImage="images/general/Icon_Speak_IOS_White.png"/>
+									 imageStyle={{height: '32px', width: 'auto'}} buttonImage="images/general/Icon_Speak_IOS_White.png"
+									 buttonAction={playAiSound}/>
 					</FlexBox>
 				</div>
 				<FlexBox />
