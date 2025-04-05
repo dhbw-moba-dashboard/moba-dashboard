@@ -15,11 +15,12 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-public class LokController {
+public class LocController
+{
 
 	private final MobaSocket tcpSocket;
 
-	public LokController(MobaSocket tcpSocket) {
+	public LocController(MobaSocket tcpSocket) {
 		this.tcpSocket = tcpSocket;
 	}
 	/**

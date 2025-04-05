@@ -85,6 +85,10 @@ public class CANMessage {
         return ModelFactory.createPayloadFromBytes(payloadArray, command);
     }
 
+    /**
+     * technically there is a correct way to generate this hash but it is not necessary. This hardcoded hash works for the current usecases
+     * @return hash value of the CAN message
+     */
     private int generateHashValue(){
         return 0x5738;
     }

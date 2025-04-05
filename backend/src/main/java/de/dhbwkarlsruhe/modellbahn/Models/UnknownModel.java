@@ -1,10 +1,10 @@
 package de.dhbwkarlsruhe.modellbahn.Models;
 
-public class ErrorModel implements Model
+public class UnknownModel implements Model
 {
-    public static ErrorModel createErrorModel(byte[] data)
+    public static UnknownModel createErrorModel(byte[] data)
     {
-        return new ErrorModel();
+        return new UnknownModel();
     }
     @Override
     public byte[] toByteArray()

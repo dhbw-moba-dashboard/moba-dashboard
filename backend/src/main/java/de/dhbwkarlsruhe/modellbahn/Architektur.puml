@@ -1,0 +1,87 @@
+@startuml
+
+package de.dhbwkarlsruhe.modellbahn.Models {
+    interface Model {
+        {abstract} byte[] toByteArray()
+        {abstract} int getDLC()
+    }
+
+    class ModelFactory {
+        {static} Model createPayloadFromBytes(byte[] data, CommandScheme scheme)
+        {static} String getJsonSerialString(Model p)
+    }
+
+    class UnknownModel {
+        {static} UnknownModel createErrorModel(byte[] data)
+        byte[] toByteArray()
+        int getDLC()
+    }
+
+    class CANMessage {
+        - Priority priority
+        + CommandScheme command
+        + boolean response
+        - int hashValue
+        - int DLC
+        + Model payload
+        + CANMessage(Priority prio, CommandScheme command, Model p, boolean response)
+        + CANMessage(byte[] message)
+        + byte[] toByteArray()
+        + boolean equals(Object o)
+        + int hashCode()
+    }
+
+    class LocDirection {
+        + int locID
+        + Direction direction
+        + {static} LocDirection createLocDirection(byte[] data)
+        + byte[] toByteArray()
+        + int getDLC()
+    }
+    class LocSpeed {
+            + int locID
+            + int speed
+            + {static} LocSpeed createLocDirection(byte[] data)
+            + byte[] toByteArray()
+            + int getDLC()
+        }
+    Model <|.. UnknownModel
+    Model <|.. LocDirection
+    Model <|.. LocSpeed
+    CANMessage --> Model
+    ModelFactory --> Model
+}
+package controller{
+class LocController{
+    - MobaSocket socket
+    + LocController(MobaSocket socket)
+    + ResponseEntity<String> setLocSpeed(LocSpeed speed)
+    + ResponseEntity<String> getLocSpeed(int locID)
+}
+}
+LocSpeed <-down- LocController
+package de.dhbwkarlsruhe.modellbahn.schemes {
+    enum CommandScheme {
+    LocDirection,
+    LocSpeed
+    }
+    enum Priority
+    enum Direction
+}
+class MobaSocket{
+    - {final} {static} int PORT
+    - {final} int IP_ADDRESS
+    + MobaSocket(CommandlineArguments args)
+    + void sendMessage(CANMessage message)
+    + void receiveMessage(CommandScheme scheme)
+}
+class CommandlineArguments{
+    - {final} String
+    + CommandlineArguments(ApplicationArguments args)
+    + String getIp()
+}
+MobaSocket --> CommandlineArguments
+LocController --> MobaSocket
+MobaSocket --> CANMessage
+MobaSocket --> CommandScheme
+@enduml
