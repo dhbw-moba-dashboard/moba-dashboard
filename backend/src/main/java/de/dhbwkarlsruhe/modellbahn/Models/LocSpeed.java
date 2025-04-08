@@ -5,7 +5,7 @@ import de.dhbwkarlsruhe.modellbahn.BitUtilities;
 import java.util.ArrayList;
 import java.util.List;
 
-public record LocSpeed(int locID, int speed) implements Model
+public record LocSpeed(int locID, int speed) implements SimpleLocValue
 {
     public static LocSpeed createLocSpeed(byte[] data)
     {
@@ -45,5 +45,17 @@ public record LocSpeed(int locID, int speed) implements Model
         else {
             return 6;
         }
+    }
+
+    @Override
+    public int getLoc()
+    {
+        return locID;
+    }
+
+    @Override
+    public int getValue()
+    {
+        return speed;
     }
 }

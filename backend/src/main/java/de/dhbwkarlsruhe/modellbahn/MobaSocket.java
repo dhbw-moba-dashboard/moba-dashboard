@@ -24,7 +24,7 @@ public class MobaSocket
          */
         try {
             java.net.Socket socket = new java.net.Socket(IP_ADDRESS_MOBA, PORT);
-            System.out.println("IP-Adresse: " + IP_ADDRESS_MOBA);
+
             BitUtilities.printBytes(message.toByteArray());
             socket.getOutputStream().write(message.toByteArray());
             socket.close();

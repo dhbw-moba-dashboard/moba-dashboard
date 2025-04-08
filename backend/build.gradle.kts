@@ -16,7 +16,7 @@ application{
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(22)
     }
 }
 
@@ -34,7 +34,13 @@ dependencies {
     //implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
     implementation("commons-codec:commons-codec:1.18.0")
-
+    // database driver
+    implementation("org.xerial:sqlite-jdbc:3.41.2.2")
+    //dialect for hibernate
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.hibernate.orm:hibernate-core")
+    implementation("org.hibernate.orm:hibernate-community-dialects")
+    implementation("org.flywaydb:flyway-core")
     compileOnly("org.projectlombok:lombok")
 
     annotationProcessor("org.projectlombok:lombok")

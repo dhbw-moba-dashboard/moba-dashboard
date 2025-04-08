@@ -5,7 +5,7 @@ import de.dhbwkarlsruhe.modellbahn.schemes.Direction;
 
 import java.util.List;
 
-public record LocDirection(int locID, Direction direction) implements Model
+public record LocDirection(int locID, Direction direction) implements SimpleLocValue
 {
     public static LocDirection createLocDirection(byte[] data)
     {
@@ -40,6 +40,18 @@ public record LocDirection(int locID, Direction direction) implements Model
          return 4;
      }
         return 6;
+    }
+
+    @Override
+    public int getLoc()
+    {
+        return locID;
+    }
+
+    @Override
+    public int getValue()
+    {
+        return direction.ordinal();
     }
 
 }

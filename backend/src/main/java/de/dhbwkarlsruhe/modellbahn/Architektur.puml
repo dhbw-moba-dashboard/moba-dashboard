@@ -1,6 +1,6 @@
 @startuml
 
-package de.dhbwkarlsruhe.modellbahn.Models {
+package Models {
     interface Model {
         {abstract} byte[] toByteArray()
         {abstract} int getDLC()
@@ -60,7 +60,7 @@ class LocController{
 }
 }
 LocSpeed <-down- LocController
-package de.dhbwkarlsruhe.modellbahn.schemes {
+package schemes {
     enum CommandScheme {
     LocDirection,
     LocSpeed

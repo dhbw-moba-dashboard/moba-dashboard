@@ -18,6 +18,7 @@ public class ModelFactory
         };
     }
 
+
 	public static String getJsonSerialString(Model p) {
 		Gson g = new Gson();
 		return g.toJson(p);
