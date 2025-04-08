@@ -11,8 +11,10 @@ create table type (
 create table "Values" (
                        ValueId integer not null,
                        loc integer not null,
-                       time_stamp varchar(255),
+                       time_stamp real not null,
                        typeid integer not null,
                        value integer not null,
-                       primary key (ValueId)
+                       primary key (ValueId),
+                       foreign key (loc) references loc(locid),
+                       foreign key (typeid) references type(typeid)
 );

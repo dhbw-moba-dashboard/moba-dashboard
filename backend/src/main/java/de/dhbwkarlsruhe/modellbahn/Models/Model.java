@@ -1,5 +1,7 @@
 package de.dhbwkarlsruhe.modellbahn.Models;
 
+import de.dhbwkarlsruhe.modellbahn.database.entities.Value;
+
 /**
  * This refers to the last 8 Bytes of a CANMessage, which contain the Databytes
  */

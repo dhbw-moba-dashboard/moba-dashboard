@@ -1,10 +1,9 @@
 package de.dhbwkarlsruhe.modellbahn.controller;
 
-import de.dhbwkarlsruhe.modellbahn.Models.CANMessage;
+import de.dhbwkarlsruhe.modellbahn.Models.*;
 import de.dhbwkarlsruhe.modellbahn.MobaSocket;
-import de.dhbwkarlsruhe.modellbahn.Models.LocDirection;
-import de.dhbwkarlsruhe.modellbahn.Models.LocSpeed;
-import de.dhbwkarlsruhe.modellbahn.Models.ModelFactory;
+import de.dhbwkarlsruhe.modellbahn.database.repositories.LocRepository;
+import de.dhbwkarlsruhe.modellbahn.database.repositories.ValueRepository;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.Priority;
 import org.springframework.http.HttpStatus;
@@ -19,9 +18,13 @@ public class LocController
 {
 
 	private final MobaSocket tcpSocket;
+	private final LocRepository locRepository;
+	private final ValueRepository valueRepository;
 
-	public LocController(MobaSocket tcpSocket) {
+	public LocController(MobaSocket tcpSocket, LocRepository locRepository, ValueRepository valueRepository) {
 		this.tcpSocket = tcpSocket;
+		this.locRepository = locRepository;
+		this.valueRepository = valueRepository;
 	}
 	/**
 	 *
@@ -37,6 +40,12 @@ public class LocController
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(ModelFactory.getJsonSerialString(lokModel), HttpStatus.OK);
+	}
+	@PutMapping("/loc/register")
+	public ResponseEntity<String> registerLoc(@RequestBody LocName loc){
+		System.out.println(loc.toString());
+		locRepository.save(loc.toEntity());
+		return new ResponseEntity<>("Loc saved", HttpStatus.OK);
 	}
 	@GetMapping("/loc/speed/{locId}")
 	public ResponseEntity<String> getLocSpeed(@PathVariable int locId) {

@@ -1,6 +1,7 @@
 package de.dhbwkarlsruhe.modellbahn.Models;
 
 import de.dhbwkarlsruhe.modellbahn.BitUtilities;
+import de.dhbwkarlsruhe.modellbahn.database.entities.Value;
 import de.dhbwkarlsruhe.modellbahn.schemes.Direction;
 
 import java.util.List;
