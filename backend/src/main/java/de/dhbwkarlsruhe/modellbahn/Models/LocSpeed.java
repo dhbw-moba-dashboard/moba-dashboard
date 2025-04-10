@@ -1,18 +1,20 @@
 package de.dhbwkarlsruhe.modellbahn.Models;
 
 import de.dhbwkarlsruhe.modellbahn.BitUtilities;
+import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public record LocSpeed(int locID, int speed) implements SimpleLocValue
 {
+    private static final LocValueScheme type = LocValueScheme.SPEED;
+
     public static LocSpeed createLocSpeed(byte[] data)
     {
-
         int id = BitUtilities.transformBitSequenceToInt(data, 0, 0, 3, 7);
         int speed = -1;
-        if (data.length > 4) {
+        if (data.length == 6) {
              speed = BitUtilities.transformBitSequenceToInt(data, 4, 0, 5, 7);
 
         }
@@ -57,5 +59,11 @@ public record LocSpeed(int locID, int speed) implements SimpleLocValue
     public int getValue()
     {
         return speed;
+    }
+
+    @Override
+    public LocValueScheme getType()
+    {
+        return type;
     }
 }

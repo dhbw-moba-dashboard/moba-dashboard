@@ -4,17 +4,17 @@ create table loc (
                      primary key (locid)
 );
 create table type (
-                      typeid integer not null,
+                      type_id integer not null,
                       type_name varchar(255),
-                      primary key (typeid)
+                      primary key (type_id)
 );
-create table "Values" (
-                       ValueId integer not null,
+create table loc_values (
+                       value_id integer not null,
                        loc integer not null,
-                       time_stamp real not null,
-                       typeid integer not null,
+                       time_stamp integer not null,
+                       type_id integer not null,
                        value integer not null,
-                       primary key (ValueId),
+                       primary key (value_id),
                        foreign key (loc) references loc(locid),
-                       foreign key (typeid) references type(typeid)
+                       foreign key (type_id) references type(type_id)
 );

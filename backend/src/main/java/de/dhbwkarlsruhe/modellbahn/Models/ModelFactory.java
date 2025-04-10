@@ -3,6 +3,7 @@ package de.dhbwkarlsruhe.modellbahn.Models;
 
 import com.google.gson.Gson;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
+import de.dhbwkarlsruhe.modellbahn.schemes.Direction;
 
 public class ModelFactory
 {
@@ -17,6 +18,7 @@ public class ModelFactory
             default -> UnknownModel.createErrorModel(data);
         };
     }
+
 
 
 	public static String getJsonSerialString(Model p) {

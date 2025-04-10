@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 class SchemeTest {
 	@Test
 	void commandScheme() {
-		CommandScheme c = CommandScheme.fromCommandValue(1);
+		CommandScheme c = CommandScheme.fromCommandValue(0x02);
 		Assertions.assertEquals("LocomotiveDiscovery", c.getCommand());
-		c = CommandScheme.fromCommandValue(69);
+		c = CommandScheme.fromCommandValue(0x69);
 		Assertions.assertEquals("UnknownCommand", c.getCommand());
 		c = CommandScheme.fromCommand("AccessoriesConfig");
-		Assertions.assertEquals(12, c.getCommandValue());
+		Assertions.assertEquals(0x18, c.getCommandValue());
 	}
 }

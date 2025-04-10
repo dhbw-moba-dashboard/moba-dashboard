@@ -50,12 +50,9 @@ public class CANMessage {
 
     private CommandScheme setCommand(byte[] message)
     {
-        byte firstByte = message[0];
-        byte secondByte = message[1];
-        int commandFirst = firstByte & 0x01; //0000 0001
-        int commandSecond = secondByte >> 1; //0111 1111
-        int merged = (commandFirst << 7) | commandSecond;
-        return CommandScheme.values()[merged];
+        int secondByte = message[1];
+
+        return CommandScheme.fromCommandValue(secondByte);
     }
 
     private boolean setResponse(byte[] message)
@@ -136,7 +133,7 @@ public class CANMessage {
      */
     private byte getSecondByte(){
         byte secondByte = 0x00;
-        secondByte = (byte) (secondByte | (command.getCommandValue() << 1));
+        secondByte = (byte) command.getCommandValue();
         secondByte = (byte) (secondByte | (response? 0x01 : 0x00));
         return secondByte;
     }

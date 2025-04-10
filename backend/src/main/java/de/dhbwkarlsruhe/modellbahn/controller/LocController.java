@@ -4,8 +4,11 @@ import de.dhbwkarlsruhe.modellbahn.Models.*;
 import de.dhbwkarlsruhe.modellbahn.MobaSocket;
 import de.dhbwkarlsruhe.modellbahn.database.repositories.LocRepository;
 import de.dhbwkarlsruhe.modellbahn.database.repositories.ValueRepository;
+import de.dhbwkarlsruhe.modellbahn.database.services.LocService;
+import de.dhbwkarlsruhe.modellbahn.database.services.ValueService;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.Priority;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +17,15 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 public class LocController
 {
 
 	private final MobaSocket tcpSocket;
-	private final LocRepository locRepository;
-	private final ValueRepository valueRepository;
+	private  final LocService locService;
+	private final ValueService valueService;
 
-	public LocController(MobaSocket tcpSocket, LocRepository locRepository, ValueRepository valueRepository) {
-		this.tcpSocket = tcpSocket;
-		this.locRepository = locRepository;
-		this.valueRepository = valueRepository;
-	}
+
 	/**
 	 *
 	 * @param lokModel contains the new speed value range : 0-1023
@@ -43,25 +43,13 @@ public class LocController
 	}
 	@PutMapping("/loc/register")
 	public ResponseEntity<String> registerLoc(@RequestBody LocName loc){
-		System.out.println(loc.toString());
-		locRepository.save(loc.toEntity());
+		locService.addLoc(loc);
 		return new ResponseEntity<>("Loc saved", HttpStatus.OK);
 	}
 	@GetMapping("/loc/speed/{locId}")
 	public ResponseEntity<String> getLocSpeed(@PathVariable int locId) {
-		LocSpeed lokModel = new LocSpeed(locId, -1);
-		CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_SPEED, lokModel, false);
-        try
-        {
-            tcpSocket.send(message);
-			CANMessage response = tcpSocket.receive(CommandScheme.LOCOMOTIVE_SPEED);
-			return new ResponseEntity<>(ModelFactory.getJsonSerialString(response.getPayload()), HttpStatus.OK);
-
-		} catch (IOException e)
-        {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+		List<String> speeds = valueService.getLocSpeeds().stream().map(ModelFactory::getJsonSerialString).toList();
+		return ResponseEntity.ok(speeds.toString());
     }
 
 	/**
