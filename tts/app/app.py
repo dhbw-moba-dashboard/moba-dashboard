@@ -7,6 +7,7 @@ from scipy.io.wavfile import write as write_wav
 from bark import generate_audio, preload_models, SAMPLE_RATE
 import torch
 import os
+from threading import Thread
 
 hostName = "0.0.0.0"
 serverPort = 80
@@ -75,13 +76,17 @@ class MyServer(BaseHTTPRequestHandler):
 
         self.wfile.write(tempfile.read())
 
-if __name__ == "__main__":
+def async_preload_models():
     print("Preloading models")
     try:
         preload_models()
         print("Models preloaded successfully, starting server")
     except FutureWarning:
         print("Models preloading failed, continuing to start server")
+
+if __name__ == "__main__":
+    t = Thread(target=async_preload_models, daemon=True)
+    t.start()
 
     webServer = HTTPServer((hostName, serverPort), MyServer)
     print("Server started http://%s:%s" % (hostName, serverPort))
