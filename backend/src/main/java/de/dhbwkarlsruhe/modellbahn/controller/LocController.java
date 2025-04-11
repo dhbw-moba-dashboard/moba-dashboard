@@ -23,13 +23,13 @@ public class LocController
 
 
     /**
-     * @param lokModel contains the new speed value range : 0-1023
+     * @param locSpeed contains the new speed value range : 0-1023
      */
     @PutMapping("/loc/speed")
-    public ResponseEntity<String> setLocSpeed(@RequestBody LocSpeed lokModel)
+    public ResponseEntity<String> setLocSpeed(@RequestBody LocSpeed locSpeed)
     {
 
-        CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_SPEED, lokModel, false);
+        CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_SPEED, locSpeed, false);
         try
         {
             tcpSocket.send(message);
@@ -37,7 +37,7 @@ public class LocController
         {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(ModelFactory.getJsonSerialString(lokModel), HttpStatus.OK);
+        return new ResponseEntity<>(ModelFactory.getJsonSerialString(locSpeed), HttpStatus.OK);
     }
 
     @PutMapping("/loc/register")
@@ -61,13 +61,13 @@ public class LocController
 
 
     /**
-     * @param lokModel contains the new direction : value range : 0-3
+     * @param locDirection contains the new direction : value range : 0-3
      */
     @PutMapping("/loc/direction")
-    public ResponseEntity<String> setLocDirection(@RequestBody LocDirection lokModel)
+    public ResponseEntity<String> setLocDirection(@RequestBody LocDirection locDirection)
     {
 
-        CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_DIRECTION, lokModel, false);
+        CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_DIRECTION, locDirection, false);
         try
         {
             tcpSocket.send(message);
@@ -75,7 +75,7 @@ public class LocController
         {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(ModelFactory.getJsonSerialString(lokModel), HttpStatus.OK);
+        return new ResponseEntity<>(ModelFactory.getJsonSerialString(locDirection), HttpStatus.OK);
     }
 
 }
