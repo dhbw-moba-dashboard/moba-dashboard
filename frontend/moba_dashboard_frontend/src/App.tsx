@@ -68,8 +68,7 @@ function App() {
 		}
 		catch (changeApplicationBackgroundError: any) {
 			//set error message
-			setConsoleMessage(changeApplicationBackgroundError.message(), true);
-		}
+			setConsoleMessage(changeApplicationBackgroundError.message, true);
 	}
 
 	//return created ui components
