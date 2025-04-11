@@ -13,8 +13,8 @@ export async function playSound(passedTrainName: string): Promise<void> {
         const arrayBuffer = await audioResponse.arrayBuffer();
 
         //create audio context to decode
-        const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+        const audioContext= new (window.AudioContext || (window as any).webkitAudioContext)();
+        const audioBuffer= await audioContext.decodeAudioData(arrayBuffer);
 
         //create buffer source mode
         const source = audioContext.createBufferSource();
