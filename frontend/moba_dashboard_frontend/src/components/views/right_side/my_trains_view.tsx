@@ -30,7 +30,7 @@ export default function MyTrainsContainer() {
 	const transferedData = useContext(DataTransferContext);
 
 	//define state hook to fetch train data
-	const [fetchedTrainData, setFetchedTrainData] = useState<[]>();
+	const [fetchedTrainData, setFetchedTrainData] = useState<[]>([]);
 	//define state for selected train name
 	const [selectedAiTrainName, setSelectedAiTrainName] = useState<string>('Crossrail');
 
@@ -80,7 +80,7 @@ export default function MyTrainsContainer() {
 	const trainInformationOptions = new Map<string, [string, string]>([
 		[
 			"currentSpeed",
-			[`Aktuelle Geschwindigkeit: ${(fetchedTrainData as any).value.toString()} km/h`, "Icon_Speedometer_IOS_White"],
+			[`Aktuelle Geschwindigkeit: ${(fetchedTrainData as any).value.toString() || "--"} km/h`, "Icon_Speedometer_IOS_White"],
 		],
 		["coalValue", [`Aktueller Kohle stand:  kg`, "Icon_Coal_IOS_White"]],
 		["waterValue", [`Aktueller Wasser Stand: l`, "Icon_Water_IOS_White"]],
