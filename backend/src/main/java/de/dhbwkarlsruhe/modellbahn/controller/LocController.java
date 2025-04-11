@@ -2,8 +2,6 @@ package de.dhbwkarlsruhe.modellbahn.controller;
 
 import de.dhbwkarlsruhe.modellbahn.Models.*;
 import de.dhbwkarlsruhe.modellbahn.MobaSocket;
-import de.dhbwkarlsruhe.modellbahn.database.repositories.LocRepository;
-import de.dhbwkarlsruhe.modellbahn.database.repositories.ValueRepository;
 import de.dhbwkarlsruhe.modellbahn.database.services.LocService;
 import de.dhbwkarlsruhe.modellbahn.database.services.ValueService;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
@@ -23,7 +21,6 @@ public class LocController
 
 	private final MobaSocket tcpSocket;
 	private  final LocService locService;
-	private final ValueService valueService;
 
 
 	/**
@@ -46,11 +43,10 @@ public class LocController
 		locService.addLoc(loc);
 		return new ResponseEntity<>("Loc saved", HttpStatus.OK);
 	}
-	@GetMapping("/loc/speed/{locId}")
-	public ResponseEntity<String> getLocSpeed(@PathVariable int locId) {
-		List<String> speeds = valueService.getLocSpeeds().stream().map(ModelFactory::getJsonSerialString).toList();
-		return ResponseEntity.ok(speeds.toString());
-    }
+	@GetMapping("/loc")
+	public ResponseEntity<List<LocName>> getLocs(){
+		return new ResponseEntity<>(locService.getLocs(), HttpStatus.OK);
+	}
 
 	/**
 	 *
@@ -68,12 +64,4 @@ public class LocController
 		return new ResponseEntity<>(ModelFactory.getJsonSerialString(lokModel), HttpStatus.OK);
     }
 
-	/**
-	 *
-	 * @return list of available locs with their loc-IDs
-	 */
-	@GetMapping("/loc/list")
-	public List<Integer> getLocList() {
-		return List.of(1, 2, 3);
-	}
 }

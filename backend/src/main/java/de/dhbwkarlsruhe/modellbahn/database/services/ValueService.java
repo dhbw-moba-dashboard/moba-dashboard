@@ -1,5 +1,6 @@
 package de.dhbwkarlsruhe.modellbahn.database.services;
 
+import com.google.gson.Gson;
 import de.dhbwkarlsruhe.modellbahn.MobaSocket;
 import de.dhbwkarlsruhe.modellbahn.Models.*;
 import de.dhbwkarlsruhe.modellbahn.database.entities.Loc;
@@ -24,9 +25,7 @@ public class ValueService
         Value value = Value.createValue(model);
         valueRepository.save(value);
     }
-    public List<SimpleLocValue> getValuesByScheme(LocValueScheme scheme){
-        return valueRepository.findAllByTypeID(scheme.ordinal()).stream().map(Value::toModel).toList();
-    }
+
     @Scheduled(cron = "0 * * * * *")
     public void checkAndSaveValues() {
         List<Integer> locIDs = locService.getLocs().stream().map(LocName::locID).toList();
@@ -58,7 +57,8 @@ public class ValueService
 
         return new UnknownModel();
     }
-    public List<LocSpeed> getLocSpeeds(){
-        return  getValuesByScheme(LocValueScheme.SPEED).stream().map(value -> (LocSpeed) value).toList();
+   public List<Value> getLocValuesByScheme(LocValueScheme scheme, long start, long end, int locID){
+        return valueRepository.findValueInRange(start, end, scheme.ordinal(), locID);
     }
+
 }

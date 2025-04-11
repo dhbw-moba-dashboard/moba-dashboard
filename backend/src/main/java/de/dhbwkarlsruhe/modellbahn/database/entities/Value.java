@@ -1,5 +1,7 @@
 package de.dhbwkarlsruhe.modellbahn.database.entities;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import de.dhbwkarlsruhe.modellbahn.Models.LocDirection;
 import de.dhbwkarlsruhe.modellbahn.Models.LocSpeed;
 import de.dhbwkarlsruhe.modellbahn.Models.SimpleLocValue;
@@ -49,5 +51,15 @@ public class Value
             case DIRECTION ->new LocDirection(Loc, Direction.values()[Value]);
 
         };
+    }
+
+    @Override
+    public String toString()
+    {
+        Gson gson = new Gson();
+        String objectString = gson.toJson(toModel());
+        JsonObject jsonObject = gson.fromJson(objectString, JsonObject.class);
+        jsonObject.addProperty("timestamp", TimeStamp);
+        return jsonObject.toString();
     }
 }
