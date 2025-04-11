@@ -13,39 +13,39 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-public class ValueController
-{
-
-
+public class ValueController {
     private final ValueService valueService;
 
     @GetMapping("/request/speed")
-    public ResponseEntity<List<String>> getLocSpeed(@RequestBody TimeStampBasedRequest record) {
-        List<Value> valueList =  valueService.getLocValuesByScheme(LocValueScheme.SPEED, record.start(), record.end(), record.locID());
+    public ResponseEntity<List<String>> getLocSpeed(@RequestBody TimeStampBasedRequest timeStampBasedRequest) {
+        List<Value> valueList = valueService.getLocValuesByScheme(LocValueScheme.SPEED, timeStampBasedRequest.start(), timeStampBasedRequest.end(), timeStampBasedRequest.locID());
         List<String> jsonRepresentation = valueList.stream()
                 .map(Value::toString)
                 .toList();
         return ResponseEntity.ok(jsonRepresentation);
     }
+
     @GetMapping("/request/direction")
-    public ResponseEntity<List<String>> getLocDirection(@RequestBody TimeStampBasedRequest record) {
-        List<Value> valueList =  valueService.getLocValuesByScheme(LocValueScheme.DIRECTION, record.start(), record.end(), record.locID());
+    public ResponseEntity<List<String>> getLocDirection(@RequestBody TimeStampBasedRequest timeStampBasedRequest) {
+        List<Value> valueList = valueService.getLocValuesByScheme(LocValueScheme.DIRECTION, timeStampBasedRequest.start(), timeStampBasedRequest.end(), timeStampBasedRequest.locID());
         List<String> jsonRepresentation = valueList.stream()
                 .map(Value::toString)
                 .toList();
         return ResponseEntity.ok(jsonRepresentation);
     }
+
     @GetMapping("/request/speed/number")
-    public ResponseEntity<List<String>> getLocSpeedByNumber(@RequestBody NumberBasedRequest record) {
-        List<Value> valueList =  valueService.getLocValuesByScheme(LocValueScheme.SPEED, record.locID(),record.entries());
+    public ResponseEntity<List<String>> getLocSpeedByNumber(@RequestBody NumberBasedRequest numberBasedRequest) {
+        List<Value> valueList = valueService.getLocValuesByScheme(LocValueScheme.SPEED, numberBasedRequest.locID(), numberBasedRequest.entries());
         List<String> jsonRepresentation = valueList.stream()
                 .map(Value::toString)
                 .toList();
         return ResponseEntity.ok(jsonRepresentation);
     }
+
     @GetMapping("/request/direction/number")
-    public ResponseEntity<List<String>> getLocDirectionByNumber(@RequestBody NumberBasedRequest record) {
-        List<Value> valueList =  valueService.getLocValuesByScheme(LocValueScheme.DIRECTION, record.locID(), record.entries());
+    public ResponseEntity<List<String>> getLocDirectionByNumber(@RequestBody NumberBasedRequest numberBasedRequest) {
+        List<Value> valueList = valueService.getLocValuesByScheme(LocValueScheme.DIRECTION, numberBasedRequest.locID(), numberBasedRequest.entries());
         List<String> jsonRepresentation = valueList.stream()
                 .map(Value::toString)
                 .toList();

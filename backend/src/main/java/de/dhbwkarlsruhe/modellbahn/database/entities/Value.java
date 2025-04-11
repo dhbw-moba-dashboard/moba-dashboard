@@ -17,8 +17,7 @@ import java.time.Instant;
 @Table(name = "loc_values")
 @Getter
 @Setter
-public class Value
-{
+public class Value {
     @Id
     @Column(name = "value_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +31,7 @@ public class Value
     @Column(name = "loc")
     private int loc;
 
-    public static Value createValue(SimpleLocValue model)
-    {
+    public static Value createValue(SimpleLocValue model) {
         Value value = new Value();
         value.setValue(model.getValue());
         value.setLoc(model.getLoc());
@@ -43,20 +41,16 @@ public class Value
         return value;
     }
 
-    public SimpleLocValue toModel()
-    {
+    public SimpleLocValue toModel() {
         LocValueScheme scheme = LocValueScheme.values()[typeID];
-        return switch (scheme)
-        {
+        return switch (scheme) {
             case SPEED -> new LocSpeed(loc, value);
             case DIRECTION -> new LocDirection(loc, Direction.values()[value]);
-
         };
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         Gson gson = new Gson();
         String objectString = gson.toJson(toModel());
         JsonObject jsonObject = gson.fromJson(objectString, JsonObject.class);

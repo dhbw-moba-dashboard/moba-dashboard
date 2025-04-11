@@ -1,0 +1,20 @@
+[libraries]
+commons-codec = { group = "commons-codec", name = "commons-codec", version.ref = "commons-codec" }
+flyway-core = { group = "org.flywaydb", name = "flyway-core" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+hibernate-community-dialects = { group = "org.hibernate.orm", name = "hibernate-community-dialects" }
+hibernate-core = { group = "org.hibernate.orm", name = "hibernate-core" }
+junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
+lombok = { group = "org.projectlombok", name = "lombok" }
+spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
+spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
+spring-boot-testcontainers = { group = "org.springframework.boot", name  = "spring-boot-testcontainers" }
+spring-boot-websocket = { group = "org.springframework.boot", name = "spring-boot-starter-websocket" }
+spring-security-test = { group = "org.springframework.security", name = "spring-security-test" }
+sqlite-jdbc = { group = "org.xerial", name = "sqlite-jdbc", version.ref = "sqlite-jdbc" }
+testcontainers-junit-jupiter = { group = "org.testcontainers", name = "junit-jupiter" }
+
+[versions]
+commons-codec = "1.18.0"
+gson = "2.11.0"
+sqlite-jdbc = "3.41.2.2"

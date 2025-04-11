@@ -14,18 +14,14 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Loc
-{
-
+public class Loc {
     @Id
     @Column(name = "locid")
-    private int LocID;
+    private int locID;
     @Column(name = "name")
-    private String Name;
+    private String name;
 
-
-    public LocName toModel()
-    {
-        return new LocName(LocID, Name);
+    public LocName toModel() {
+        return new LocName(locID, name);
     }
 }

@@ -2,41 +2,33 @@ package de.dhbwkarlsruhe.modellbahn.models;
 
 import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 
-public class UnknownModel implements SimpleLocValue
-{
-    public static UnknownModel createErrorModel(byte[] data)
-    {
+public class UnknownModel implements SimpleLocValue {
+    public static UnknownModel createErrorModel() {
         return new UnknownModel();
     }
 
     @Override
-    public byte[] toByteArray()
-    {
+    public byte[] toByteArray() {
         return new byte[0];
     }
 
     @Override
-    public int getDLC()
-    {
-        return 0;
-    }
-
-
-    @Override
-    public int getLoc()
-    {
+    public int getDLC() {
         return 0;
     }
 
     @Override
-    public int getValue()
-    {
+    public int getLoc() {
         return 0;
     }
 
     @Override
-    public LocValueScheme getType()
-    {
+    public int getValue() {
+        return 0;
+    }
+
+    @Override
+    public LocValueScheme getType() {
         return null;
     }
 }

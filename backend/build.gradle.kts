@@ -31,27 +31,26 @@ repositories {
 }
 
 dependencies {
-    //implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-websocket")
-    implementation("commons-codec:commons-codec:1.18.0")
-    // database driver
-    implementation("org.xerial:sqlite-jdbc:3.41.2.2")
-    //dialect for hibernate
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.hibernate.orm:hibernate-core")
-    implementation("org.hibernate.orm:hibernate-community-dialects")
-    implementation("org.flywaydb:flyway-core")
-    compileOnly("org.projectlombok:lombok")
+    implementation(libs.spring.boot.websocket)
+    implementation(libs.spring.boot.starter.data.jpa)
+    implementation(libs.sqlite.jdbc)
+    implementation(libs.hibernate.core)
+    implementation(libs.hibernate.community.dialects)
 
-    annotationProcessor("org.projectlombok:lombok")
+    implementation(libs.commons.codec)
+    implementation(libs.flyway.core)
+    implementation(libs.gson)
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
-    testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("org.testcontainers:junit-jupiter")
+    compileOnly(libs.lombok)
 
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    implementation("com.google.code.gson:gson:2.11.0")
+    annotationProcessor(libs.lombok)
+
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.spring.boot.testcontainers)
+    testImplementation(libs.spring.security.test)
+    testImplementation(libs.testcontainers.junit.jupiter)
+
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 tasks.withType<Test> {
