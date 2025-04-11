@@ -19,42 +19,32 @@ public class ValueController
     private final ValueService valueService;
 
     @GetMapping("/request/speed/{locID}")
-    public ResponseEntity<List<String>> getLocSpeed(@PathVariable int locID, @RequestParam int startTime, @RequestParam int endTime)
+    public ResponseEntity<List<Value>> getLocSpeed(@PathVariable int locID, @RequestParam int startTime, @RequestParam int endTime)
     {
         List<Value> valueList = valueService.getLocValuesByScheme(LocValueScheme.SPEED, locID, startTime, endTime);
-        List<String> jsonRepresentation = valueList.stream()
-                .map(Value::toString)
-                .toList();
-        return ResponseEntity.ok(jsonRepresentation);
+
+        return ResponseEntity.ok(valueList);
     }
 
     @GetMapping("/request/direction/{locID}")
-    public ResponseEntity<List<String>> getLocDirection(@PathVariable int locID, @RequestParam int startTime, @RequestParam int endTime)
+    public ResponseEntity<List<Value>> getLocDirection(@PathVariable int locID, @RequestParam int startTime, @RequestParam int endTime)
     {
         List<Value> valueList = valueService.getLocValuesByScheme(LocValueScheme.DIRECTION, locID, startTime, endTime);
-        List<String> jsonRepresentation = valueList.stream()
-                .map(Value::toString)
-                .toList();
-        return ResponseEntity.ok(jsonRepresentation);
+        return ResponseEntity.ok(valueList);
     }
 
     @GetMapping("/request/speed/{locID}")
-    public ResponseEntity<List<String>> getLocSpeedByNumber(@RequestParam int entries, @PathVariable int locID)
+    public ResponseEntity<List<Value>> getLocSpeedByNumber(@RequestParam int entries, @PathVariable int locID)
     {
         List<Value> valueList = valueService.getLocValuesByScheme(LocValueScheme.SPEED, locID, entries);
-        List<String> jsonRepresentation = valueList.stream()
-                .map(Value::toString)
-                .toList();
-        return ResponseEntity.ok(jsonRepresentation);
+
+        return ResponseEntity.ok(valueList);
     }
 
     @GetMapping("/request/direction/number/{locID}")
-    public ResponseEntity<List<String>> getLocDirectionByNumber(@PathVariable int locID, @RequestParam int entries)
+    public ResponseEntity<List<Value>> getLocDirectionByNumber(@PathVariable int locID, @RequestParam int entries)
     {
         List<Value> valueList = valueService.getLocValuesByScheme(LocValueScheme.DIRECTION, locID, entries);
-        List<String> jsonRepresentation = valueList.stream()
-                .map(Value::toString)
-                .toList();
-        return ResponseEntity.ok(jsonRepresentation);
+        return ResponseEntity.ok(valueList);
     }
 }
