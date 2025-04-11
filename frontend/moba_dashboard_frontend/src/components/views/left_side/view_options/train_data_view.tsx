@@ -12,16 +12,6 @@ import {ChartComponent} from "../../../charts/Graph";
 import {DataTransferContext} from "../../../../App";
 import { fetchTrainInformation } from "../../../../logic/backend/fetch_train_data";
 
-//testing
-const data = [
-	{ name: "15 min", value: 30 },
-	{ name: "30 min", value: 45 },
-	{ name: "45 min", value: 15 },
-	{ name: "60 min", value: 10 },
-	{ name: "90 min", value: 10 },
-	{name: "120 min", value: 100}
-];
-
 //create and export default train data container
 export default function TrainDataContainer() {
 	//get data transfer context
@@ -30,19 +20,34 @@ export default function TrainDataContainer() {
 	//define state hook for selected train data type option
 	const [selectedAction, setSelectedAction] = useState<string>('Geschwindigkeit');
 	//define state hook for diagram data
-	const [trainData, setTrainData] = useState<any[]>(data);
+	const [trainData, setTrainData] = useState<any[]>([]);
 
 	//get data to show in diagram
 	useEffect(() => {
-		//function to create data object
-		async function createDataObject(): Promise<any | []> {
-			const fetchedDataObject = await fetchTrainInformation((dataTransferContext as any).selectedTrain);
+		async function createDataObject(): Promise<any[]> {
+			try {
+				const fetchedData = await fetchTrainInformation((dataTransferContext as any).selectedTrain);
 
-			//create structure for data
-			
+				//set data to receuved format
+				const formattedData = fetchedData.map((item: any) => ({
+					name: item.timeLabel || "Unbekannt",
+					value: item.speed || 0
+				}));
+
+				return formattedData;
+			} catch (err) {
+				console.error("Fehler beim Laden der Zugdaten:", err);
+				return [];
+			}
 		}
-		setTrainData(await createDataObject());
-	}, [selectedAction]);
+
+		createDataObject().then((data) => setTrainData(data));
+
+		//get new values every 30 seconds
+		const interval = setInterval(createDataObject, 30000);
+
+		return () => clearInterval(interval);
+	}, [selectedAction, dataTransferContext]);
 
 	//return created ui component
 	return (

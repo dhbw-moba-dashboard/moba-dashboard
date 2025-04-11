@@ -20,6 +20,7 @@ import { DataTransferContext } from "../../../App";
 import { Select } from "../../atoms/input";
 import { ImageButton } from "../../atoms/buttons";
 import {playSound} from "../../../logic/other/sounds";
+import {getCurrentSpeed} from "../../../logic/backend/fetch_train_data";
 
 //create and export default my trains container
 export default function MyTrainsContainer() {
@@ -51,7 +52,22 @@ export default function MyTrainsContainer() {
 
 	//use effect to fetch train speed
 	useEffect(() => {
+		async function fetchSpeed() {
+			if (!transferedData.selectedTrain) return;
 
+			const latestData = await getCurrentSpeed(transferedData.selectedTrain);
+
+			if (latestData && (latestData as any).value !== undefined) {
+				setFetchedTrainData(latestData as any);
+			}
+		}
+
+		fetchSpeed();
+
+		//get new values every 30 seconds
+		const interval = setInterval(fetchSpeed, 30000);
+
+		return () => clearInterval(interval);
 	}, []);
 
 	//define async function to play AI sound for selecte train
@@ -64,7 +80,7 @@ export default function MyTrainsContainer() {
 	const trainInformationOptions = new Map<string, [string, string]>([
 		[
 			"currentSpeed",
-			[`Aktuelle Geschwindigkeit: ${fetchedTrainData?.toString()} km/h`, "Icon_Speedometer_IOS_White"],
+			[`Aktuelle Geschwindigkeit: ${(fetchedTrainData as any).value.toString()} km/h`, "Icon_Speedometer_IOS_White"],
 		],
 		["coalValue", [`Aktueller Kohle stand:  kg`, "Icon_Coal_IOS_White"]],
 		["waterValue", [`Aktueller Wasser Stand: l`, "Icon_Water_IOS_White"]],
