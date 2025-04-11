@@ -18,7 +18,7 @@ public class ValueController
 {
     private final ValueService valueService;
 
-    @GetMapping("/request/speed/{locID}")
+    @GetMapping("/timerequest/speed/{locID}")
     public ResponseEntity<List<String>> getLocSpeed(@PathVariable int locID, @RequestParam int startTime, @RequestParam int endTime)
     {
         List<Value> valueList = valueService.getLocValuesByScheme(LocValueScheme.SPEED, locID, startTime, endTime);
@@ -28,7 +28,7 @@ public class ValueController
         return ResponseEntity.ok(jsonRepresentation);
     }
 
-    @GetMapping("/request/direction/{locID}")
+    @GetMapping("/timerequest/direction/{locID}")
     public ResponseEntity<List<String>> getLocDirection(@PathVariable int locID, @RequestParam int startTime, @RequestParam int endTime)
     {
         List<Value> valueList = valueService.getLocValuesByScheme(LocValueScheme.DIRECTION, locID, startTime, endTime);
@@ -38,7 +38,7 @@ public class ValueController
         return ResponseEntity.ok(jsonRepresentation);
     }
 
-    @GetMapping("/request/speed/{locID}")
+    @GetMapping("/numberrequest/speed/{locID}")
     public ResponseEntity<List<String>> getLocSpeedByNumber(@RequestParam int entries, @PathVariable int locID)
     {
         List<Value> valueList = valueService.getLocValuesByScheme(LocValueScheme.SPEED, locID, entries);
@@ -48,7 +48,7 @@ public class ValueController
         return ResponseEntity.ok(jsonRepresentation);
     }
 
-    @GetMapping("/request/direction/number/{locID}")
+    @GetMapping("/numberrequest/direction/number/{locID}")
     public ResponseEntity<List<String>> getLocDirectionByNumber(@PathVariable int locID, @RequestParam int entries)
     {
         List<Value> valueList = valueService.getLocValuesByScheme(LocValueScheme.DIRECTION, locID, entries);
