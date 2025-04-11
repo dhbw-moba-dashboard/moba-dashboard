@@ -1,16 +1,22 @@
+
 plugins {
     java
     id("org.springframework.boot") version "3.3.4"
     id("io.spring.dependency-management") version "1.1.6"
     id("org.sonarqube") version "5.1.0.4882"
+    id("jacoco")
+    application
 }
 
 group = "de.dhbw-karlsruhe.modellbahn"
 version = "0.0.1"
+application{
+    mainClass = "de.dhbwkarlsruhe.modellbahn.ModellbahnApplication"
+}
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -25,30 +31,42 @@ repositories {
 }
 
 dependencies {
-    //implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-websocket")
+    implementation(libs.spring.boot.websocket)
+    implementation(libs.spring.boot.starter.data.jpa)
+    implementation(libs.sqlite.jdbc)
+    implementation(libs.hibernate.core)
+    implementation(libs.hibernate.community.dialects)
 
-    compileOnly("org.projectlombok:lombok")
+    implementation(libs.commons.codec)
+    implementation(libs.flyway.core)
+    implementation(libs.gson)
 
-    annotationProcessor("org.projectlombok:lombok")
+    compileOnly(libs.lombok)
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
-    testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("org.testcontainers:junit-jupiter")
+    annotationProcessor(libs.lombok)
 
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    implementation("com.google.code.gson:gson:2.11.0")
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.spring.boot.testcontainers)
+    testImplementation(libs.spring.security.test)
+    testImplementation(libs.testcontainers.junit.jupiter)
+
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
-
 sonar {
   properties {
     property("sonar.projectKey", "dhbw-moba-dashboard_moba-dashboard")
     property("sonar.organization", "dhbw-moba-dashboard")
     property("sonar.host.url", "https://sonarcloud.io")
   }
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
