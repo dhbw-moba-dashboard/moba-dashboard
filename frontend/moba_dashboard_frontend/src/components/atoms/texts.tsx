@@ -18,7 +18,7 @@ interface TextProperties extends DefaultComponentProps {
 	textImage?: string | undefined;
 	textStyle?: React.CSSProperties;
 	imageStyle?: React.CSSProperties;
-	textLinkAction?: (value: any) => void;
+	textLinkAction?: (value?: any) => void;
 }
 
 //create text component
@@ -74,7 +74,7 @@ export const TextLink: React.FC<TextProperties> = (props: TextProperties) => {
 			);
 		} else if (props.textLinkAction) {
 			//execute action
-			props.textLinkAction;
+			props.textLinkAction();
 		}
 	}
 

@@ -3,10 +3,8 @@
 
 /*set video view style properties*/
 .video-view-style-properties {
-	height: 250px;
-	width: 94%;
-	border: 1px solid white;
+	height: 300px;
+	width: auto;
 	border-radius: var(--default_border_radius);
-	padding: var(--default_padding);
 	margin: 2%;
 }

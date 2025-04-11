@@ -46,7 +46,7 @@ export const ImageButton: React.FC<ButtonProperties> = (
 			className={props.className}
 		>
 			<Image
-				style={{ height: "18px", width: "auto", ...props.style }}
+				style={{ height: "18px", width: "auto", ...props.imageStyle }}
 				imageValue={props.buttonImage}
 			/>
 		</button>

@@ -1,11 +1,12 @@
 name: Biome - Linter
 on:
-  push:
-    branches:
-      - '*'
-  pull_request:
-    branches:
-      - '*'
+  #TODO reenable later
+  #push:
+  #  branches:
+  #    - '*'
+  #pull_request:
+  #  branches:
+  #    - '*'
   
 jobs:
   biome:

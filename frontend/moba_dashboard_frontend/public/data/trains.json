@@ -1,20 +1,38 @@
 [
 	{
-		"trainID": "",
+		"trainID": "16390",
 		"trainType": "ELECTRIC",
-		"trainName": "E Lok 1",
-		"trainImage": "images/trains/Lok_1.png"
+		"trainName": "Crossrail",
+		"trainImage": "images/trains/XRAIL_266_280-7.png"
 	},
 	{
 		"trainID": "",
-		"trainType": "STEAM",
-		"trainName": "Lok 2",
-		"trainImage": "images/trains/Lok_2.png"
+		"trainType": "ELCTRIC",
+		"trainName": "Rangierlok",
+		"trainImage": "images/trains/DB_BR_261_841-1.png"
 	},
 	{
-		"trainID": "",
+		"trainID": "16397",
+		"trainType": "ELCTRIC",
+		"trainName": "BR151 gealtert",
+		"trainImage": "images/trains/DB_BR_150_144-4_alt.png"
+	},
+	{
+		"trainID": "2",
 		"trainType": "STEAM",
-		"trainName": "Lok 3",
-		"trainImage": "images/trains/Lok_3.png"
+		"trainName": "SBB Köfferli",
+		"trainImage": "images/trains/SBB_Fc_12_201.png"
+	},
+	{
+		"trainID": "16392",
+		"trainType": "STEAM",
+		"trainName": "Dampflok - BR96",
+		"trainImage": "images/trains/DRG_BR_96_024.png"
+	},
+	{
+		"trainID": "4",
+		"trainType": "STEAM",
+		"trainName": "Dampflok - BR95",
+		"trainImage": "images/trains/DR_DDR_BR_95_0041-4.png"
 	}
 ]

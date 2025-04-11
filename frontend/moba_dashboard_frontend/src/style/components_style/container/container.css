@@ -11,11 +11,10 @@
 /*define grid component style project*/
 .grid-component-style-properties {
 	display: grid;
-	width: auto;
-	height: auto;
-	max-height: 600px;
-	overflow-y: auto;
+	grid-template-columns: repeat(3, 1fr);
 	gap: var(--default_padding);
+	width: 100%;
+	height: auto;
 }
 
 /*define content container style properties*/
