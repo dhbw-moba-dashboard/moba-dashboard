@@ -1,9 +1,19 @@
 services:
+  backend:
+    build: backend
+    container_name: "moba-backend"
+    ports:
+      - "8080:8080"
+    networks:
+      - tts
+
   tts:
     build: tts
     container_name: "moba-tts"
     ports:
       - "8000:80"
+    networks:
+      - tts
     #deploy:
     #  resources:
     #    reservations:
@@ -11,3 +21,8 @@ services:
     #        - driver: nvidia
     #          count: 1
     #          capabilities: [ gpu ]
+
+networks:
+  tts:
+    name: tts_network
+    driver: bridge
