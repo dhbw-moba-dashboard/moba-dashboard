@@ -22,7 +22,7 @@ export const DataTransferContext = createContext<any | null>(null);
 
 function App() {
 	//define state hook for selected train
-	const [selectedTrain, setSelectedTrain] = useState<string>();
+	const [selectedTrain, setSelectedTrain] = useState<number>(16390);
 
 	//data transfer object
 	const dataTransferObject: object = {
@@ -69,6 +69,7 @@ function App() {
 		catch (changeApplicationBackgroundError: any) {
 			//set error message
 			setConsoleMessage(changeApplicationBackgroundError.message, true);
+		}
 	}
 
 	//return created ui components
