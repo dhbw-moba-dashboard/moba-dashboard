@@ -1,7 +1,6 @@
-package de.dhbwkarlsruhe.modellbahn.Models;
+package de.dhbwkarlsruhe.modellbahn.models;
 
 import de.dhbwkarlsruhe.modellbahn.BitUtilities;
-import de.dhbwkarlsruhe.modellbahn.database.entities.Value;
 import de.dhbwkarlsruhe.modellbahn.schemes.Direction;
 import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 
@@ -10,11 +9,13 @@ import java.util.List;
 public record LocDirection(int locID, Direction direction) implements SimpleLocValue
 {
     private static final LocValueScheme type = LocValueScheme.DIRECTION;
+
     public static LocDirection createLocDirection(byte[] data)
     {
         int id = BitUtilities.transformBitSequenceToInt(data, 0, 0, 3, 7);
         int dir = -1;
-        if(data.length == 5){
+        if (data.length == 5)
+        {
             dir = BitUtilities.transformBitSequenceToInt(data, 4, 0, 4, 7);
 
         }
@@ -33,7 +34,7 @@ public record LocDirection(int locID, Direction direction) implements SimpleLocV
     @Override
     public byte[] toByteArray()
     {
-        int directionByte = (direction == Direction.REQUEST) ? 0:this.direction.ordinal();
+        int directionByte = (direction == Direction.REQUEST) ? 0 : this.direction.ordinal();
         List<byte[]> data = List.of(
                 BitUtilities.intToByteArray(locID, 4),
                 BitUtilities.intToByteArray(directionByte, 1),
@@ -45,10 +46,10 @@ public record LocDirection(int locID, Direction direction) implements SimpleLocV
     @Override
     public int getDLC()
     {
-     if (direction == Direction.REQUEST)
-     {
-         return 4;
-     }
+        if (direction == Direction.REQUEST)
+        {
+            return 4;
+        }
         return 5;
     }
 

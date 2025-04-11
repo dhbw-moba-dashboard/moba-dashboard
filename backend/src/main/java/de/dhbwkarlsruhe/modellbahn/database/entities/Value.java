@@ -2,15 +2,14 @@ package de.dhbwkarlsruhe.modellbahn.database.entities;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import de.dhbwkarlsruhe.modellbahn.Models.LocDirection;
-import de.dhbwkarlsruhe.modellbahn.Models.LocSpeed;
-import de.dhbwkarlsruhe.modellbahn.Models.SimpleLocValue;
+import de.dhbwkarlsruhe.modellbahn.models.LocDirection;
+import de.dhbwkarlsruhe.modellbahn.models.LocSpeed;
+import de.dhbwkarlsruhe.modellbahn.models.SimpleLocValue;
 import de.dhbwkarlsruhe.modellbahn.schemes.Direction;
 import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 
 import java.time.Instant;
 
@@ -23,15 +22,15 @@ public class Value
     @Id
     @Column(name = "value_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ValueID;
+    private int valueID;
     @Column(name = "type_id")
     public int typeID;
     @Column(name = "time_stamp")
-    private long TimeStamp;
+    private long timeStamp;
     @Column(name = "value")
-    private int Value;
+    private int value;
     @Column(name = "loc")
-    private int Loc;
+    private int loc;
 
     public static Value createValue(SimpleLocValue model)
     {
@@ -43,12 +42,14 @@ public class Value
         value.setTimeStamp(Instant.now().getEpochSecond());
         return value;
     }
+
     public SimpleLocValue toModel()
     {
         LocValueScheme scheme = LocValueScheme.values()[typeID];
-        return switch (scheme){
-            case SPEED -> new LocSpeed(Loc, Value);
-            case DIRECTION ->new LocDirection(Loc, Direction.values()[Value]);
+        return switch (scheme)
+        {
+            case SPEED -> new LocSpeed(loc, value);
+            case DIRECTION -> new LocDirection(loc, Direction.values()[value]);
 
         };
     }
@@ -59,7 +60,7 @@ public class Value
         Gson gson = new Gson();
         String objectString = gson.toJson(toModel());
         JsonObject jsonObject = gson.fromJson(objectString, JsonObject.class);
-        jsonObject.addProperty("timestamp", TimeStamp);
+        jsonObject.addProperty("timestamp", timeStamp);
         return jsonObject.toString();
     }
 }

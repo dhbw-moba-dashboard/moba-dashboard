@@ -1,6 +1,4 @@
-package de.dhbwkarlsruhe.modellbahn.Models;
-
-import de.dhbwkarlsruhe.modellbahn.database.entities.Value;
+package de.dhbwkarlsruhe.modellbahn.models;
 
 /**
  * This refers to the last 8 Bytes of a CANMessage, which contain the Databytes
@@ -8,5 +6,6 @@ import de.dhbwkarlsruhe.modellbahn.database.entities.Value;
 public interface Model
 {
     byte[] toByteArray();
+
     int getDLC();
 }

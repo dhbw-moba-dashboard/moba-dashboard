@@ -1,4 +1,4 @@
-package de.dhbwkarlsruhe.modellbahn.Models;
+package de.dhbwkarlsruhe.modellbahn.models;
 
 import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 
@@ -8,6 +8,7 @@ public class UnknownModel implements SimpleLocValue
     {
         return new UnknownModel();
     }
+
     @Override
     public byte[] toByteArray()
     {

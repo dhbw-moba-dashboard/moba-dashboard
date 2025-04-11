@@ -1,4 +1,4 @@
-package de.dhbwkarlsruhe.modellbahn.Models;
+package de.dhbwkarlsruhe.modellbahn.models;
 
 import de.dhbwkarlsruhe.modellbahn.database.entities.Loc;
 

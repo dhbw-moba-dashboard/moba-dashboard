@@ -6,17 +6,20 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Component
-public class CommandlineArguments {
+public class CommandlineArguments
+{
     private final String ipAddress;
-    public CommandlineArguments(ApplicationArguments arguments){
-        boolean ip= arguments.containsOption("ip");
-        if (ip){
-            this.ipAddress=arguments.getNonOptionArgs().get(0);
-            System.out.println("IP-Adresse: "+arguments.getNonOptionArgs().get(0));
+
+    public CommandlineArguments(ApplicationArguments arguments)
+    {
+        boolean ip = arguments.containsOption("ip");
+        if (ip)
+        {
+            this.ipAddress = arguments.getNonOptionArgs().getFirst();
         }
-        else{
-            this.ipAddress="0.0.0.0";
-            System.out.println("Keine IP-Adresse angegeben");
+        else
+        {
+            this.ipAddress = "0.0.0.0";
         }
     }
 }

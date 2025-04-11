@@ -1,4 +1,4 @@
-package de.dhbwkarlsruhe.modellbahn.Models;
+package de.dhbwkarlsruhe.modellbahn.models;
 
 import de.dhbwkarlsruhe.modellbahn.BitUtilities;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class CANMessage {
+public class CANMessage
+{
     private final Priority priority;
     @Getter
     private final CommandScheme command;
@@ -18,25 +19,27 @@ public class CANMessage {
     private final boolean response;
     private final int hashValue;
     //Data Length Code : number of data bytes (0-8)
-    private final int DLC;
+    private final int dlc;
     @Getter
     private final Model payload;
 
-    public CANMessage(Priority prio, CommandScheme command, Model p, boolean response) {
+    public CANMessage(Priority prio, CommandScheme command, Model p, boolean response)
+    {
         this.priority = prio;
         this.command = command;
         this.response = response;
         this.hashValue = generateHashValue();
-        this.DLC = p.getDLC();
+        this.dlc = p.getDLC();
         this.payload = p;
     }
 
-    public CANMessage(byte[] message) {
+    public CANMessage(byte[] message)
+    {
         priority = setPriority(message);
         command = setCommand(message);
         response = setResponse(message);
         hashValue = setHashValue(message);
-        DLC = setDLC(message);
+        dlc = setDlc(message);
         payload = setPayload(message);
     }
 
@@ -70,7 +73,7 @@ public class CANMessage {
         return firstByte << 8 | (secondByte & 0xFF);
     }
 
-    private int setDLC(byte[] message)
+    private int setDlc(byte[] message)
     {
         byte dlcByte = message[4];
         return dlcByte & 0x0F;
@@ -78,17 +81,20 @@ public class CANMessage {
 
     private Model setPayload(byte[] message)
     {
-        byte[] payloadArray = Arrays.copyOfRange(message, 5, 5 + DLC);
+        byte[] payloadArray = Arrays.copyOfRange(message, 5, 5 + dlc);
         return ModelFactory.createPayloadFromBytes(payloadArray, command);
     }
 
     /**
      * technically there is a correct way to generate this hash but it is not necessary. This hardcoded hash works for the current usecases
+     *
      * @return hash value of the CAN message
      */
-    private int generateHashValue(){
+    private int generateHashValue()
+    {
         return 0x5738;
     }
+
     /*private int generateHashValue(){
         Random r = new Random();
         long longRand= r.nextLong(0xFFFFFFFFL);
@@ -100,41 +106,42 @@ public class CANMessage {
         uidHash = uidHash| 0x0300;
         return uidHash;
     }*/
-    public byte[] toByteArray(){
+    public byte[] toByteArray()
+    {
         byte[] firstByte = {getFirstByte()};
-        byte [] secondByte = {getSecondByte()};
-        byte[] hash = BitUtilities.intToByteArray(hashValue,2);
-        byte[] dlc = BitUtilities.intToByteArray(DLC,1);
-        byte [] data = payload.toByteArray();
-        return BitUtilities.mergeByteArrays(List.of(firstByte,secondByte,hash,dlc,data));
+        byte[] secondByte = {getSecondByte()};
+        byte[] hash = BitUtilities.intToByteArray(hashValue, 2);
+        byte[] length = BitUtilities.intToByteArray(this.dlc, 1);
+        byte[] data = payload.toByteArray();
+        return BitUtilities.mergeByteArrays(List.of(firstByte, secondByte, hash, length, data));
     }
 
     /**
-     *
      * @return first byte of the CAN message
      * structure of the first byte
      * 4 bit priority
      * 3 bit 0
      * 1 bit command
      */
-    private byte getFirstByte(){
-        byte firstByte = 0x00;
-        firstByte = (byte) (firstByte | (priority.ordinal() << 4));
-        firstByte = (byte) (firstByte | (command.getCommandValue()>>7));
+    private byte getFirstByte()
+    {
+        byte firstByte = (byte) (priority.ordinal() << 4);
+
+        firstByte = (byte) (firstByte & 0xff | (command.getCommandValue() >> 7));
         return firstByte;
     }
 
     /**
-     *
      * @return second byte of CAN message
      * structure of the second byte
      * 7 bit command
      * 1 bit response
      */
-    private byte getSecondByte(){
-        byte secondByte = 0x00;
+    private byte getSecondByte()
+    {
+        byte secondByte;
         secondByte = (byte) command.getCommandValue();
-        secondByte = (byte) (secondByte | (response? 0x01 : 0x00));
+        secondByte = (byte) (secondByte | (response ? 0x01 : 0x00));
         return secondByte;
     }
 
@@ -146,13 +153,13 @@ public class CANMessage {
             return false;
         }
         CANMessage that = (CANMessage) o;
-        return response == that.response && hashValue == that.hashValue && DLC == that.DLC && priority == that.priority && command == that.command && Objects.equals(payload, that.payload);
+        return response == that.response && hashValue == that.hashValue && dlc == that.dlc && priority == that.priority && command == that.command && Objects.equals(payload, that.payload);
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(priority, command, response, hashValue, DLC, payload);
+        return Objects.hash(priority, command, response, hashValue, dlc, payload);
     }
 
 }
