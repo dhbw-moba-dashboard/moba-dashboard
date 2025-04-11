@@ -27,7 +27,7 @@ public class LocService
 
     public void addLoc(LocName locName)
     {
-        Loc loc = locName.toEntity();
+        Loc loc = Loc.fromModel(locName);
 
         locRepository.save(loc);
     }

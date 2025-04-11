@@ -26,14 +26,14 @@ public class Value {
     public int typeID;
     @Column(name = "time_stamp")
     private long timeStamp;
-    @Column(name = "value")
-    private int value;
+    @Column(name = "data")
+    private int data;
     @Column(name = "loc")
     private int loc;
 
     public static Value createValue(SimpleLocValue model) {
         Value value = new Value();
-        value.setValue(model.getValue());
+        value.setData(model.getValue());
         value.setLoc(model.getLoc());
         value.setTypeID(model.getType().ordinal());
 
@@ -44,8 +44,8 @@ public class Value {
     public SimpleLocValue toModel() {
         LocValueScheme scheme = LocValueScheme.values()[typeID];
         return switch (scheme) {
-            case SPEED -> new LocSpeed(loc, value);
-            case DIRECTION -> new LocDirection(loc, Direction.values()[value]);
+            case SPEED -> new LocSpeed(loc, data);
+            case DIRECTION -> new LocDirection(loc, Direction.values()[data]);
         };
     }
 
