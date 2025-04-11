@@ -6,8 +6,8 @@
 		"trainImage": "images/trains/XRAIL_266_280-7.png"
 	},
 	{
-		"trainID": "",
-		"trainType": "ELCTRIC",
+		"trainID": "16391",
+		"trainType": "DIESEL",
 		"trainName": "Rangierlok",
 		"trainImage": "images/trains/DB_BR_261_841-1.png"
 	},
@@ -18,7 +18,7 @@
 		"trainImage": "images/trains/DB_BR_150_144-4_alt.png"
 	},
 	{
-		"trainID": "2",
+		"trainID": "16398",
 		"trainType": "STEAM",
 		"trainName": "SBB Köfferli",
 		"trainImage": "images/trains/SBB_Fc_12_201.png"
@@ -30,7 +30,7 @@
 		"trainImage": "images/trains/DRG_BR_96_024.png"
 	},
 	{
-		"trainID": "4",
+		"trainID": "16289",
 		"trainType": "STEAM",
 		"trainName": "Dampflok - BR95",
 		"trainImage": "images/trains/DR_DDR_BR_95_0041-4.png"

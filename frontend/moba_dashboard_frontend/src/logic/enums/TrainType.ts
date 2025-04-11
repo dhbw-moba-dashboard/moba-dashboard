@@ -1,6 +1,7 @@
 //define export train types
 export enum TrainType {
 	STEAM = "steam",
+	DIESEL = "diesel",
 	ELECTRIC = "electric",
 }
 
@@ -12,6 +13,7 @@ export function setDefaultImage(
 	//define map with default train images
 	const trainImages = new Map<TrainType, string>([
 		[TrainType.STEAM, "Steam_Train"],
+		[TrainType.DIESEL, ""],
 		[TrainType.ELECTRIC, "Electric_Train"],
 	]);
 

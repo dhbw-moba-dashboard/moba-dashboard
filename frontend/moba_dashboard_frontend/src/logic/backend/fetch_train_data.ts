@@ -6,7 +6,7 @@ export async function fetchTrainInformation(trainId: string | number): Promise<a
 	//try catch for error handling
 	try {
 		//define backend url
-		const TRAIN_INFORMATION_URL: string = `http://localhost:8080/?loc=${trainId}`;
+		const TRAIN_INFORMATION_URL: string = `http://localhost:8080/request/speed/number/?amount=5&trainId=${trainId}`;
 
 		//make backend call to load data
 		const backendResponse: Response = await fetch(TRAIN_INFORMATION_URL, {
