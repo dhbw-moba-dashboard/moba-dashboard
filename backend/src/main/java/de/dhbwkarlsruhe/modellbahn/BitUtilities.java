@@ -1,11 +1,13 @@
 package de.dhbwkarlsruhe.modellbahn;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+//this prevents the class from being instantiated
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BitUtilities {
-	//this prevents the class from being instantiated
-	private BitUtilities() {
-	}
     /**
      * This method returns a byte array containing the bits from startByte:startBit to lastByte:lastBit
      *
@@ -28,7 +30,6 @@ public class BitUtilities {
 				result[i - startByte] = (byte) ((data[i] & 0xFF) & (0xFF << (7 - lastBit)));
             } else {
                 result[i - startByte] = data[i];
-
             }
         }
         return result;

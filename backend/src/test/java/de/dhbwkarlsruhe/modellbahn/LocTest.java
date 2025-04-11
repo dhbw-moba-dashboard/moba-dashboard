@@ -1,36 +1,26 @@
 package de.dhbwkarlsruhe.modellbahn;
 
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.controller.models.request.LocModel;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.Payload;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.PayloadFactory;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.payloadtypes.commands.LocomotiveDirection;
-import de.dhbwkarlsruhe.modellbahn.hardwareabstractionlayer.schemes.CommandScheme;
+import de.dhbwkarlsruhe.modellbahn.models.LocSpeed;
+import de.dhbwkarlsruhe.modellbahn.models.Model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class LocTest {
-	@Test
-	void speed() {
-		byte[] bytes = new byte[]{0x00, 0x00, 0x00, 0x03, 0x00, 0x10};
-		String json = "{locID:3,speed:16}";
-		Payload jsonPayload = PayloadFactory.createPayloadFromJson(json, CommandScheme.LOCOMOTIVE_SPEED);
-		Payload bytePayload = PayloadFactory.createPayloadFromBytes(bytes, CommandScheme.LOCOMOTIVE_SPEED);
-		byte[] convertedBytes = bytePayload.toByteArray();
-		Assertions.assertEquals(jsonPayload, bytePayload);
-		Assertions.assertArrayEquals(bytes, convertedBytes);
+class LocTest
+{
+    @Test
+    void speed()
+    {
+        byte[] bytes = new byte[]{0x00, 0x00,//Id bytes empty
+                0x40, 0x0d, //loc id : 16397
+                0x01, (byte) 0xf4, //speed 500 max 1024 min 0
+                0x00, 0x00};
 
-	}
 
-	@Test
-	void model() {
-		//Todo: test edge cases like -1 and serialize/deserialize json properly
-		int speed = 16;
-		int id = 4;
-		LocModel.LocSpeed locSpeed = new LocModel.LocSpeed(speed);
-		String input = locSpeed.buildJson(id);
-		Assertions.assertEquals("{\"locID\":4,\"speed\":16}", input);
-		LocModel.LocDirection locDirection = new LocModel.LocDirection(LocomotiveDirection.Direction.FORWARD);
-		String inputDirection = locDirection.buildJson(id);
-		Assertions.assertEquals("{\"locID\":4,\"direction\":FORWARD}", inputDirection);
-	}
+        Model jsonPayload = new LocSpeed(16397, 500);
+
+        byte[] convertedBytes = jsonPayload.toByteArray();
+        Assertions.assertArrayEquals(bytes, convertedBytes);
+
+    }
+
 }

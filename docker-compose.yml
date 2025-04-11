@@ -1,0 +1,13 @@
+services:
+  tts:
+    build: tts
+    container_name: "moba-tts"
+    ports:
+      - "8000:80"
+    #deploy:
+    #  resources:
+    #    reservations:
+    #      devices:
+    #        - driver: nvidia
+    #          count: 1
+    #          capabilities: [ gpu ]
