@@ -6,6 +6,7 @@ import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.Priority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -18,8 +19,8 @@ public class MobaSocket {
 
     private final String ipAddressMoba;
 
-    public MobaSocket(CommandlineArguments args) {
-        this.ipAddressMoba = args.getIpAddress();
+    public MobaSocket(@Value("${moba.ip}") String ipAddressMoba) {
+        this.ipAddressMoba = ipAddressMoba;
     }
 
     public CANMessage handleCANInteraction(CANMessage request) throws IOException {
