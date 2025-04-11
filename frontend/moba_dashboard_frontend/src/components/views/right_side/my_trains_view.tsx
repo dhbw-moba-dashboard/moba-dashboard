@@ -65,9 +65,9 @@ export default function MyTrainsContainer() {
 		fetchSpeed();
 
 		//get new values every 30 seconds
-		const interval = setInterval(fetchSpeed, 30000);
+		//const interval = setInterval(fetchSpeed, 30000);
 
-		return () => clearInterval(interval);
+		//return () => clearInterval(interval);
 	}, []);
 
 	//define async function to play AI sound for selecte train
@@ -80,7 +80,7 @@ export default function MyTrainsContainer() {
 	const trainInformationOptions = new Map<string, [string, string]>([
 		[
 			"currentSpeed",
-			[`Aktuelle Geschwindigkeit: ${(fetchedTrainData as any).value.toString() || "--"} km/h`, "Icon_Speedometer_IOS_White"],
+			[`Aktuelle Geschwindigkeit: ${(fetchedTrainData as any).value || "--"} km/h`, "Icon_Speedometer_IOS_White"],
 		],
 		["coalValue", [`Aktueller Kohle stand:  kg`, "Icon_Coal_IOS_White"]],
 		["waterValue", [`Aktueller Wasser Stand: l`, "Icon_Water_IOS_White"]],
@@ -102,7 +102,7 @@ export default function MyTrainsContainer() {
 									trainOptionElementImage={currentTrain.trainImage}
 									style={{
 										border:
-											transferedData.selectedTrain === currentTrain.trainID
+											transferedData.selectedTrain == currentTrain.trainID
 												? "1px solid white"
 												: "none",
 									}}

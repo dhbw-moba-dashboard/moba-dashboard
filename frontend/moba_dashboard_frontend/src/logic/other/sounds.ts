@@ -6,7 +6,7 @@ export async function playSound(passedTrainName: string): Promise<void> {
     try {
         //define url to for endpoint call
         const PLAY_SOUND_ENDPOINT: string = 
-            `http://?xy=${passedTrainName}`;
+            `http://localhost:8000/?xy=${passedTrainName}`;
 
         //fetch audio file
         const audioResponse = await fetch(PLAY_SOUND_ENDPOINT);
