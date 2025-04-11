@@ -20,7 +20,7 @@ export async function playSound(passedTrainName: string): Promise<void> {
         const source = audioContext.createBufferSource();
         source.buffer = audioBuffer;
 
-        //connmect to speakers
+        //connect to speakers
         source.connect(audioContext.destination);
         //start playing sound
         source.start();
