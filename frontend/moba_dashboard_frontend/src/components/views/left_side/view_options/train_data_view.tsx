@@ -10,6 +10,7 @@ import {ChartComponent} from "../../../charts/Graph";
 
 //import context
 import {DataTransferContext} from "../../../../App";
+import { fetchTrainInformation } from "../../../../logic/backend/fetch_train_data";
 
 //testing
 const data = [
@@ -29,18 +30,25 @@ export default function TrainDataContainer() {
 	//define state hook for selected train data type option
 	const [selectedAction, setSelectedAction] = useState<string>('Geschwindigkeit');
 	//define state hook for diagram data
-	const [diagramData, setDiagramData] = useState<any[]>(data);
+	const [trainData, setTrainData] = useState<any[]>(data);
 
 	//get data to show in diagram
 	useEffect(() => {
+		//function to create data object
+		async function createDataObject(): Promise<any | []> {
+			const fetchedDataObject = await fetchTrainInformation((dataTransferContext as any).selectedTrain);
 
+			//create structure for data
+			
+		}
+		setTrainData(await createDataObject());
 	}, [selectedAction]);
 
 	//return created ui component
 	return (
 		<>
 			<ContentContainer contentContainerHeaderText="Zug Daten" topHeaderSectionChildren={<TrainDataTypeSelect setSelectedAction={setSelectedAction}/>}>
-				<ChartComponent data={data} yAxisText={selectedAction}/>
+				<ChartComponent data={trainData} yAxisText={selectedAction}/>
 			</ContentContainer>
 		</>
 	);

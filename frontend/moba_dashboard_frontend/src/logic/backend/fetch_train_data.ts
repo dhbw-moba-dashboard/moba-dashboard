@@ -1,7 +1,7 @@
 //define and export function to fetch train information
-export async function fetchTrainInformation(trainId: string): Promise<any[]> {
+export async function fetchTrainInformation(trainId: string | number): Promise<any[]> {
 	//define backend url
-	const TRAIN_INFORMATION_URL: string = `${process.env.REACT_APP_PROJECT_BACKEND_URL}/`;
+	const TRAIN_INFORMATION_URL: string = `http://?xy=${trainId}`;
 
 	//make backend call to load data
 	const backendResponse: Response = await fetch(TRAIN_INFORMATION_URL, {
