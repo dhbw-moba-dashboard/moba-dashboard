@@ -59,6 +59,9 @@ public class ValueService
     }
    public List<Value> getLocValuesByScheme(LocValueScheme scheme, long start, long end, int locID){
         return valueRepository.findValueInRange(start, end, scheme.ordinal(), locID);
-    }
+   }
+   public List<Value> getLocValuesByScheme(LocValueScheme scheme,int locID, int number){
+        return valueRepository.findNumberOfValues(scheme.ordinal(),locID, number);
+   }
 
 }
