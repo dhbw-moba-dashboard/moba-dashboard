@@ -30,7 +30,7 @@ export default function MyTrainsContainer() {
 	const transferedData = useContext(DataTransferContext);
 
 	//define state hook to fetch train data
-	const [fetchedTrainData, setFetchedTrainData] = useState<[]>([]);
+	const [fetchedTrainData, setFetchedTrainData] = useState<any[]>([]);
 	//define state for selected train name
 	const [selectedAiTrainName, setSelectedAiTrainName] = useState<string>('Crossrail');
 
@@ -52,23 +52,27 @@ export default function MyTrainsContainer() {
 
 	//use effect to fetch train speed
 	useEffect(() => {
-		async function fetchSpeed() {
+		async function fetchSpeed(): Promise<void> {
 			if (!transferedData.selectedTrain) return;
 
-			const latestData = await getCurrentSpeed(transferedData.selectedTrain);
+			try {
+				const latestData = await getCurrentSpeed(transferedData.selectedTrain);
 
-			if (latestData && (latestData as any).value !== undefined) {
-				setFetchedTrainData(latestData as any);
+				if (latestData && (latestData as any).value !== undefined) {
+					setFetchedTrainData(latestData); // latestData is a single object, not an array
+				}
+			} catch (err) {
+				setConsoleMessage((err as any).message, true);
 			}
 		}
 
+		//initial fetch
 		fetchSpeed();
 
-		//get new values every 30 seconds
-		//const interval = setInterval(fetchSpeed, 30000);
+		//const interval = setInterval(fetchSpeed, 30000); // repeat every 30 sec
 
-		//return () => clearInterval(interval);
-	}, []);
+		//return () => clearInterval(interval); // cleanup
+	}, [transferedData.selectedTrain]);
 
 	//define async function to play AI sound for selecte train
 	async function playAiSound(): Promise<void> {

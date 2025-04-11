@@ -11,6 +11,7 @@ import {ChartComponent} from "../../../charts/Graph";
 //import context
 import {DataTransferContext} from "../../../../App";
 import { fetchTrainInformation } from "../../../../logic/backend/fetch_train_data";
+import {formatTimestampToTime} from "../../../../logic/other/time_transfer";
 
 //create and export default train data container
 export default function TrainDataContainer() {
@@ -30,8 +31,8 @@ export default function TrainDataContainer() {
 
 				//set data to receuved format
 				const formattedData = fetchedData.map((item: any) => ({
-					name: item.timeLabel || "Unbekannt",
-					value: item.speed || 0
+					name: formatTimestampToTime(item.timeStamp),
+					value: item.data
 				}));
 
 				return formattedData;
@@ -44,9 +45,9 @@ export default function TrainDataContainer() {
 		createDataObject().then((data) => setTrainData(data));
 
 		//get new values every 30 seconds
-		const interval = setInterval(createDataObject, 30000);
+		//const interval = setInterval(createDataObject, 30000);
 
-		return () => clearInterval(interval);
+		//return () => clearInterval(interval);
 	}, [selectedAction, dataTransferContext]);
 
 	//return created ui component
