@@ -8,7 +8,7 @@ import java.io.OutputStream;
 public class MockOutputstream extends OutputStream
 {
 
-	private CANMessage expectedMessageObject;
+	private final CANMessage expectedMessageObject;
 	private CANMessage actualMessageObject;
 
 	public MockOutputstream(CANMessage expectedMessageObject)
