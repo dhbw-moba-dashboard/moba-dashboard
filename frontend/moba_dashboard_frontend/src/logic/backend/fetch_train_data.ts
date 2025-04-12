@@ -29,14 +29,14 @@ export async function fetchTrainInformation(trainId: string | number): Promise<a
 }
 
 //define and export async funtion to get the data value with the latest timestamp
-export async function getCurrentSpeed(trainId: string | number): Promise<any[]> {
+export async function getCurrentSpeed(trainId: string | number): Promise<any | null> {
 	//try catch for error handling
 	try {
 		//load total train data
 		const allTrainData: any[] = await fetchTrainInformation(trainId);
 
 		//check if no train data
-		if (!allTrainData || allTrainData.length === 0) return [];
+		if (!allTrainData || allTrainData.length === 0) return null;
 
 		//sort and get latest entry
 		const latestEntry = allTrainData.sort((a, b) =>
@@ -46,6 +46,6 @@ export async function getCurrentSpeed(trainId: string | number): Promise<any[]> 
 		return latestEntry;
 	} catch (getTrainSpeedError: any) {
 		setConsoleMessage(getTrainSpeedError.message, true);
-		return [];
+		return null;
 	}
 }

@@ -4,14 +4,19 @@ import React, {useContext, useEffect, useState} from "react";
 import { Select } from "../../../atoms/input";
 //import custom react component
 import { ContentContainer } from "../../../container/content_container";
+import Image from "../../../atoms/images";
+import Text from "../../../atoms/texts";
 
 //import chart component
 import {ChartComponent} from "../../../charts/Graph";
 
+//import custom ts functions
+import { fetchTrainInformation } from "../../../../logic/backend/fetch_train_data";
+//import external ts function
+import {format} from 'date-fns';
+
 //import context
 import {DataTransferContext} from "../../../../App";
-import { fetchTrainInformation } from "../../../../logic/backend/fetch_train_data";
-import {formatTimestampToTime} from "../../../../logic/other/time_transfer";
 
 //create and export default train data container
 export default function TrainDataContainer() {
@@ -31,7 +36,7 @@ export default function TrainDataContainer() {
 
 				//set data to receuved format
 				const formattedData = fetchedData.map((item: any) => ({
-					name: formatTimestampToTime(item.timeStamp),
+					name: format(new Date(item.timeStamp), 'HH:mm'),
 					value: item.data
 				}));
 
@@ -41,29 +46,43 @@ export default function TrainDataContainer() {
 				return [];
 			}
 		}
-
+		//make inital call
 		createDataObject().then((data) => setTrainData(data));
 
-		//get new values every 30 seconds
-		//const interval = setInterval(createDataObject, 30000);
-
-		//return () => clearInterval(interval);
+		//set interval of 30 seconds to load data
+		setInterval(() => {
+			createDataObject().then((data) => setTrainData(data));
+		}, 30000);
 	}, [selectedAction, dataTransferContext]);
 
 	//return created ui component
 	return (
 		<>
 			<ContentContainer contentContainerHeaderText="Zug Daten" topHeaderSectionChildren={<TrainDataTypeSelect setSelectedAction={setSelectedAction}/>}>
-				<ChartComponent data={trainData} yAxisText={selectedAction}/>
+				{
+					//check if to set chart component or no data information
+					(trainData && trainData.length !== 0) ? (
+						<ChartComponent data={trainData} yAxisText={selectedAction}/>
+					) : (
+						<div style={{height: "300px", display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+							<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+								<Image style={{height: '80px', width: '80px'}}
+									   imageValue="images/color/Icon_Line_Chart_Color.png"/>
+								<Text style={{fontSize: '20px', fontWeight: 'bold', marginTop: '.25%', textWrap: 'nowrap'}} textValue="Keine Daten verfügbar!"/>
+							</div>
+						</div>
+					)
+				}
 			</ContentContainer>
 		</>
 	);
 }
 
 //create train data type select component
-function TrainDataTypeSelect({ setSelectedAction }: { setSelectedAction: (value: string) => void }) {
+function TrainDataTypeSelect({setSelectedAction}: { setSelectedAction: (value: string) => void }) {
 	return (
-		<Select style={{ fontWeight: "bold", fontSize: "18px" }} selectAction={(event) => setSelectedAction(event.target.value)}>
+		<Select style={{fontWeight: "bold", fontSize: "18px"}}
+				selectAction={(event) => setSelectedAction(event.target.value)}>
 			<option value="Geschwindigkeit">Geschwindigkeit</option>
 			<optgroup label="Verbrauch">
 				<option value="Wasser">Wasser</option>

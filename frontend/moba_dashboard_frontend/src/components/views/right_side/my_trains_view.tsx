@@ -30,7 +30,7 @@ export default function MyTrainsContainer() {
 	const transferedData = useContext(DataTransferContext);
 
 	//define state hook to fetch train data
-	const [fetchedTrainData, setFetchedTrainData] = useState<any[]>([]);
+	const [fetchedTrainData, setFetchedTrainData] = useState<any | null>(null);
 	//define state for selected train name
 	const [selectedAiTrainName, setSelectedAiTrainName] = useState<string>('Crossrail');
 
@@ -53,25 +53,21 @@ export default function MyTrainsContainer() {
 	//use effect to fetch train speed
 	useEffect(() => {
 		async function fetchSpeed(): Promise<void> {
-			if (!transferedData.selectedTrain) return;
-
 			try {
 				const latestData = await getCurrentSpeed(transferedData.selectedTrain);
 
-				if (latestData && (latestData as any).value !== undefined) {
-					setFetchedTrainData(latestData); // latestData is a single object, not an array
-				}
+				//add latest data
+				setFetchedTrainData(latestData)
 			} catch (err) {
 				setConsoleMessage((err as any).message, true);
 			}
 		}
-
 		//initial fetch
 		fetchSpeed();
 
-		//const interval = setInterval(fetchSpeed, 30000); // repeat every 30 sec
-
-		//return () => clearInterval(interval); // cleanup
+		//set interval of 30 seconds to load data
+		const interval = setInterval(fetchSpeed, 30000);
+		return () => clearInterval(interval);
 	}, [transferedData.selectedTrain]);
 
 	//define async function to play AI sound for selecte train
@@ -84,11 +80,11 @@ export default function MyTrainsContainer() {
 	const trainInformationOptions = new Map<string, [string, string]>([
 		[
 			"currentSpeed",
-			[`Aktuelle Geschwindigkeit: ${(fetchedTrainData as any).value || "--"} km/h`, "Icon_Speedometer_IOS_White"],
+			[`Aktuelle Geschwindigkeit: ${fetchedTrainData?.data ?? "--"} km/h`, "Icon_Speedometer_IOS_White"],
 		],
-		["coalValue", [`Aktueller Kohle stand:  kg`, "Icon_Coal_IOS_White"]],
-		["waterValue", [`Aktueller Wasser Stand: l`, "Icon_Water_IOS_White"]],
-		["sandValue", [`Aktueller Sand stand: kg`, "Icon_Sand_IOS_White"]],
+		["coalValue", [`Aktueller Kohle stand: -- kg`, "Icon_Coal_IOS_White"]],
+		["waterValue", [`Aktueller Wasser Stand: -- l`, "Icon_Water_IOS_White"]],
+		["sandValue", [`Aktueller Sand stand: -- kg`, "Icon_Sand_IOS_White"]],
 	]);
 
 	//return created ui component
