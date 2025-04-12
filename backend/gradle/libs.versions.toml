@@ -13,6 +13,7 @@ spring-boot-websocket = { group = "org.springframework.boot", name = "spring-boo
 spring-security-test = { group = "org.springframework.security", name = "spring-security-test" }
 sqlite-jdbc = { group = "org.xerial", name = "sqlite-jdbc", version.ref = "sqlite-jdbc" }
 testcontainers-junit-jupiter = { group = "org.testcontainers", name = "junit-jupiter" }
+mockito-core = { group = "org.mockito", name = "mockito-core" }
 
 [versions]
 commons-codec = "1.18.0"

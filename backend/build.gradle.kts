@@ -36,6 +36,7 @@ dependencies {
     implementation(libs.sqlite.jdbc)
     implementation(libs.hibernate.core)
     implementation(libs.hibernate.community.dialects)
+    implementation(libs.mockito.core)
 
     implementation(libs.commons.codec)
     implementation(libs.flyway.core)

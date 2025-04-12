@@ -40,13 +40,6 @@ public class LocController
         return new ResponseEntity<>(ModelFactory.getJsonSerialString(locSpeed), HttpStatus.OK);
     }
 
-    @PutMapping("/loc/register")
-    public ResponseEntity<String> registerLoc(@RequestBody LocName loc)
-    {
-        locService.addLoc(loc);
-        return new ResponseEntity<>("Loc saved", HttpStatus.OK);
-    }
-
     @GetMapping("/loc")
     public ResponseEntity<List<LocName>> getLocs()
     {
