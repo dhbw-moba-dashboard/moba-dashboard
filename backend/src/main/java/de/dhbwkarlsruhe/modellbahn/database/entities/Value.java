@@ -13,30 +13,33 @@ import java.time.Instant;
 @Setter
 public class Value
 {
-	@Column(name = "type_id")
-	public int typeID;
-	@Id
-	@Column(name = "value_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int valueID;
-	@Column(name = "time_stamp")
-	private long timeStamp;
-	@Column(name = "data")
-	private int data;
-	@Column(name = "loc")
-	private int loc;
+    @ManyToOne
+    @JoinColumn(name = "type_id", referencedColumnName = "type_id")
+    public Type type;
+    @Id
+    @Column(name = "value_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int valueID;
+    @Column(name = "time_stamp")
+    private long timeStamp;
+    @Column(name = "data")
+    private int data;
+    @Column(name = "loc")
+    private int loc;
 
 
-	public static Value createValue(SimpleLocValue model)
-	{
-		Value value = new Value();
-		value.setData(model.getValue());
-		value.setLoc(model.getLoc());
-		value.setTypeID(model.getType().ordinal());
+    public static Value createValue(SimpleLocValue model)
+    {
+        Value value = new Value();
+        value.setData(model.getValue());
+        value.setLoc(model.getLoc());
+        Type currentType = new Type();
+        currentType.setTypeID(model.getType().ordinal());
+        value.setType(currentType);
 
-		value.setTimeStamp(Instant.now().getEpochSecond());
-		return value;
-	}
+        value.setTimeStamp(Instant.now().getEpochSecond());
+        return value;
+    }
 
 
 }
