@@ -25,10 +25,4 @@ public class LocService
         return locRepository.findById(locID).orElseThrow().toModel();
     }
 
-    public void addLoc(LocName locName)
-    {
-        Loc loc = Loc.fromModel(locName);
-
-        locRepository.save(loc);
-    }
 }
