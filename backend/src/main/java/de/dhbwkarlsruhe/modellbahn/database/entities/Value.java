@@ -33,9 +33,7 @@ public class Value
         Value value = new Value();
         value.setData(model.getValue());
         value.setLoc(model.getLoc());
-        Type currentType = new Type();
-        currentType.setTypeID(model.getType().ordinal());
-        value.setType(currentType);
+        value.setType(model.getType().getType());
 
         value.setTimeStamp(Instant.now().getEpochSecond());
         return value;
