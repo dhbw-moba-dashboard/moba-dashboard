@@ -19,8 +19,8 @@ RUN npm install
 
 COPY --chown=node:node moba_dashboard_frontend .
 
-RUN npm build
+RUN npm run build
 
 EXPOSE 3000
 
-ENTRYPOINT [ "npm", "serve" ]
+ENTRYPOINT [ "npm", "run", "serve" ]
