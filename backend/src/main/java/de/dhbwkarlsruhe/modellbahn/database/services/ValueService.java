@@ -35,7 +35,7 @@ public class ValueService
      * scheduled task that requests data from the MoBa every minute and updates the database
      * the data should include every loc associated from every loc.
      */
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "*/15 * * * * *")
     public void checkAndSaveValues()
     {
         List<Integer> locIDs = locService.getLocs().stream().map(LocName::locID).toList();
