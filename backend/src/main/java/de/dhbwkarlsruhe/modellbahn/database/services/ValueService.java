@@ -31,6 +31,10 @@ public class ValueService
         valueRepository.save(value);
     }
 
+    /**
+     * scheduled task that requests data from the MoBa every minute and updates the database
+     * the data should include every loc associated from every loc.
+     */
     @Scheduled(cron = "0 * * * * *")
     public void checkAndSaveValues()
     {
@@ -48,6 +52,12 @@ public class ValueService
 
     }
 
+    /**
+     * iterates over the schema enum of the loc-Values
+     *
+     * @param locID data from this specific loc
+     * @throws SocketTimeoutException indicates that the computer can't connect to the MoBa
+     */
     private void iterateOverScheme(int locID) throws SocketTimeoutException
     {
         for (LocValueScheme scheme : LocValueScheme.values())
@@ -55,7 +65,10 @@ public class ValueService
             try
             {
                 SimpleLocValue value = socket.handleSimpleCANRequest(locID, scheme);
-                addValue(value);
+                if (value.isValidAnswer())
+                {
+                    addValue(value);
+                }
             } catch (MobaSocket.InvalidPackageException e)
             {
                 logger.error("Invalid package", e);
@@ -72,11 +85,11 @@ public class ValueService
 
     public List<Value> getLocValuesByScheme(LocValueScheme scheme, long start, long end, int locID)
     {
-        return valueRepository.findValueInRange(start, end, scheme.ordinal(), locID);
+        return valueRepository.findValueInRange(start, end, scheme.getType(), locID);
     }
 
     public List<Value> getLocValuesByScheme(LocValueScheme scheme, int locID, int number)
     {
-        return valueRepository.findNumberOfValues(scheme.ordinal(), locID, number);
+        return valueRepository.findNumberOfValues(scheme.getType(), locID, number);
     }
 }

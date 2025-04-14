@@ -29,7 +29,7 @@ public class LocController
     public ResponseEntity<String> setLocSpeed(@RequestBody LocSpeed locSpeed)
     {
 
-        CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_SPEED, locSpeed, false);
+        CANMessage message = new CANMessage(Priority.COMMAND, CommandScheme.LOCOMOTIVE_SPEED, locSpeed, false);
         try
         {
             tcpSocket.send(message);
@@ -60,7 +60,7 @@ public class LocController
     public ResponseEntity<String> setLocDirection(@RequestBody LocDirection locDirection)
     {
 
-        CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_DIRECTION, locDirection, false);
+        CANMessage message = new CANMessage(Priority.COMMAND, CommandScheme.LOCOMOTIVE_DIRECTION, locDirection, false);
         try
         {
             tcpSocket.send(message);

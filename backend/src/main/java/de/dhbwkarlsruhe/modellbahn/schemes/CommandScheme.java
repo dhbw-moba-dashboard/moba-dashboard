@@ -5,10 +5,11 @@ import lombok.Getter;
 /**
  * These are the commands that can be sent to the CAN-Bus
  * They are 8 bits long
- * and the third field of the CAN-Frame
+ * their binary representation is located in the second byte of a CAN-Frame
  */
 @Getter
-public enum CommandScheme {
+public enum CommandScheme
+{
     SYSTEM_COMMAND("SystemCommand", 0x00),
     LOCOMOTIVE_DISCOVERY("LocomotiveDiscovery", 0x02),
     MFX_BIND("MFXBind", 0x04),
@@ -39,26 +40,42 @@ public enum CommandScheme {
 
     /**
      * used to map command to hex-Value
-     * @param command Command name
+     *
+     * @param command      Command name
      * @param commandValue "Wert in CAN-ID in Dokumentation S.11"
      */
-    CommandScheme(String command, int commandValue) {
+    CommandScheme(String command, int commandValue)
+    {
         this.command = command;
         this.commandValue = commandValue;
 
     }
 
-    public static CommandScheme fromCommand(String command) {
-        for(CommandScheme scheme : CommandScheme.values()) {
-            if (scheme.getCommand().equals(command)) return scheme;
+    public static CommandScheme fromCommand(String command)
+    {
+        for (CommandScheme scheme : CommandScheme.values())
+        {
+            if (scheme.getCommand().equals(command))
+            {
+                return scheme;
+            }
         }
         return UNKNOWN_COMMAND;
     }
 
-    public static CommandScheme fromCommandValue(int commandValue) {
-        commandValue &= 0xFE; // last bit is response bit should be set to 0 to get the command value
-        for(CommandScheme scheme : CommandScheme.values()) {
-            if (scheme.getCommandValue() == commandValue) return scheme;
+    /**
+     * @param commandValue byte representation of a command
+     * @return enum representation
+     */
+    public static CommandScheme fromCommandValue(int commandValue)
+    {
+        commandValue &= 0xFE;
+        for (CommandScheme scheme : CommandScheme.values())
+        {
+            if (scheme.getCommandValue() == commandValue)
+            {
+                return scheme;
+            }
         }
         return UNKNOWN_COMMAND;
     }

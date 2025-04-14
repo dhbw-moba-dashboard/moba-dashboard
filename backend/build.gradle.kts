@@ -1,4 +1,3 @@
-
 plugins {
     java
     id("org.springframework.boot") version "3.3.4"
@@ -10,7 +9,7 @@ plugins {
 
 group = "de.dhbw-karlsruhe.modellbahn"
 version = "0.0.1"
-application{
+application {
     mainClass = "de.dhbwkarlsruhe.modellbahn.ModellbahnApplication"
 }
 
@@ -50,6 +49,7 @@ dependencies {
     testImplementation(libs.spring.boot.testcontainers)
     testImplementation(libs.spring.security.test)
     testImplementation(libs.testcontainers.junit.jupiter)
+    testImplementation(libs.h2)
 
     testRuntimeOnly(libs.junit.platform.launcher)
 }
@@ -59,11 +59,11 @@ tasks.withType<Test> {
     finalizedBy(tasks.jacocoTestReport)
 }
 sonar {
-  properties {
-    property("sonar.projectKey", "dhbw-moba-dashboard_moba-dashboard")
-    property("sonar.organization", "dhbw-moba-dashboard")
-    property("sonar.host.url", "https://sonarcloud.io")
-  }
+    properties {
+        property("sonar.projectKey", "dhbw-moba-dashboard_moba-dashboard")
+        property("sonar.organization", "dhbw-moba-dashboard")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
 }
 
 tasks.jacocoTestReport {

@@ -1,11 +1,17 @@
 package de.dhbwkarlsruhe.modellbahn.models;
 
 /**
- * This refers to the last 8 Bytes of a CANMessage, which contain the Databytes
+ * object representation of the data in a CAN-Frame
  */
 public interface Model
 {
+    /**
+     * @return serialization of the Model
+     */
     byte[] toByteArray();
 
+    /**
+     * @return the dlc based on the values of the object
+     */
     int getDLC();
 }

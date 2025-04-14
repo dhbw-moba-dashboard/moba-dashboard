@@ -7,7 +7,8 @@ import java.util.List;
 
 //this prevents the class from being instantiated
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class BitUtilities {
+public class BitUtilities
+{
     /**
      * This method returns a byte array containing the bits from startByte:startBit to lastByte:lastBit
      *
@@ -18,17 +19,24 @@ public class BitUtilities {
      * @param lastBit   the bit in the last byte where the sequence ends
      * @return a byte array containing the bits from startByte:startBit to lastByte:lastBit
      */
-    public static byte[] getBitSequence(byte[] data, int startByte, int startBit, int lastByte, int lastBit) {
+    public static byte[] getBitSequence(byte[] data, int startByte, int startBit, int lastByte, int lastBit)
+    {
         byte[] result = new byte[lastByte - startByte + 1];
-        for (int i = startByte; i <= lastByte; i++) {
-            if (i == startByte) {
-				//&0xFF is done to fix sonar issue.
-				//right shift to get rid of the bits less signicikant than the starting bit
-				result[i - startByte] = (byte) ((data[i] & 0xFF) >> startBit);
-            } else if (i == lastByte) {
-				//left shift to get rid of the less significant bits
-				result[i - startByte] = (byte) ((data[i] & 0xFF) & (0xFF << (7 - lastBit)));
-            } else {
+        for (int i = startByte; i <= lastByte; i++)
+        {
+            if (i == startByte)
+            {
+                //&0xFF is done to fix sonar issue.
+                //right shift to get rid of the bits less signicikant than the starting bit
+                result[i - startByte] = (byte) ((data[i] & 0xFF) >> startBit);
+            }
+            else if (i == lastByte)
+            {
+                //left shift to get rid of the less significant bits
+                result[i - startByte] = (byte) ((data[i] & 0xFF) & (0xFF << (7 - lastBit)));
+            }
+            else
+            {
                 result[i - startByte] = data[i];
             }
         }
@@ -41,9 +49,11 @@ public class BitUtilities {
      * @param data the byte array to convert
      * @return the integer representation of the byte array
      */
-    public static int byteArrayToInt(byte[] data) {
+    public static int byteArrayToInt(byte[] data)
+    {
         int result = 0;
-        for (byte datum : data) {
+        for (byte datum : data)
+        {
             result = result << 8;
             result = result | (datum & 0xFF);
         }
@@ -60,7 +70,8 @@ public class BitUtilities {
      * @param lastBit   the bit in the last byte where the sequence ends
      * @return an integer representation of the bits from startByte:startBit to lastByte:lastBit
      */
-    public static int transformBitSequenceToInt(byte[] data, int startByte, int startBit, int lastByte, int lastBit) {
+    public static int transformBitSequenceToInt(byte[] data, int startByte, int startBit, int lastByte, int lastBit)
+    {
         byte[] result = getBitSequence(data, startByte, startBit, lastByte, lastBit);
         return byteArrayToInt(result);
     }
@@ -71,11 +82,15 @@ public class BitUtilities {
      * @param value the integer to convert
      * @return the byte array representation of the integer
      */
-    public static byte[] intToByteArray(int value, int supposedLength) throws IllegalArgumentException {
+    public static byte[] intToByteArray(int value, int supposedLength) throws IllegalArgumentException
+    {
         if (getByteArrayLength(value) > supposedLength)
+        {
             throw new IllegalArgumentException("Value too large for bit sequence");
+        }
         byte[] result = new byte[supposedLength];
-        for (int i = 0; i < result.length; i++) {
+        for (int i = 0; i < result.length; i++)
+        {
             //retrieves the least significant byte
             // and writes it to the result array starting from the end
             result[(result.length - 1) - i] = (byte) (value & 0xFF);
@@ -90,9 +105,11 @@ public class BitUtilities {
      * @param value the integer to check
      * @return the number of bytes needed to represent the integer
      */
-    private static int getByteArrayLength(int value) {
+    private static int getByteArrayLength(int value)
+    {
         int length = 0;
-        while (value > 0) {
+        while (value > 0)
+        {
             value = value >> 8;
             length++;
         }
@@ -105,22 +122,42 @@ public class BitUtilities {
      * @param list of byte arrays
      * @return array that contains the other arrays
      */
-    public static byte[] mergeByteArrays(List<byte[]> list) {
-		int dlc = calculateDLC(list);
-		byte[] result = new byte[dlc];
+    public static byte[] mergeByteArrays(List<byte[]> list)
+    {
+        int dlc = calculateDLC(list);
+        byte[] result = new byte[dlc];
         int destinationPosition = 0;
-        for (byte[] element : list) {
+        for (byte[] element : list)
+        {
             System.arraycopy(element, 0, result, destinationPosition, element.length);
             destinationPosition += element.length;
         }
         return result;
     }
 
-    private static int calculateDLC(List<byte[]> list) {
-		int sum = 0;
-		for (byte[] element : list) {
-			sum += element.length;
-		}
-		return sum;
-	}
+    private static int calculateDLC(List<byte[]> list)
+    {
+        int sum = 0;
+        for (byte[] element : list)
+        {
+            sum += element.length;
+        }
+        return sum;
+    }
+
+    public static String byteArrayToHexString(byte[] byteArray)
+    {
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : byteArray)
+        {
+            String hex = Integer.toHexString(b & 0xFF);
+            if (hex.length() < 2)
+            {
+                hex = "0" + hex;
+            }
+            hex = "0x" + hex + " ";
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
 }

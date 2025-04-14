@@ -7,6 +7,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "type")
 @Getter
@@ -18,4 +20,21 @@ public class Type
     private int typeID;
     @Column(name = "type_name")
     private String typeName;
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+        Type type = (Type) o;
+        return typeID == type.typeID && Objects.equals(typeName, type.typeName);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(typeID, typeName);
+    }
 }

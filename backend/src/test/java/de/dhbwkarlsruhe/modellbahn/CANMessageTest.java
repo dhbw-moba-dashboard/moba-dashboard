@@ -22,7 +22,7 @@ class CANMessageTest
                 0x40, 0x0d, //loc id : 16397
                 0x01, (byte) 0xf4, //speed 500 max 1024 min 0
                 0x00, 0x00};
-        CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_SPEED, locSpeed, false);
+        CANMessage message = new CANMessage(Priority.COMMAND, CommandScheme.LOCOMOTIVE_SPEED, locSpeed, false);
 
         byte[] convertedBytes = message.toByteArray();
         Assertions.assertArrayEquals(resultingByteArray, convertedBytes);
@@ -39,7 +39,7 @@ class CANMessageTest
                 0x40, 0x0d, //loc id : 16397
                 0x01, (byte) 0xf4, //speed 500 max 1024 min 0
                 0x00, 0x00};
-        CANMessage resultingMessage = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_SPEED, locSpeed, true);
+        CANMessage resultingMessage = new CANMessage(Priority.COMMAND, CommandScheme.LOCOMOTIVE_SPEED, locSpeed, true);
         CANMessage convertedMessage = new CANMessage(resultingByteArray);
         Assertions.assertEquals(resultingMessage, convertedMessage);
     }
@@ -49,7 +49,7 @@ class CANMessageTest
     {
         byte[] directionMessage = new byte[]{0x00, 0x0a, 0x57, 0x38, 0x04, 0x00, 0x00, 0x40, 0x0d, 0x00, 0x00, 0x00, 0x00};
         LocDirection direction = new LocDirection(16397, Direction.REQUEST);
-        CANMessage message = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_DIRECTION, direction, false);
+        CANMessage message = new CANMessage(Priority.COMMAND, CommandScheme.LOCOMOTIVE_DIRECTION, direction, false);
         CANMessage convertedMessage = new CANMessage(directionMessage);
         Assertions.assertEquals(message, convertedMessage);
     }

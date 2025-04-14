@@ -34,8 +34,8 @@ class MobaSocketTest
     @BeforeEach
     void setupSocketStream() throws IOException
     {
-        CANMessage toBeIgnored = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_SPEED, new LocSpeed(16289, -1), false);
-        CANMessage answer = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_SPEED, new LocSpeed(16289, 200), true);
+        CANMessage toBeIgnored = new CANMessage(Priority.COMMAND, CommandScheme.LOCOMOTIVE_SPEED, new LocSpeed(16289, -1), false);
+        CANMessage answer = new CANMessage(Priority.COMMAND, CommandScheme.LOCOMOTIVE_SPEED, new LocSpeed(16289, 200), true);
         byte[] firstMessage = toBeIgnored.toByteArray();
         byte[] secondMesage = answer.toByteArray();
         byte[] expectedMessage = BitUtilities.mergeByteArrays(List.of(firstMessage, secondMesage));
@@ -48,7 +48,7 @@ class MobaSocketTest
     {
 
 
-        CANMessage answer = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_SPEED, new LocSpeed(16289, 200), true);
+        CANMessage answer = new CANMessage(Priority.COMMAND, CommandScheme.LOCOMOTIVE_SPEED, new LocSpeed(16289, 200), true);
         CANMessage response = mobaSocket.receive(CommandScheme.LOCOMOTIVE_SPEED);
         Assertions.assertEquals(response, answer);
     }
@@ -73,7 +73,7 @@ class MobaSocketTest
     void handleSimpleCANRequest() throws IOException
     {
         SimpleLocValue expectedAnswer = new LocSpeed(16289, 200);
-        CANMessage request = new CANMessage(Priority.BEFEHLE, CommandScheme.LOCOMOTIVE_SPEED, new LocSpeed(16289, -1), false);
+        CANMessage request = new CANMessage(Priority.COMMAND, CommandScheme.LOCOMOTIVE_SPEED, new LocSpeed(16289, -1), false);
         MockOutputstream mockOutputstream = new MockOutputstream(request);
         Mockito.when(socket.getOutputStream()).thenReturn(mockOutputstream);
         SimpleLocValue value = mobaSocket.handleSimpleCANRequest(16289, LocValueScheme.SPEED);
