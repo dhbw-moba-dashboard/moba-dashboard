@@ -80,7 +80,8 @@ export default function TrainDataContainer() {
 					(trainData && trainData.length !== 0) ? (
                             <div>
                                 <ChartComponent data={trainData} yAxisText={selectedAction}/>
-                                <FlexBox style={{justifyContent: 'space-between', alignItems: 'center', marginTop: '2%'}}>
+								<hr style={{border: '1px solid white'}}/>
+                                <FlexBox style={{justifyContent: 'space-between', alignItems: 'center', marginTop: '2%', marginBottom: '2%'}}>
                                     {
                                         //check if data loaded and add to ui
                                         dataAmountOptions.map((currentTrain: any, index: number) => (
