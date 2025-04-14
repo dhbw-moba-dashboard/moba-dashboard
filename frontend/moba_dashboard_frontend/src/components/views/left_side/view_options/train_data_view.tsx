@@ -17,6 +17,7 @@ import {format} from 'date-fns';
 
 //import context
 import {DataTransferContext} from "../../../../App";
+import FlexBox from "../../../container/FlexBox";
 
 //create and export default train data container
 export default function TrainDataContainer() {
@@ -32,11 +33,11 @@ export default function TrainDataContainer() {
 	useEffect(() => {
 		async function createDataObject(): Promise<any[]> {
 			try {
-				const fetchedData = await fetchTrainInformation((dataTransferContext as any).selectedTrain);
+				const fetchedData = (await fetchTrainInformation((dataTransferContext as any).selectedTrain)).reverse();
 
 				//set data to receuved format
 				const formattedData = fetchedData.map((item: any) => ({
-					name: format(new Date(item.timeStamp), 'HH:mm'),
+					name: format(new Date(item.timeStamp * 1000), 'HH:mm:ss'),
 					value: item.data
 				}));
 
@@ -49,10 +50,10 @@ export default function TrainDataContainer() {
 		//make inital call
 		createDataObject().then((data) => setTrainData(data));
 
-		//set interval of 30 seconds to load data
+		//set interval of 60 seconds to load data
 		setInterval(() => {
 			createDataObject().then((data) => setTrainData(data));
-		}, 30000);
+		}, 60000);
 	}, [selectedAction, dataTransferContext]);
 
 	//return created ui component
