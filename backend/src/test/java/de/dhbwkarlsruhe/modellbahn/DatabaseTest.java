@@ -74,7 +74,7 @@ class DatabaseTest
         entryThree.setTimeStamp(1744551385);
         entryThree.setValueID(6);
 
-        List<Value> expected = List.of(entryOne, entryTwo, entryThree);
+        List<Value> expected = List.of(entryThree, entryTwo, entryOne);
         List<Value> actual = service.getLocValuesByScheme(LocValueScheme.SPEED, 16390, 3);
         Assertions.assertEquals(expected, actual);
     }
