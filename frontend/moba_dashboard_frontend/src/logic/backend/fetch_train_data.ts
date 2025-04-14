@@ -39,7 +39,7 @@ export async function getCurrentSpeed(trainId: string | number): Promise<any | n
 		if (!allTrainData || allTrainData.length === 0) return null;
 
 		//return current speed
-		return allTrainData;
+		return allTrainData[0];
 	} catch (getTrainSpeedError: any) {
 		setConsoleMessage(getTrainSpeedError.message, true);
 		return null;
