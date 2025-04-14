@@ -22,4 +22,6 @@ public interface SimpleLocValue extends Model
      * @return the type of Value
      */
     LocValueScheme getType();
+
+    boolean isValidAnswer();
 }

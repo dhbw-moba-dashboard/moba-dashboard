@@ -8,12 +8,13 @@ junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform
 lombok = { group = "org.projectlombok", name = "lombok" }
 spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
 spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
-spring-boot-testcontainers = { group = "org.springframework.boot", name  = "spring-boot-testcontainers" }
+spring-boot-testcontainers = { group = "org.springframework.boot", name = "spring-boot-testcontainers" }
 spring-boot-websocket = { group = "org.springframework.boot", name = "spring-boot-starter-websocket" }
 spring-security-test = { group = "org.springframework.security", name = "spring-security-test" }
 sqlite-jdbc = { group = "org.xerial", name = "sqlite-jdbc", version.ref = "sqlite-jdbc" }
 testcontainers-junit-jupiter = { group = "org.testcontainers", name = "junit-jupiter" }
 mockito-core = { group = "org.mockito", name = "mockito-core" }
+h2 = { group = "com.h2database", name = "h2" }
 
 [versions]
 commons-codec = "1.18.0"

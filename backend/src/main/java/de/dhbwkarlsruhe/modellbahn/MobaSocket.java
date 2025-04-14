@@ -5,6 +5,8 @@ import de.dhbwkarlsruhe.modellbahn.models.SimpleLocFactory;
 import de.dhbwkarlsruhe.modellbahn.models.SimpleLocValue;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +20,7 @@ public class MobaSocket
 {
     private static final int PORT = 15731;
     private static final int PACKAGE_LENGTH = 13;
+    private static final Logger logger = LoggerFactory.getLogger(MobaSocket.class);
 
     private final String ipAddressMoba;
 
@@ -46,7 +49,10 @@ public class MobaSocket
     {
         try (Socket socket = createSocket())
         {
-            socket.getOutputStream().write(message.toByteArray());
+            byte[] messageBytes = message.toByteArray();
+            String messageAsString = BitUtilities.byteArrayToHexString(messageBytes);
+            logger.debug("Sending message : {}", messageAsString);
+            socket.getOutputStream().write(messageBytes);
         }
     }
 
@@ -54,11 +60,14 @@ public class MobaSocket
     {
         try (Socket socket = createSocket())
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 4; i++)
             {
                 byte[] buffer = new byte[PACKAGE_LENGTH];
 
                 int length = socket.getInputStream().read(buffer);
+                String messageAsString = BitUtilities.byteArrayToHexString(buffer);
+
+                logger.debug("Received message : {}", messageAsString);
                 if (length != PACKAGE_LENGTH)
                 {
                     throw new InvalidPackageException("Invalid package length: " + length);

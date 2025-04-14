@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
 @Table(name = "loc_values")
@@ -39,5 +40,20 @@ public class Value
         return value;
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+        Value value = (Value) o;
+        return valueID == value.valueID && timeStamp == value.timeStamp && data == value.data && loc == value.loc && Objects.equals(type, value.type);
+    }
 
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(type, valueID, timeStamp, data, loc);
+    }
 }

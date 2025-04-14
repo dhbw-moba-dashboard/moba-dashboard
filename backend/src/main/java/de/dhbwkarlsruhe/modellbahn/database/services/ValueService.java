@@ -65,7 +65,10 @@ public class ValueService
             try
             {
                 SimpleLocValue value = socket.handleSimpleCANRequest(locID, scheme);
-                addValue(value);
+                if (value.isValidAnswer())
+                {
+                    addValue(value);
+                }
             } catch (MobaSocket.InvalidPackageException e)
             {
                 logger.error("Invalid package", e);

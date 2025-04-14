@@ -67,4 +67,10 @@ public record LocSpeed(int locID, int speed) implements SimpleLocValue
     {
         return type;
     }
+
+    @Override
+    public boolean isValidAnswer()
+    {
+        return speed >= 0;
+    }
 }

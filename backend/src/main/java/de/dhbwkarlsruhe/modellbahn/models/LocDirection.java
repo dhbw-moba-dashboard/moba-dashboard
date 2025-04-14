@@ -71,6 +71,12 @@ public record LocDirection(int locID, Direction direction) implements SimpleLocV
         return type;
     }
 
+    @Override
+    public boolean isValidAnswer()
+    {
+        return direction == Direction.FORWARD || direction == Direction.BACKWARD;
+    }
+
 }
 
 
