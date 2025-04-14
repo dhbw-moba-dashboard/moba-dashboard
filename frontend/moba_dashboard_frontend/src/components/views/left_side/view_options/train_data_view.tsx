@@ -69,7 +69,7 @@ export default function TrainDataContainer() {
 		setInterval(() => {
 			createDataObject().then((data) => setTrainData(data));
 		}, 60000);
-	}, [selectedAction, dataTransferContext]);
+	}, [selectedAction, dataTransferContext, dataValuesAmount]);
 
 	//return created ui component
 	return (
