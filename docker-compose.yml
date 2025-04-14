@@ -6,6 +6,18 @@ services:
       - "8080:8080"
     networks:
       - tts
+      - backend
+
+  frontend:
+    build: frontend
+    container_name: "moba-frontend"
+    ports:
+      - "80:3000"
+      #- "443:443"
+    environment:
+      - REACT_APP_BACKEND_URL=http://moba-backend:8080
+    networks:
+      - backend
 
   tts:
     build: tts
@@ -25,4 +37,7 @@ services:
 networks:
   tts:
     name: tts_network
+    driver: bridge
+  backend:
+    name: backend_network
     driver: bridge
