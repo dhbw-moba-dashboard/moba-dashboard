@@ -1,4 +1,4 @@
-FROM gradle:8.10-jdk21 AS BUILD
+FROM gradle:8.10-jdk21 AS build
 
 ENV APP_HOME=/app/build/
 WORKDIR $APP_HOME
@@ -12,7 +12,7 @@ ENV ARTIFACT_NAME=backend-0.0.1.jar
 ENV APP_HOME=/app/
 
 WORKDIR $APP_HOME
-COPY --from=BUILD $APP_HOME/build/build/libs/$ARTIFACT_NAME .
+COPY --from=build $APP_HOME/build/build/libs/$ARTIFACT_NAME .
 
 EXPOSE 8080
 ENTRYPOINT java -jar $ARTIFACT_NAME
