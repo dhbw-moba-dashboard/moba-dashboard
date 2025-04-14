@@ -2,11 +2,11 @@
 import {setConsoleMessage} from "../tools/messages";
 
 //define and export function to fetch train information
-export async function fetchTrainInformation(trainId: string | number): Promise<any[]> {
+export async function fetchTrainInformation(trainId: number | string, dataValuesAmount: number | string = 10): Promise<any[]> {
 	//try catch for error handling
 	try {
 		//define backend url
-		const TRAIN_INFORMATION_URL: string = `${process.env.REACT_APP_BACKEND_URL}/request/speed/${trainId}?entries=15`;
+		const TRAIN_INFORMATION_URL: string = `${process.env.REACT_APP_BACKEND_URL}/request/speed/${trainId}?entries=${dataValuesAmount}`;
 
 		//make backend call to load data
 		const backendResponse: Response = await fetch(TRAIN_INFORMATION_URL, {
@@ -33,17 +33,13 @@ export async function getCurrentSpeed(trainId: string | number): Promise<any | n
 	//try catch for error handling
 	try {
 		//load total train data
-		const allTrainData: any[] = await fetchTrainInformation(trainId);
+		const allTrainData: any[] = await fetchTrainInformation(trainId, 1);
 
 		//check if no train data
 		if (!allTrainData || allTrainData.length === 0) return null;
 
-		//sort and get latest entry
-		const latestEntry = allTrainData.sort((a, b) =>
-			new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-		)[0];
-
-		return latestEntry;
+		//return current speed
+		return allTrainData;
 	} catch (getTrainSpeedError: any) {
 		setConsoleMessage(getTrainSpeedError.message, true);
 		return null;

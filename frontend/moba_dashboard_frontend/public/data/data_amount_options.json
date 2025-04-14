@@ -1,0 +1,22 @@
+[
+  {
+    "buttonText": "5 Values",
+    "buttonValue": 5
+  },
+  {
+    "buttonText": "10 Values",
+    "buttonValue": 10
+  },
+  {
+    "buttonText": "15 Values",
+    "buttonValue": 15
+  },
+  {
+    "buttonText": "20 Values",
+    "buttonValue": 20
+  },
+  {
+    "buttonText": "25 Values",
+    "buttonValue": 25
+  }
+]
