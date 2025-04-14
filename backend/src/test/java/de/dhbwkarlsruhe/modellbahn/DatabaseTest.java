@@ -64,12 +64,16 @@ class DatabaseTest
     {
         Value entryOne = Value.createValue(new LocSpeed(16390, 140));
         entryOne.setTimeStamp(1744551352);
+        entryOne.setValueID(1);
 
         Value entryTwo = Value.createValue(new LocSpeed(16390, 130));
-        entryTwo.setTimeStamp(1744551354);
+        entryTwo.setTimeStamp(1744551362);
+        entryTwo.setValueID(3);
 
         Value entryThree = Value.createValue(new LocSpeed(16390, 160));
-        entryThree.setTimeStamp(1744551357);
+        entryThree.setTimeStamp(1744551385);
+        entryThree.setValueID(6);
+
         List<Value> expected = List.of(entryOne, entryTwo, entryThree);
         List<Value> actual = service.getLocValuesByScheme(LocValueScheme.SPEED, 16390, 3);
         Assertions.assertEquals(expected, actual);

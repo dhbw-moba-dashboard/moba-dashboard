@@ -29,6 +29,6 @@ public interface ValueRepository extends JpaRepository<Value, Integer>
      * @param locID  specific locomotive
      * @return the last n values
      */
-    @Query("SELECT v  from Value v where v.type = ?1 and v.loc = ?2 order by v.timeStamp desc limit ?3")
+    @Query("SELECT v  from Value v where v.type = ?1 and v.loc = ?2 order by v.timeStamp asc limit ?3")
     List<Value> findNumberOfValues(Type typeID, int locID, int number);
 }
