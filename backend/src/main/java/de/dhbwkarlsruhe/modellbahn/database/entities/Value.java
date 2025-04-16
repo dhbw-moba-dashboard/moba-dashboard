@@ -12,8 +12,7 @@ import java.util.Objects;
 @Table(name = "loc_values")
 @Getter
 @Setter
-public class Value
-{
+public class Value {
     @ManyToOne
     @JoinColumn(name = "type_id", referencedColumnName = "type_id")
     public Type type;
@@ -29,22 +28,19 @@ public class Value
     private int loc;
 
 
-    public static Value createValue(SimpleLocValue model)
-    {
+    public static Value createValue(SimpleLocValue model) {
         Value value = new Value();
         value.setData(model.getValue());
         value.setLoc(model.getLoc());
-        value.setType(model.getType().getType());
+        value.setType(model.getLocScheme().getType());
 
         value.setTimeStamp(Instant.now().getEpochSecond());
         return value;
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (o == null || getClass() != o.getClass())
-        {
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         Value value = (Value) o;
@@ -52,8 +48,7 @@ public class Value
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return Objects.hash(type, valueID, timeStamp, data, loc);
     }
 }

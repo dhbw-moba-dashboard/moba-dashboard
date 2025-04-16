@@ -6,22 +6,18 @@ import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 
 import java.util.List;
 
-public record LocDirection(int locID, Direction direction) implements SimpleLocValue
-{
+public record LocDirection(int locID, Direction direction) implements SimpleLocValue {
     private static final LocValueScheme type = LocValueScheme.DIRECTION;
 
-    public static LocDirection createLocDirection(byte[] data)
-    {
+    public static LocDirection createLocDirection(byte[] data) {
         int id = BitUtilities.transformBitSequenceToInt(data, 0, 0, 3, 7);
         int dir = -1;
-        if (data.length == 5)
-        {
+        if (data.length == 5) {
             dir = BitUtilities.transformBitSequenceToInt(data, 4, 0, 4, 7);
 
         }
         Direction direction;
-        switch (dir)
-        {
+        switch (dir) {
             case 0 -> direction = Direction.SAME;
             case 1 -> direction = Direction.FORWARD;
             case 2 -> direction = Direction.BACKWARD;
@@ -32,8 +28,7 @@ public record LocDirection(int locID, Direction direction) implements SimpleLocV
     }
 
     @Override
-    public byte[] toByteArray()
-    {
+    public byte[] toByteArray() {
         int directionByte = (direction == Direction.REQUEST) ? 0 : this.direction.ordinal();
         List<byte[]> data = List.of(
                 BitUtilities.intToByteArray(locID, 4),
@@ -44,36 +39,30 @@ public record LocDirection(int locID, Direction direction) implements SimpleLocV
     }
 
     @Override
-    public int getDLC()
-    {
-        if (direction == Direction.REQUEST)
-        {
+    public int getDLC() {
+        if (direction == Direction.REQUEST) {
             return 4;
         }
         return 5;
     }
 
     @Override
-    public int getLoc()
-    {
+    public int getLoc() {
         return locID;
     }
 
     @Override
-    public int getValue()
-    {
+    public int getValue() {
         return direction.ordinal();
     }
 
     @Override
-    public LocValueScheme getType()
-    {
+    public LocValueScheme getLocScheme() {
         return type;
     }
 
     @Override
-    public boolean isValidAnswer()
-    {
+    public boolean isValidAnswer() {
         return direction == Direction.FORWARD || direction == Direction.BACKWARD;
     }
 

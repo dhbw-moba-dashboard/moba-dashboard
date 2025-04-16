@@ -6,8 +6,7 @@ import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
  * These are the Models which represent Values associated with a loc
  * This type is easier to persist in a database
  */
-public interface SimpleLocValue extends Model
-{
+public interface SimpleLocValue extends Model {
     /**
      * @return locid
      */
@@ -21,7 +20,7 @@ public interface SimpleLocValue extends Model
     /**
      * @return the type of Value
      */
-    LocValueScheme getType();
+    LocValueScheme getLocScheme();
 
     boolean isValidAnswer();
 }

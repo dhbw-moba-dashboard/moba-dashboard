@@ -6,16 +6,13 @@ import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 import java.util.ArrayList;
 import java.util.List;
 
-public record LocSpeed(int locID, int speed) implements SimpleLocValue
-{
+public record LocSpeed(int locID, int speed) implements SimpleLocValue {
     private static final LocValueScheme type = LocValueScheme.SPEED;
 
-    public static LocSpeed createLocSpeed(byte[] data)
-    {
+    public static LocSpeed createLocSpeed(byte[] data) {
         int id = BitUtilities.transformBitSequenceToInt(data, 0, 0, 3, 7);
         int speed = -1;
-        if (data.length == 6)
-        {
+        if (data.length == 6) {
             speed = BitUtilities.transformBitSequenceToInt(data, 4, 0, 5, 7);
 
         }
@@ -25,8 +22,7 @@ public record LocSpeed(int locID, int speed) implements SimpleLocValue
     }
 
     @Override
-    public byte[] toByteArray()
-    {
+    public byte[] toByteArray() {
 
         List<byte[]> src = new ArrayList<>();
         src.add(BitUtilities.intToByteArray(locID, 4));
@@ -38,39 +34,31 @@ public record LocSpeed(int locID, int speed) implements SimpleLocValue
     }
 
     @Override
-    public int getDLC()
-    {
-        if (speed < 0)
-        {
+    public int getDLC() {
+        if (speed < 0) {
             return 4;
-        }
-        else
-        {
+        } else {
             return 6;
         }
     }
 
     @Override
-    public int getLoc()
-    {
+    public int getLoc() {
         return locID;
     }
 
     @Override
-    public int getValue()
-    {
+    public int getValue() {
         return speed;
     }
 
     @Override
-    public LocValueScheme getType()
-    {
+    public LocValueScheme getLocScheme() {
         return type;
     }
 
     @Override
-    public boolean isValidAnswer()
-    {
+    public boolean isValidAnswer() {
         return speed >= 0;
     }
 }
