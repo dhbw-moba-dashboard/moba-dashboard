@@ -1,22 +1,22 @@
 [
   {
-    "buttonText": "10 Values",
+    "buttonText": "10 Werte",
     "buttonValue": 10
   },
   {
-    "buttonText": "20 Values",
+    "buttonText": "20 Werte",
     "buttonValue": 20
   },
   {
-    "buttonText": "30 Values",
+    "buttonText": "30 Werte",
     "buttonValue": 30
   },
   {
-    "buttonText": "40 Values",
+    "buttonText": "40 Werte",
     "buttonValue": 40
   },
   {
-    "buttonText": "50 Values",
+    "buttonText": "50 Werte",
     "buttonValue": 50
   }
 ]
