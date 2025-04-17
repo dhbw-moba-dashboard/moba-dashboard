@@ -14,20 +14,20 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.time.Instant;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ValueService
-{
+public class ValueService {
     private static final Logger logger = LoggerFactory.getLogger(ValueService.class);
     private final ValueRepository valueRepository;
     private final LocService locService;
     private final MobaSocket socket;
 
-    public void addValue(SimpleLocValue model)
-    {
-        Value value = Value.createValue(model);
+    public void addValue(SimpleLocValue model) {
+
+        Value value = new Value(model, Instant.now().getEpochSecond());
         valueRepository.save(value);
     }
 
@@ -36,17 +36,13 @@ public class ValueService
      * the data should include every loc associated from every loc.
      */
     @Scheduled(cron = "*/15 * * * * *")
-    public void checkAndSaveValues()
-    {
+    public void checkAndSaveValues() {
         List<Integer> locIDs = locService.getLocs().stream().map(LocName::locID).toList();
-        try
-        {
-            for (int locID : locIDs)
-            {
+        try {
+            for (int locID : locIDs) {
                 iterateOverScheme(locID);
             }
-        } catch (SocketTimeoutException connectException)
-        {
+        } catch (SocketTimeoutException connectException) {
             logger.error("Could not connect to MOBA");
         }
 
@@ -58,38 +54,29 @@ public class ValueService
      * @param locID data from this specific loc
      * @throws SocketTimeoutException indicates that the computer can't connect to the MoBa
      */
-    private void iterateOverScheme(int locID) throws SocketTimeoutException
-    {
-        for (LocValueScheme scheme : LocValueScheme.values())
-        {
-            try
-            {
+    private void iterateOverScheme(int locID) throws SocketTimeoutException {
+        for (LocValueScheme scheme : LocValueScheme.values()) {
+            try {
                 SimpleLocValue value = socket.handleSimpleCANRequest(locID, scheme);
-                if (value.isValidAnswer())
-                {
+                if (value.isValidAnswer()) {
                     addValue(value);
                 }
-            } catch (MobaSocket.InvalidPackageException e)
-            {
+            } catch (MobaSocket.InvalidPackageException e) {
                 logger.error("Invalid package", e);
-            } catch (SocketTimeoutException e)
-            {
+            } catch (SocketTimeoutException e) {
                 throw e;
-            } catch (IOException e)
-            {
+            } catch (IOException e) {
                 logger.error(e.getMessage());
             }
         }
     }
 
 
-    public List<Value> getLocValuesByScheme(LocValueScheme scheme, long start, long end, int locID)
-    {
-        return valueRepository.findValueInRange(start, end, scheme.getType(), locID);
+    public List<Value> getLocValuesByScheme(LocValueScheme scheme, long start, long end, int locID) {
+        return valueRepository.findValueInRange(start, end, scheme.ordinal(), locID);
     }
 
-    public List<Value> getLocValuesByScheme(LocValueScheme scheme, int locID, int number)
-    {
-        return valueRepository.findNumberOfValues(scheme.getType(), locID, number);
+    public List<Value> getLocValuesByScheme(LocValueScheme scheme, int locID, int number) {
+        return valueRepository.findNumberOfValues(scheme.ordinal(), locID, number);
     }
 }

@@ -21,9 +21,6 @@ public class Loc {
     @Column(name = "name")
     private String name;
 
-    public static Loc fromModel(LocName model) {
-        return new Loc(model.locID(), model.name());
-    }
 
     public LocName toModel() {
         return new LocName(locID, name);

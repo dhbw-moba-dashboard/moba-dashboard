@@ -5,16 +5,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
 @Entity
 @Table(name = "type")
 @Getter
-@Setter
-public class Type
-{
+@NoArgsConstructor
+public class Type {
     @Id
     @Column(name = "type_id")
     private int typeID;
@@ -22,10 +21,8 @@ public class Type
     private String typeName;
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (o == null || getClass() != o.getClass())
-        {
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         Type type = (Type) o;
@@ -33,8 +30,7 @@ public class Type
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return Objects.hash(typeID, typeName);
     }
 }

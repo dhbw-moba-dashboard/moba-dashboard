@@ -3,19 +3,17 @@ package de.dhbwkarlsruhe.modellbahn.database.entities;
 import de.dhbwkarlsruhe.modellbahn.models.SimpleLocValue;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
-import java.time.Instant;
 import java.util.Objects;
 
 @Entity
 @Table(name = "loc_values")
 @Getter
-@Setter
+@NoArgsConstructor
 public class Value {
-    @ManyToOne
-    @JoinColumn(name = "type_id", referencedColumnName = "type_id")
-    public Type type;
+    @Column(name = "type_id")
+    private int type;
     @Id
     @Column(name = "value_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,18 +22,18 @@ public class Value {
     private long timeStamp;
     @Column(name = "data")
     private int data;
+
     @Column(name = "loc")
     private int loc;
 
 
-    public static Value createValue(SimpleLocValue model) {
-        Value value = new Value();
-        value.setData(model.getValue());
-        value.setLoc(model.getLoc());
-        value.setType(model.getLocScheme().getType());
+    public Value(SimpleLocValue model, long timeStamp) {
 
-        value.setTimeStamp(Instant.now().getEpochSecond());
-        return value;
+        data = model.getValue();
+        loc = model.getLoc();
+        type = model.getLocScheme().ordinal();
+        this.timeStamp = timeStamp;
+
     }
 
     @Override
@@ -44,11 +42,11 @@ public class Value {
             return false;
         }
         Value value = (Value) o;
-        return valueID == value.valueID && timeStamp == value.timeStamp && data == value.data && loc == value.loc && Objects.equals(type, value.type);
+        return timeStamp == value.timeStamp && data == value.data && loc == value.loc && Objects.equals(type, value.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, valueID, timeStamp, data, loc);
+        return Objects.hash(type, timeStamp, data, loc);
     }
 }

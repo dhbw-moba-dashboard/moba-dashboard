@@ -1,6 +1,5 @@
 package de.dhbwkarlsruhe.modellbahn.schemes;
 
-import de.dhbwkarlsruhe.modellbahn.database.entities.Type;
 import lombok.Getter;
 
 /**
@@ -9,16 +8,7 @@ import lombok.Getter;
  * more complex values are ressources such as sand or diesel. They have to be read out of a Config-Stream.
  */
 @Getter
-public enum LocValueScheme
-{
+public enum LocValueScheme {
     SPEED,
-    DIRECTION;
-
-    public Type getType()
-    {
-        Type currentType = new Type();
-        currentType.setTypeID(ordinal());
-        currentType.setTypeName(name());
-        return currentType;
-    }
+    DIRECTION
 }
