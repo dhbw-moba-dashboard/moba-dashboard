@@ -1,10 +1,8 @@
 package de.dhbwkarlsruhe.modellbahn.database.services;
 
-import de.dhbwkarlsruhe.modellbahn.MobaSocket;
 import de.dhbwkarlsruhe.modellbahn.database.entities.Value;
 import de.dhbwkarlsruhe.modellbahn.database.repositories.ValueRepository;
-import de.dhbwkarlsruhe.modellbahn.models.LocName;
-import de.dhbwkarlsruhe.modellbahn.models.SimpleLocValue;
+import de.dhbwkarlsruhe.modellbahn.models.*;
 import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -25,6 +23,12 @@ public class ValueService {
     private final LocService locService;
     private final MobaSocket socket;
 
+    /**
+     * saves a value in the database
+     * and generates timestamp
+     *
+     * @param model the value to save
+     */
     public void addValue(SimpleLocValue model) {
 
         Value value = new Value(model, Instant.now().getEpochSecond());
@@ -32,8 +36,8 @@ public class ValueService {
     }
 
     /**
-     * scheduled task that requests data from the MoBa every minute and updates the database
-     * the data should include every loc associated from every loc.
+     * a scheduled task that requests data from the MoBa every minute and updates the database.
+     * the data should include every loc associated with every loc.
      */
     @Scheduled(cron = "*/15 * * * * *")
     public void checkAndSaveValues() {
@@ -57,7 +61,9 @@ public class ValueService {
     private void iterateOverScheme(int locID) throws SocketTimeoutException {
         for (LocValueScheme scheme : LocValueScheme.values()) {
             try {
-                SimpleLocValue value = socket.handleSimpleCANRequest(locID, scheme);
+                CANMessage request = SimpleLocFactory.createRequest(locID, scheme);
+                CANMessage response = socket.handleCANInteraction(request);
+                SimpleLocValue value = (SimpleLocValue) response.getPayload();
                 if (value.isValidAnswer()) {
                     addValue(value);
                 }
@@ -71,11 +77,23 @@ public class ValueService {
         }
     }
 
-
+    /**
+     * @param scheme kind of values e.g. speed, direction
+     * @param start  start time (unix timestamp)
+     * @param end    end time (unix timestamp)
+     * @param locID  specific locomotive
+     * @return all values in specific timespan
+     */
     public List<Value> getLocValuesByScheme(LocValueScheme scheme, long start, long end, int locID) {
         return valueRepository.findValueInRange(start, end, scheme.ordinal(), locID);
     }
 
+    /**
+     * @param scheme kind of values e.g. speed, direction
+     * @param locID  specific locomotive
+     * @param number number of entries
+     * @return last number of values
+     */
     public List<Value> getLocValuesByScheme(LocValueScheme scheme, int locID, int number) {
         return valueRepository.findNumberOfValues(scheme.ordinal(), locID, number);
     }

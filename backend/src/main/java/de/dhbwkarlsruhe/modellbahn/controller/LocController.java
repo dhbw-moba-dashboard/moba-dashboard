@@ -1,12 +1,12 @@
 package de.dhbwkarlsruhe.modellbahn.controller;
 
-import de.dhbwkarlsruhe.modellbahn.MobaSocket;
 import de.dhbwkarlsruhe.modellbahn.database.services.LocService;
 import de.dhbwkarlsruhe.modellbahn.models.*;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.Priority;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,41 +15,37 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-public class LocController
-{
+public class LocController {
 
     private final MobaSocket tcpSocket;
     private final LocService locService;
+    private static final Logger logger = LoggerFactory.getLogger(LocController.class);
 
 
     /**
-     * @param locSpeed contains the new speed value range : 0-1023
+     * @param locSpeed contains the new speed value range: 0-1023
      */
     @PutMapping("/loc/speed")
-    public ResponseEntity<String> setLocSpeed(@RequestBody LocSpeed locSpeed)
-    {
+    public ResponseEntity<Void> setLocSpeed(@RequestBody LocSpeed locSpeed) {
 
         CANMessage message = new CANMessage(Priority.COMMAND, CommandScheme.LOCOMOTIVE_SPEED, locSpeed, false);
-        try
-        {
+        try {
             tcpSocket.send(message);
-        } catch (IOException e)
-        {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (IOException e) {
+            logError(e);
+            return ResponseEntity.internalServerError().build();
         }
-        return new ResponseEntity<>(ModelFactory.getJsonSerialString(locSpeed), HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/loc")
-    public ResponseEntity<List<LocName>> getLocs()
-    {
-        return new ResponseEntity<>(locService.getLocs(), HttpStatus.OK);
+    public ResponseEntity<List<LocName>> getLocs() {
+        return ResponseEntity.ok(locService.getLocs());
     }
 
     @GetMapping("/loc/{locID}")
-    public ResponseEntity<LocName> getLoc(@PathVariable int locID)
-    {
-        return new ResponseEntity<>(locService.getLocByID(locID), HttpStatus.OK);
+    public ResponseEntity<LocName> getLoc(@PathVariable int locID) {
+        return ResponseEntity.ok(locService.getLocByID(locID));
     }
 
 
@@ -57,18 +53,20 @@ public class LocController
      * @param locDirection contains the new direction : value range : 0-3
      */
     @PutMapping("/loc/direction")
-    public ResponseEntity<String> setLocDirection(@RequestBody LocDirection locDirection)
-    {
+    public ResponseEntity<Void> setLocDirection(@RequestBody LocDirection locDirection) {
 
         CANMessage message = new CANMessage(Priority.COMMAND, CommandScheme.LOCOMOTIVE_DIRECTION, locDirection, false);
-        try
-        {
+        try {
             tcpSocket.send(message);
-        } catch (IOException e)
-        {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (IOException e) {
+            logError(e);
+            return ResponseEntity.internalServerError().build();
         }
-        return new ResponseEntity<>(ModelFactory.getJsonSerialString(locDirection), HttpStatus.OK);
+        return ResponseEntity.ok().build();
+    }
+
+    private void logError(Exception e) {
+        logger.error(e.getMessage());
     }
 
 }

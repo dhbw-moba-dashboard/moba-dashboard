@@ -1,6 +1,5 @@
 package de.dhbwkarlsruhe.modellbahn.models;
 
-import de.dhbwkarlsruhe.modellbahn.BitUtilities;
 import de.dhbwkarlsruhe.modellbahn.schemes.Direction;
 import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 

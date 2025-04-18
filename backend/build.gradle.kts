@@ -39,7 +39,6 @@ dependencies {
 
     implementation(libs.commons.codec)
     implementation(libs.flyway.core)
-    implementation(libs.gson)
 
     compileOnly(libs.lombok)
 

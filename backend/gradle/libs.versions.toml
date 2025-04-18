@@ -1,7 +1,6 @@
 [libraries]
 commons-codec = { group = "commons-codec", name = "commons-codec", version.ref = "commons-codec" }
 flyway-core = { group = "org.flywaydb", name = "flyway-core" }
-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 hibernate-community-dialects = { group = "org.hibernate.orm", name = "hibernate-community-dialects" }
 hibernate-core = { group = "org.hibernate.orm", name = "hibernate-core" }
 junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
@@ -18,5 +17,4 @@ h2 = { group = "com.h2database", name = "h2" }
 
 [versions]
 commons-codec = "1.18.0"
-gson = "2.11.0"
 sqlite-jdbc = "3.41.2.2"
