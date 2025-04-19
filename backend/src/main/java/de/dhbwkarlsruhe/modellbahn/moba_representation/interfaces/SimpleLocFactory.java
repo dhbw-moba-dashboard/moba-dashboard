@@ -28,4 +28,18 @@ public class SimpleLocFactory {
             }
         };
     }
+
+    public static CANMessage createCommand(SimpleLocValue value) {
+        LocValueScheme scheme = value.getLocScheme();
+        return switch (scheme) {
+            case SPEED -> new CANMessage(Priority.COMMAND,
+                    CommandScheme.LOCOMOTIVE_SPEED,
+                    value, false);
+
+            case DIRECTION -> new CANMessage(Priority.COMMAND,
+                    CommandScheme.LOCOMOTIVE_DIRECTION,
+                    value, false);
+
+        };
+    }
 }
