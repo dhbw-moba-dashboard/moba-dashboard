@@ -1,5 +1,8 @@
-package de.dhbwkarlsruhe.modellbahn.models;
+package de.dhbwkarlsruhe.modellbahn.moba_representation.can;
 
+import de.dhbwkarlsruhe.modellbahn.moba_representation.BitUtilities;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces.Model;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces.ModelFactory;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.Priority;
 import lombok.Getter;

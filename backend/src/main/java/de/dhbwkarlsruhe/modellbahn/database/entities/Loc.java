@@ -1,6 +1,6 @@
 package de.dhbwkarlsruhe.modellbahn.database.entities;
 
-import de.dhbwkarlsruhe.modellbahn.models.LocName;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocName;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

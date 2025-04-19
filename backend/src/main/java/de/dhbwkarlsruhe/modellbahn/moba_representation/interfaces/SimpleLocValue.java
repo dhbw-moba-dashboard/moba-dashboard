@@ -1,4 +1,4 @@
-package de.dhbwkarlsruhe.modellbahn.models;
+package de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces;
 
 import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 

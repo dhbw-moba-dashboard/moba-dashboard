@@ -1,15 +1,13 @@
 package de.dhbwkarlsruhe.modellbahn;
 
-import de.dhbwkarlsruhe.modellbahn.models.LocSpeed;
-import de.dhbwkarlsruhe.modellbahn.models.Model;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces.Model;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocSpeed;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class LocTest
-{
+class LocTest {
     @Test
-    void speed()
-    {
+    void speed() {
         byte[] bytes = new byte[]{0x00, 0x00,//Id bytes empty
                 0x40, 0x0d, //loc id : 16397
                 0x01, (byte) 0xf4, //speed 500 max 1024 min 0

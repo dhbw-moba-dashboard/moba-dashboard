@@ -1,10 +1,9 @@
-package de.dhbwkarlsruhe.modellbahn.models;
+package de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces;
 
 /**
  * object representation of the data in a CAN-Frame
  */
-public interface Model
-{
+public interface Model {
     /**
      * @return serialization of the Model
      */

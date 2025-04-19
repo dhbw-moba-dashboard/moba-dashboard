@@ -2,7 +2,11 @@ package de.dhbwkarlsruhe.modellbahn.database.services;
 
 import de.dhbwkarlsruhe.modellbahn.database.entities.Value;
 import de.dhbwkarlsruhe.modellbahn.database.repositories.ValueRepository;
-import de.dhbwkarlsruhe.modellbahn.models.*;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.can.CANMessage;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.can.MobaSocket;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces.SimpleLocFactory;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces.SimpleLocValue;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocName;
 import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

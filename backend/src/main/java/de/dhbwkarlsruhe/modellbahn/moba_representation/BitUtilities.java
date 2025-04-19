@@ -1,4 +1,4 @@
-package de.dhbwkarlsruhe.modellbahn.models;
+package de.dhbwkarlsruhe.modellbahn.moba_representation;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

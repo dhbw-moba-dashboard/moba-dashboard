@@ -1,7 +1,11 @@
 package de.dhbwkarlsruhe.modellbahn.controller;
 
 import de.dhbwkarlsruhe.modellbahn.database.services.LocService;
-import de.dhbwkarlsruhe.modellbahn.models.*;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.can.CANMessage;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.can.MobaSocket;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocDirection;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocName;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocSpeed;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.Priority;
 import lombok.AllArgsConstructor;
