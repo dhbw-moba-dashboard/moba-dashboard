@@ -18,8 +18,7 @@ import java.util.Optional;
  */
 @RestController
 @AllArgsConstructor
-public class ValueController
-{
+public class ValueController {
     private final ValueService valueService;
 
     @GetMapping("/request/speed/{locID}")
@@ -28,8 +27,7 @@ public class ValueController
             @RequestParam(required = false) Optional<Integer> startTime,
             @RequestParam(required = false) Optional<Integer> endTime,
             @RequestParam(required = false) Optional<Integer> entries
-    )
-    {
+    ) {
         return getLocValue(startTime, endTime, entries, locID, LocValueScheme.SPEED);
 
     }
@@ -40,22 +38,18 @@ public class ValueController
             @RequestParam(required = false) Optional<Integer> startTime,
             @RequestParam(required = false) Optional<Integer> endTime,
             @RequestParam(required = false) Optional<Integer> entries
-    )
-    {
+    ) {
         return getLocValue(startTime, endTime, entries, locID, LocValueScheme.DIRECTION);
     }
 
-    private ResponseEntity<List<Value>> getLocValue(Optional<Integer> startTime, Optional<Integer> endTime, Optional<Integer> entries, int locID, LocValueScheme scheme)
-    {
-        if (startTime.isPresent() && endTime.isPresent())
-        {
-            List<Value> valueList = valueService.getLocValuesByScheme(scheme, locID, startTime.get(), endTime.get());
+    private ResponseEntity<List<Value>> getLocValue(Optional<Integer> startTime, Optional<Integer> endTime, Optional<Integer> entries, int locID, LocValueScheme scheme) {
+        if (startTime.isPresent() && endTime.isPresent()) {
+            List<Value> valueList = valueService.getLocValuesByScheme(scheme, startTime.get(), endTime.get(), locID);
 
             return ResponseEntity.ok(valueList);
         }
 
-        if (entries.isPresent())
-        {
+        if (entries.isPresent()) {
             List<Value> valueList = valueService.getLocValuesByScheme(scheme, locID, entries.get());
             return ResponseEntity.ok(valueList);
         }
