@@ -19,10 +19,8 @@ java {
     }
 }
 
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
+configurations.compileOnly {
+    extendsFrom(configurations.annotationProcessor.get())
 }
 
 repositories {
@@ -35,8 +33,6 @@ dependencies {
     implementation(libs.sqlite.jdbc)
     implementation(libs.hibernate.core)
     implementation(libs.hibernate.community.dialects)
-    implementation(libs.mockito.core)
-
     implementation(libs.commons.codec)
     implementation(libs.flyway.core)
 
@@ -49,8 +45,6 @@ dependencies {
     testImplementation(libs.spring.security.test)
     testImplementation(libs.testcontainers.junit.jupiter)
     testImplementation(libs.h2)
-
-    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 tasks.withType<Test> {

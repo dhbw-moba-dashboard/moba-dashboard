@@ -3,7 +3,6 @@ commons-codec = { group = "commons-codec", name = "commons-codec", version.ref =
 flyway-core = { group = "org.flywaydb", name = "flyway-core" }
 hibernate-community-dialects = { group = "org.hibernate.orm", name = "hibernate-community-dialects" }
 hibernate-core = { group = "org.hibernate.orm", name = "hibernate-core" }
-junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
 lombok = { group = "org.projectlombok", name = "lombok" }
 spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
 spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
@@ -12,7 +11,6 @@ spring-boot-websocket = { group = "org.springframework.boot", name = "spring-boo
 spring-security-test = { group = "org.springframework.security", name = "spring-security-test" }
 sqlite-jdbc = { group = "org.xerial", name = "sqlite-jdbc", version.ref = "sqlite-jdbc" }
 testcontainers-junit-jupiter = { group = "org.testcontainers", name = "junit-jupiter" }
-mockito-core = { group = "org.mockito", name = "mockito-core" }
 h2 = { group = "com.h2database", name = "h2" }
 
 [versions]
