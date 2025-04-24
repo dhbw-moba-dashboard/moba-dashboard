@@ -1,5 +1,8 @@
-package de.dhbwkarlsruhe.modellbahn.models;
+package de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces;
 
+import de.dhbwkarlsruhe.modellbahn.moba_representation.UnknownModel;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocDirection;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocSpeed;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

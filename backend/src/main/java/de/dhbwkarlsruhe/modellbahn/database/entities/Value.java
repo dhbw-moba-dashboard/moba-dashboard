@@ -1,6 +1,6 @@
 package de.dhbwkarlsruhe.modellbahn.database.entities;
 
-import de.dhbwkarlsruhe.modellbahn.models.SimpleLocValue;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces.SimpleLocValue;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

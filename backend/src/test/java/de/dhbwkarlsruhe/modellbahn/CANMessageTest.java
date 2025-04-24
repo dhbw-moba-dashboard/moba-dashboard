@@ -1,19 +1,17 @@
 package de.dhbwkarlsruhe.modellbahn;
 
-import de.dhbwkarlsruhe.modellbahn.models.CANMessage;
-import de.dhbwkarlsruhe.modellbahn.models.LocDirection;
-import de.dhbwkarlsruhe.modellbahn.models.LocSpeed;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.can.CANMessage;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocDirection;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocSpeed;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.Direction;
 import de.dhbwkarlsruhe.modellbahn.schemes.Priority;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class CANMessageTest
-{
+class CANMessageTest {
     @Test
-    void messageToByteArray()
-    {
+    void messageToByteArray() {
         LocSpeed locSpeed = new LocSpeed(16397, 500);
         byte[] resultingByteArray = new byte[]{0x00, 0x08 //4 bit priority 3bit padding 8bit command 1bit answer bit
                 , 0x57, 0x38//hash
@@ -29,8 +27,7 @@ class CANMessageTest
     }
 
     @Test
-    void byteArrayToMessage()
-    {
+    void byteArrayToMessage() {
         LocSpeed locSpeed = new LocSpeed(16397, -1);
         byte[] resultingByteArray = new byte[]{0x00, 0x09 //4 bit priority 3bit padding 8bit command 1bit answer bit
                 , 0x57, 0x38//hash
@@ -45,8 +42,7 @@ class CANMessageTest
     }
 
     @Test
-    void messageToByteArrayDirection()
-    {
+    void messageToByteArrayDirection() {
         byte[] directionMessage = new byte[]{0x00, 0x0a, 0x57, 0x38, 0x04, 0x00, 0x00, 0x40, 0x0d, 0x00, 0x00, 0x00, 0x00};
         LocDirection direction = new LocDirection(16397, Direction.REQUEST);
         CANMessage message = new CANMessage(Priority.COMMAND, CommandScheme.LOCOMOTIVE_DIRECTION, direction, false);

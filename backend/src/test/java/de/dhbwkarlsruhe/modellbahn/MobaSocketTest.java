@@ -1,6 +1,11 @@
 package de.dhbwkarlsruhe.modellbahn;
 
-import de.dhbwkarlsruhe.modellbahn.models.*;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.BitUtilities;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.can.CANMessage;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.can.MobaSocket;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces.SimpleLocFactory;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces.SimpleLocValue;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocSpeed;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.Priority;

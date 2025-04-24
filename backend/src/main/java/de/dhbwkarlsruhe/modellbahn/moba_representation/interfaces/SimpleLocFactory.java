@@ -1,5 +1,8 @@
-package de.dhbwkarlsruhe.modellbahn.models;
+package de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces;
 
+import de.dhbwkarlsruhe.modellbahn.moba_representation.can.CANMessage;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocDirection;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocSpeed;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import de.dhbwkarlsruhe.modellbahn.schemes.Direction;
 import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
@@ -23,6 +26,20 @@ public class SimpleLocFactory {
                         CommandScheme.LOCOMOTIVE_DIRECTION,
                         locDirection, false);
             }
+        };
+    }
+
+    public static CANMessage createCommand(SimpleLocValue value) {
+        LocValueScheme scheme = value.getLocScheme();
+        return switch (scheme) {
+            case SPEED -> new CANMessage(Priority.COMMAND,
+                    CommandScheme.LOCOMOTIVE_SPEED,
+                    value, false);
+
+            case DIRECTION -> new CANMessage(Priority.COMMAND,
+                    CommandScheme.LOCOMOTIVE_DIRECTION,
+                    value, false);
+
         };
     }
 }

@@ -1,5 +1,7 @@
-package de.dhbwkarlsruhe.modellbahn.models;
+package de.dhbwkarlsruhe.modellbahn.moba_representation.loc;
 
+import de.dhbwkarlsruhe.modellbahn.moba_representation.BitUtilities;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces.SimpleLocValue;
 import de.dhbwkarlsruhe.modellbahn.schemes.LocValueScheme;
 
 import java.util.ArrayList;

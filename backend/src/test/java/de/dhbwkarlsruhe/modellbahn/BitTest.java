@@ -1,6 +1,6 @@
 package de.dhbwkarlsruhe.modellbahn;
 
-import de.dhbwkarlsruhe.modellbahn.models.BitUtilities;
+import de.dhbwkarlsruhe.modellbahn.moba_representation.BitUtilities;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

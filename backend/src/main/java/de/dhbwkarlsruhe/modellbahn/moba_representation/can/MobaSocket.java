@@ -1,5 +1,6 @@
-package de.dhbwkarlsruhe.modellbahn.models;
+package de.dhbwkarlsruhe.modellbahn.moba_representation.can;
 
+import de.dhbwkarlsruhe.modellbahn.moba_representation.BitUtilities;
 import de.dhbwkarlsruhe.modellbahn.schemes.CommandScheme;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
