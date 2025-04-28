@@ -13,4 +13,7 @@ public interface Model {
      * @return the dlc based on the values of the object
      */
     int getDLC();
+
+    boolean isValidAnswer();
+
 }

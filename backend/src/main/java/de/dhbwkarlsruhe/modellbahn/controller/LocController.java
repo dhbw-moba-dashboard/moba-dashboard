@@ -3,7 +3,6 @@ package de.dhbwkarlsruhe.modellbahn.controller;
 import de.dhbwkarlsruhe.modellbahn.database.services.LocService;
 import de.dhbwkarlsruhe.modellbahn.moba_representation.interfaces.SimpleLocValue;
 import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocDirection;
-import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocHandler;
 import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocName;
 import de.dhbwkarlsruhe.modellbahn.moba_representation.loc.LocSpeed;
 import lombok.AllArgsConstructor;
@@ -18,8 +17,6 @@ public class LocController {
 
 
     private final LocService locService;
-
-    private final LocHandler locHandler;
 
 
     /**
@@ -49,7 +46,7 @@ public class LocController {
     }
 
     public ResponseEntity<Void> setValue(SimpleLocValue value) {
-        boolean success = locHandler.setValue(value);
+        boolean success = locService.setValue(value);
         if (!success) {
             return ResponseEntity.internalServerError().build();
         }

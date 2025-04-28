@@ -18,5 +18,10 @@ public class UnknownModel implements Model {
         return 0;
     }
 
+    @Override
+    public boolean isValidAnswer() {
+        return false;
+    }
+
 
 }

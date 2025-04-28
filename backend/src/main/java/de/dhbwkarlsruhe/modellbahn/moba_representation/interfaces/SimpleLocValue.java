@@ -22,5 +22,4 @@ public interface SimpleLocValue extends Model {
      */
     LocValueScheme getLocScheme();
 
-    boolean isValidAnswer();
 }

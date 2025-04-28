@@ -31,7 +31,6 @@ dependencies {
     implementation(libs.spring.boot.websocket)
     implementation(libs.spring.boot.starter.data.jpa)
     implementation(libs.sqlite.jdbc)
-    implementation(libs.hibernate.core)
     implementation(libs.hibernate.community.dialects)
     implementation(libs.commons.codec)
     implementation(libs.flyway.core)

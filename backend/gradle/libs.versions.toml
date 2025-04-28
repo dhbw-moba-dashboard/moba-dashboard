@@ -2,7 +2,6 @@
 commons-codec = { group = "commons-codec", name = "commons-codec", version.ref = "commons-codec" }
 flyway-core = { group = "org.flywaydb", name = "flyway-core" }
 hibernate-community-dialects = { group = "org.hibernate.orm", name = "hibernate-community-dialects" }
-hibernate-core = { group = "org.hibernate.orm", name = "hibernate-core" }
 lombok = { group = "org.projectlombok", name = "lombok" }
 spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
 spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
