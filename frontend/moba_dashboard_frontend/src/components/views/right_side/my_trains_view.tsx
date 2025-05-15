@@ -80,7 +80,7 @@ export default function MyTrainsContainer() {
 	const trainInformationOptions = new Map<string, [string, string]>([
 		[
 			"currentSpeed",
-			[`Aktuelle Geschwindigkeit: ${fetchedTrainData?.data ?? "--"} km/h`, "Icon_Speedometer_IOS_White"],
+			[`Aktuelle Geschwindigkeit: ${(fetchedTrainData?.data / 10) ?? "--"} km/h`, "Icon_Speedometer_IOS_White"],
 		],
 		["coalValue", [`Aktueller Kohle stand: -- kg`, "Icon_Coal_IOS_White"]],
 		["waterValue", [`Aktueller Wasser Stand: -- l`, "Icon_Water_IOS_White"]],
