@@ -21,7 +21,7 @@ export const ChartComponent: React.FC<ChartComponentProps> = (props: ChartCompon
 			<ResponsiveContainer width="100%" height={290}>
 				{
 					//check if data is passed or not
-					props.data ? <LineChart data={props.data.map((it: number) => it / 10)} margin={{ top: 20, right: 30, left: 20, bottom: 40 }}>
+					props.data ? <LineChart data={props.data} margin={{ top: 20, right: 30, left: 20, bottom: 40 }}>
 						<CartesianGrid strokeDasharray="3 3" stroke="#555" />
 						<XAxis
 							dataKey="name"

@@ -53,7 +53,7 @@ export default function TrainDataContainer() {
 				//set data to receuved format
 				const formattedData = fetchedData.map((item: any) => ({
 					name: format(new Date(item.timeStamp * 1000), 'HH:mm:ss'),
-					value: item.data
+					value: item.data / 100
 				}));
 
 				return formattedData;
