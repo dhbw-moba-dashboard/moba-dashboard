@@ -63,6 +63,8 @@ class MyServer(BaseHTTPRequestHandler):
 
         self.send_response(200)
         self.send_header("Content-type", "audio/wav")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "*")
         self.end_headers()
 
         print("Generating audio...")

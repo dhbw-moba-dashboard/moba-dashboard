@@ -24,13 +24,13 @@ services:
       - "8000:80"
     networks:
       - tts
-    #deploy:
-    #  resources:
-    #    reservations:
-    #      devices:
-    #        - driver: nvidia
-    #          count: 1
-    #          capabilities: [ gpu ]
+#    deploy:
+#      resources:
+#        reservations:
+#          devices:
+#            - driver: nvidia
+#              count: all
+#              capabilities: [ gpu ]
 
 networks:
   tts:
