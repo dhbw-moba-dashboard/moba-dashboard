@@ -17,6 +17,9 @@ import {format} from 'date-fns';
 
 //import context
 import {DataTransferContext} from "../../../../App";
+import FlexBox from "../../../container/FlexBox";
+import TextButton from "../../../atoms/buttons";
+import {setConsoleMessage} from "../../../../logic/tools/messages";
 
 //create and export default train data container
 export default function TrainDataContainer() {
@@ -28,15 +31,28 @@ export default function TrainDataContainer() {
 	//define state hook for diagram data
 	const [trainData, setTrainData] = useState<any[]>([]);
 
+    //define state for amount of data values
+    const [dataAmountOptions, setDataAmountOptions] = useState<any[]>([]);
+    const [dataValuesAmount, setDataValuesAmount] = useState<number>(10);
+
+    //use effect to load all data amount value options
+    useEffect(() => {
+        //fetch data from .json file
+        fetch("../data/data_amount_options.json")
+                .then((jsonResponse) => jsonResponse.json())
+                .then((jsonData) => setDataAmountOptions(jsonData))
+                .catch((readJsonFileError) => setConsoleMessage(readJsonFileError, true));
+    }, []);
+
 	//get data to show in diagram
 	useEffect(() => {
 		async function createDataObject(): Promise<any[]> {
 			try {
-				const fetchedData = await fetchTrainInformation((dataTransferContext as any).selectedTrain);
+				const fetchedData = (await fetchTrainInformation((dataTransferContext as any).selectedTrain, dataValuesAmount)).reverse();
 
 				//set data to receuved format
 				const formattedData = fetchedData.map((item: any) => ({
-					name: format(new Date(item.timeStamp), 'HH:mm'),
+					name: format(new Date(item.timeStamp * 1000), 'HH:mm:ss'),
 					value: item.data
 				}));
 
@@ -49,11 +65,11 @@ export default function TrainDataContainer() {
 		//make inital call
 		createDataObject().then((data) => setTrainData(data));
 
-		//set interval of 30 seconds to load data
+		//set interval of 60 seconds to load data
 		setInterval(() => {
 			createDataObject().then((data) => setTrainData(data));
-		}, 30000);
-	}, [selectedAction, dataTransferContext]);
+		}, 60000);
+	}, [selectedAction, dataTransferContext, dataValuesAmount]);
 
 	//return created ui component
 	return (
@@ -62,7 +78,20 @@ export default function TrainDataContainer() {
 				{
 					//check if to set chart component or no data information
 					(trainData && trainData.length !== 0) ? (
-						<ChartComponent data={trainData} yAxisText={selectedAction}/>
+                            <div>
+                                <ChartComponent data={trainData} yAxisText={selectedAction}/>
+								<hr style={{border: '1px solid white'}}/>
+                                <FlexBox style={{justifyContent: 'space-between', alignItems: 'center', marginTop: '2%', marginBottom: '2%'}}>
+                                    {
+                                        //check if data loaded and add to ui
+                                        dataAmountOptions.map((currentTrain: any, index: number) => (
+                                                <TextButton key={index} style={{padding: '1%', fontSize: '18px', border: '.5px solid white'}}
+                                                            buttonText={currentTrain.buttonText} buttonAction={() => setDataValuesAmount(currentTrain.buttonValue)}/>
+
+                                        ))
+                                    }
+                                </FlexBox>
+                            </div>
 					) : (
 						<div style={{height: "300px", display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
 							<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>

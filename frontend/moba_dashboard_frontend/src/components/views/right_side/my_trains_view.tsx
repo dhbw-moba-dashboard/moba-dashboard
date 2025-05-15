@@ -65,8 +65,8 @@ export default function MyTrainsContainer() {
 		//initial fetch
 		fetchSpeed();
 
-		//set interval of 30 seconds to load data
-		const interval = setInterval(fetchSpeed, 30000);
+		//set interval of 5 seconds to load data
+		const interval = setInterval(fetchSpeed, 5000);
 		return () => clearInterval(interval);
 	}, [transferedData.selectedTrain]);
 
